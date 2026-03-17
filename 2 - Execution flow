@@ -1,0 +1,20 @@
+
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+|Writing the Source Code -----> Preprocessing -----> Compilation -----> Assembly -----> Linking -----> Loading -----> Program Startup (Runtime Initialization) -----> Execution by the Processor -----> Program Termination|
+
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+Program Lifecycle (One Line Each)
+
+    * Writing Source Code                      → You write human-readable instructions in a programming language.
+    * Preprocessing                            → The preprocessor expands macros, includes headers, and removes comments.
+    * Compilation                              → The compiler checks syntax and converts code into assembly-level instructions.
+    * Assembly                                 → The assembler translates assembly code into machine-level object code.
+    * Linking                                  → The linker combines object files with libraries to create a final executable.
+    * Loading                                  → The operating system loads the executable into memory for execution.
+    * Program Startup (Runtime Initialization) → The system sets up the environment and calls the main() function.
+    * Execution by Processor                   → The CPU fetches, decodes, and executes the program instructions.
+    * Program Termination                      → The program ends, and the operating system releases all resources.
+    
+[Write → Expand → Translate → Convert → Combine → Load → Start → Run → End]
