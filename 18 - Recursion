@@ -1,0 +1,584 @@
+Recursion — One-Liners
+
+    What:
+        Recursion is a function calling itself to solve smaller instances of the same problem.
+    Why:
+        To simplify complex, self-similar problems by breaking them into smaller parts.
+    Where:
+        Used in trees, graphs, backtracking, divide-and-conquer, and nested structures.
+    When:
+        When a problem can be reduced into smaller identical subproblems with a clear base case.
+    How:
+        By defining a base case and repeatedly calling the function with reduced input until it stops.
+        
+Ultra-Short Memory Version
+
+    What  → function calls itself
+    Why   → simplify complex problems
+    Where → trees, graphs, recursion-heavy problems
+    When  → self-similar breakdown exists
+    How   → base case + recursive call
+
+
+Recursion(Self-calling function)
+
+what -> oru function athaye athu athoda definition part la call panna 
+atha recursion apdi nu solluvom
+
+ok va 
+
+Simple ah "re-occurance" apdindra word ah gnabagam vachukko 
+
+Looping   -> Repetition
+
+    CPU executes instructions repeatedly
+    No new memory allocation
+    
+    Scrolling Instagram
+    
+        Scroll → see post → scroll → repeat
+        Stops when you close app
+        
+    Other Examples:
+    
+        Walking Steps Counter
+        Eating Food
+        Traffic Signal System
+        Factory assembly line 
+        
+Recursion:
+
+    Each call → pushed into stack
+    Memory grows
+    Then shrinks when returning
+    Recursion -> Self-calling function(self-repetition)
+
+    Examples: 
+    
+        Opening Nested Boxes 
+        Family tree 
+        Mirror facing Mirror
+        File system navigation 
+        Solving Maze 
+    
+Loop = LINEAR THINKING
+
+    Do → Repeat → Stop
+    You control repetition
+    Loop → "Again and again"
+    
+Recursion = HIERARCHICAL THINKING
+
+    Solve → smaller version → smaller version → base case
+    Problem controls itself
+    Recursion → "Inside itself"
+    
+    
+Loop = explicit control -> outside control
+Recursion = implicit control (stack manages it) -> inside control
+
+
+Loop:
+    Climbing stairs step by step
+Recursion:
+    Opening a staircase inside a staircase inside a staircase
+
+
+
+#include<stdio.h>
+void print(int N)
+{
+    if(N > 0)
+    {
+        printf("%d ",N);
+        print(N - 1);
+    }
+}
+int main()
+{
+    int N = 5;
+    print(N);
+    return 0;
+}
+
+
+                 Stack
+|–––––––––––––––––––––––––––––––––––––|
+|                                     |
+|               Print(0)              |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 0            |  |  stack frame 6 -> 6th
+|  |                               |  |
+|  |-------------------------------|  |
+|               Print(1)              |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 1            |  |  stack frame 5 -> 5th
+|  |                               |  |
+|  |-------------------------------|  |
+|               Print(2)              |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 2            |  |  stack frame 4 -> 4th
+|  |                               |  |
+|  |-------------------------------|  |
+|               Print(3)              |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 3            |  |  stack frame 3 -> 3rd
+|  |                               |  |
+|  |-------------------------------|  |
+|               Print(4)              |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 4            |  |  stack frame 2 -> 2nd
+|  |                               |  |
+|  |-------------------------------|  |
+|               Print(5)              |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 5            |  |  stack frame 1 -> 1st call pann function block ithutha
+|  |                               |  |
+|  |-------------------------------|  |
+|                                     |
+|                Main                 |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 5            |  |
+|  |                               |  |
+|  |-------------------------------|  |
+|                                     |
+|–––––––––––––––––––––––––––––––––––––|
+
+
+input = 4
+
+Calling phase:-
+
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|             |     |     |             |     |     |             |     |     |             |     |      |   print(0)  |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|             |     |     |             |     |     |             |     |     |   print(1)  |     |      |   print(1)  |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|             |     |     |             |     |     |   print(2)  |     |     |   print(2)  |     |      |   print(2)  |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|             |     |     |   print(3)  |     |     |   print(3)  |     |     |   print(3)  |     |      |   print(3)  |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|   print(4)  |     |     |   print(4)  |     |     |   print(4)  |     |     |   print(4)  |     |      |   print(4)  |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|.   main()   |     |     |.   main()   |     |     |.   main()   |     |     |.   main()   |     |      |    main()   |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+
+
+
+Returning Phase:-
+
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|   print(0)  |     |     |             |     |     |             |     |     |             |     |      |             |  
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|   print(1)  |     |     |   print(1)  |     |     |             |     |     |             |     |      |             |   
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|   print(2)  |     |     |   print(2)  |     |     |   print(2)  |     |     |             |     |      |             | 
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|   print(3)  |     |     |   print(3)  |     |     |   print(3)  |     |     |   print(3)  |     |      |             |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|   print(4)  |     |     |   print(4)  |     |     |   print(4)  |     |     |   print(4)  |     |      |   print(4)  |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|.   main()   |     |     |.   main()   |     |     |.   main()   |     |     |.   main()   |     |      |.   main()   |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+ 
+
+Inga Extra memory thevei -> Naa update panna ovvoru valuevaiyum inga store panni vaikkalam so naa 
+backtrack panni varappo ella valuevaiyum again oru time reverse la eduthu work panna mudiyum
+
+
+#include<stdio.h>
+void print(int N)
+{
+    while(N > 0)
+    {
+        printf("%d ",N);
+        N = N - 1;
+    }
+}
+int main()
+{
+    int N = 5;
+    print(N);
+    return 0;
+}
+
+
+                 Stack
+|–––––––––––––––––––––––––––––––––––––|
+|                                     |
+|                Print                |
+|  |-------------------------------|  |
+|  |                               |  |    update_No ->     1 - 2 - 3 - 4 -  5
+|  |            num = 5            |  | -> parameter -> 5 - 4 - 3 - 2 - 1 - [0] -> Termination value
+|  |                               |  |
+|  |-------------------------------|  |
+|                                     |
+|                Main                 |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 5            |  |
+|  |                               |  |
+|  |-------------------------------|  |
+|                                     |
+|–––––––––––––––––––––––––––––––––––––|
+
+it will print 5 then updated to 4
+it will print 4 then updated to 3
+it will print 3 then updated to 2
+it will print 2 then updated to 1
+it will print 1 then updated to 0
+
+No need of extra memory
+
+
+|–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|
+|  print(5) |   |   |  print(4) |   |   |  print(3) |   |   |  print(2) |   |   |  print(1) |   |   |  print(0) |
+|–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|
+|   main()  |   |   |   main()  |   |   |   main()  |   |   |   main()  |   |   |   main()  |   |   |   main()  |
+|–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|
+
+
+
+Aspect         	         Loop  	                Recursion 
+Time Complexity	         Usually O(n)	        O(n) or worse (O(2ⁿ))
+Space Complexity         O(1)	                O(n)
+Memory Usage	         Low	                High
+Speed	                 Faster	                Slower(function call overhead)
+Risk	                 Infinite loop	        Stack overflow
+
+
+                        Recursion
+                            |
+                            |
+           |---------------------------------|
+           |                                 |
+        Direct                           Indirect   
+           |                                 |                                      
+           |-> Head                          |-> Head         
+           |-> Tail                          |-> Tail         
+           |-> Linear                        |-> Linear     
+           |-> Nested                        |-> Nested    
+           |-> Tree                          |-> Tree         
+           
+           
+Direct recursion   -> calling directly
+Indirect recursion -> calling with intermediate function
+
+Head recursion     -> calling will be on the top
+Tail recursion     -> calling will be on the bottom
+Linear recursion   -> mostly used with expression formation
+Nested recursion   -> function calling will be inside another function called
+Tree Recursion     -> more than one calling
+
+
+
+sum of natural numbers
+
+input = 5 
+
+15 = 5 + 4 + 3 + 2 + 1
+
+sum= v + sum
+15 = 5 + 10 
+10 = 4 + 06
+06 = 3 + 03 
+03 = 2 + 01
+01 = 1 + 00(priming)
+
+
+                      +15
+                       ^
+                       |
+                     f(05)
+                    /     \
+                 f(04)  +  5  
+                /     \
+             f(03)  +  4     
+            /     \
+         f(02)  +  3   
+        /     \
+     f(01)  +  2 
+    /     \
+ f(00)  +  1 
+   |
+return 0;                     till it reaches 0
+
+          f(04)  +  5  = f(N - 1) + N -> till 0
+
+
+#include<stdio.h>
+long long int sum(long long int num)
+{
+    if(num == 0)
+        return 0;
+    return sum(num - 1) + num;
+}
+int main()
+{
+    long long int num;
+    scanf("%lld",&num);
+    printf("%lld",sum(num));
+}
+
+
+
+Product of N natural numbers(factorial)
+
+input = 5 
+
+120 = 5 * 4 * 3 * 2 * 1 
+
+120 = 5 * 24
+024 = 4 * 06 
+006 = 3 * 02
+002 = 2 * 01 
+001 = 1 * 01(priming)
+
+
+                      120
+                       ^
+                       |
+                     f(05)
+                    /     \
+                 f(04)  *  5  
+                /     \
+             f(03)  *  4     
+            /     \
+         f(02)  *  3   
+        /     \
+     f(01)  *  2 
+    /     \
+ f(00)  *  1 
+   |
+return 1;                     till it reaches 0
+
+          f(04)  *  5  = f(N - 1) * N -> till 0
+
+
+
+#include<stdio.h>
+long long int fac(long long int num)
+{
+    if(num == 0)
+        return 1;
+    return fac(num - 1) * num;
+}
+int main()
+{
+    long long int num;
+    scanf("%lld",&num);
+    printf("%lld",fac(num));
+}
+
+
+
+exponential
+
+base 3 
+power 5
+
+243 = 3 * 3 * 3 * 3 * 3 
+
+
+243 = 3 * 81 
+081 = 3 * 27 
+027 = 3 * 09
+009 = 3 * 03 
+003 = 3 * 01
+
+
+                        243
+                         ^
+                         |
+                     f(3 , 5)
+                    /        \
+                 f(3 , 4)  *  3  
+                /        \
+             f(3 , 3)  *  3     
+            /        \
+         f(3 , 2)  *  3   
+        /        \
+     f(3 , 1)  *  3 
+    /        \
+ f(3 , 0)  *  3 
+   |
+return 1;                                   till it reaches 0
+
+          f(04)  *  3  = f(base , power - 1) * base -> till 0
+
+
+#include<stdio.h>
+long long int Exp(int base , int power)
+{
+    if(power == 0)
+        return 1;
+    return Exp(base , power - 1) * base;
+}
+int main()
+{
+    int base;
+    int power;
+    scanf("%d %d",&base, &power);
+    printf("%lld",Exp(base , power));
+}
+
+
+
+
+e(x , n) = x⁰ / 0! + x¹ / 1! + x² / 2! + x³ / 3! + x⁴ / 4! +...+xⁿ / n!
+e(2 , 4) = 2⁰ / 0! + 2¹ / 1! + 2² / 2! + 2³ / 3! + 2⁴ / 4!
+         = 1  / 1  + 2  / 1  + 4  / 2  + 8  / 6  + 16 / 24
+         = 1       + 2       + 2       + 1.3333  + 0.6667
+         = 7
+
+
+using indirect recursion
+
+#include<stdio.h>
+double fac(long long int num)
+{
+    if(num == 0)
+        return 1;
+    return fac(num - 1) * num;
+}
+double sum(long long int num)
+{
+    if(num == 0)
+        return 0;
+    return sum(num - 1) + num;
+}
+double Exp(int base , int power)
+{
+    if(power == 0)
+        return 1;
+    return Exp(base , power - 1) * base;
+}
+double taylor(int x , int n)
+{
+    if(n == 0) return 1;
+    return (Exp(x , n) / fac(n)) + taylor(x , n-1);
+}
+int main()
+{
+    int x;
+    int n;
+    scanf("%d %d",&x, &n);
+    printf("%f",taylor(x , n));
+}
+
+
+using direct recursion
+
+
+
+e(x , n) = x⁰ / 0! + x¹ / 1! + x² / 2! + x³ / 3! + x⁴ / 4! +...+xⁿ / n!
+e(2 , 4) = 2⁰ / 0! + 2¹ / 1! + 2² / 2! + 2³ / 3! + 2⁴ / 4!
+         = 1  / 1  + 2  / 1  + 4  / 2  + 8  / 6  + 16 / 24
+         = 1       + 2       + 2       + 1.3333  + 0.6667
+         = 7
+
+
+fac=val*fac; Exp= x *Exp; res = Exp/fac + res
+ 1 = 1 * 1 ; 2  = 2 * 1 ; 3.0 = 2  /  1 + 1.0
+ 2 = 2 * 1 ; 4  = 2 * 2 ; 5.0 = 4  /  2 + 3.0
+ 6 = 3 * 2 ; 8  = 2 * 4 ; 6.3 = 8  /  6 + 5.0
+24 = 4 * 6 ; 16 = 2 * 8 ; 7.0 = 16 / 24 + 6.3
+
+
+                 7.0 
+                /   \
+             6.3  +  16/24    e = 16, f = 24 , n = 4
+            /   \
+         5.0  +  8/6          e = 8 , f = 6  , n = 3
+        /   \
+     3.0  +  4/2              e = 4 , f = 2  , n = 2
+    /   \
+ 1.0  +  2/1                  e = 2 , f = 1  , n = 1
+
+
+
+#include<stdio.h>
+double taylor(int x , int n)
+{
+    static double Exp = 1.0;
+    static double fac = 1.0;
+    double res = 1.0;
+    if(n == 0) return 1;
+    else 
+    {
+        res = taylor(x , n - 1);
+        Exp = Exp * x;
+        fac = fac * n;
+        return (Exp/fac) + res;
+    }
+}
+int main()
+{
+    int x;
+    int n;
+    scanf("%d %d",&x, &n);
+    printf("%f",taylor(x , n));
+}
+
+
+Looping: 
+
+1. CPU Scheduling (Operating System)
+    CPU runs:
+    Process A → Process B → Process C → repeat
+    Happens millions of times per second
+    This is a high-speed loop
+    while system_running:
+        execute_next_process()
+        
+2. Heartbeat (Biological Loop)
+    Heart beats continuously
+    Lub → Dub → repeat
+    Stops only when condition fails (life ends)
+    
+3. Washing Machine Cycle
+    Fill water → wash → rinse → spin
+    Repeats cycles
+    Controlled loop with stages
+    
+4. CCTV Monitoring System
+    Camera continuously records frames
+    while camera_on:
+        capture_frame()
+        
+5. Game Loop (Very Important in Programming)
+    Every game runs on loop:
+    Input → Update → Render → repeat
+    
+    
+Recursion:
+
+1. Trees in Nature (Fractals)
+    Branch → smaller branches → smaller branches
+    Same pattern repeating at smaller scale
+    
+2. Google Maps Zoom System
+    World map → country → city → street → building
+    Each level is a smaller version of same structure
+    
+3. Company Hierarchy
+    CEO → Managers → Employees
+    Each manager manages a sub-tree
+    Recursive structure
+    
+4. Brain Thinking (Breaking Problems)
+    Big problem → smaller problem → smaller → solve
+    That’s recursion thinking
+    
+5. Website DOM Structure (HTML)
+    Page contains:
+    Div → contains div → contains div
+    Nested structure = recursion
+
