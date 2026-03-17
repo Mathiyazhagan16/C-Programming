@@ -1,0 +1,2852 @@
+Number System Conversions:
+
+Types of number systems:
+    1) Decimal 
+    2) Binary 
+    3) Octal 
+    4) Hexa Decimal 
+    
+1) Decimal 
+
+Symbols used -> 0 1 2 3 4 5 6 7 8 9 
+base(count)  -> 10
+        
+0 -> 00 01 02 03 04 05 06 07 08 09
+1 -> 10 11 12 13 14 15 16 17 18 19
+2 -> 20 21 22 23 24 25 26 27 28 29
+3 -> 30 31 32 33 34 35 36 37 38 39
+4 -> 40 41 42 43 44 45 46 47 48 49
+5 -> 50 51 52 53 54 55 56 57 58 59
+6 -> 60 61 62 63 64 65 66 67 68 69
+7 -> 70 71 72 73 74 75 76 77 78 79
+8 -> 80 81 82 83 84 85 86 87 88 89
+9 -> 90 91 92 93 94 95 96 97 98 99
+ 
+Every time the count will gets increased exponential based on base 10 
+
+... 1000000 100000 10000 1000  100   10    1 
+
+         10⁶    10⁵   10⁴  10³  10²  10¹  10⁰     
+         
+                                 7    3    2  ->  7*100 + 3*10 + 2*1 
+                                 
+2) Binary
+
+Symbols used -> 0 1 
+base(count)  -> 2 
+
+Everytime find the first zero from the right side end and invert the bits upto the same place
+
+Example -> 1000001010111111
+                    ^
+           1000001011000000
+                    -------
+                    
+Every time the count will gets increased exponential based on base 2 
+
+... 64 32 16 8  4  2  1 
+
+    2⁶ 2⁵ 2⁴ 2³ 2² 2¹ 2⁰     
+                    
+16 8 4 2 1
+ 0 0 0 0 0  ->  [0 * 16] + [0 * 8] + [0 * 4] + [0 * 2] + [0 * 1] = 00 
+ 0 0 0 0 1  ->  [0 * 16] + [0 * 8] + [0 * 4] + [0 * 2] + [1 * 1] = 01 
+ 0 0 0 1 0  ->  [0 * 16] + [0 * 8] + [0 * 4] + [1 * 2] + [0 * 1] = 02 
+ 0 0 0 1 1  ->  [0 * 16] + [0 * 8] + [0 * 4] + [1 * 2] + [1 * 1] = 03 
+ 0 0 1 0 0  ->  [0 * 16] + [0 * 8] + [1 * 4] + [0 * 2] + [0 * 1] = 04 
+ 0 0 1 0 1  ->  [0 * 16] + [0 * 8] + [1 * 4] + [0 * 2] + [1 * 1] = 05 
+ 0 0 1 1 0  ->  [0 * 16] + [0 * 8] + [1 * 4] + [1 * 2] + [0 * 1] = 06 
+ 0 0 1 1 1  ->  [0 * 16] + [0 * 8] + [1 * 4] + [1 * 2] + [1 * 1] = 07 
+ 0 1 0 0 0  ->  [0 * 16] + [1 * 8] + [0 * 4] + [0 * 2] + [0 * 1] = 08 
+ 0 1 0 0 1  ->  [0 * 16] + [1 * 8] + [0 * 4] + [0 * 2] + [1 * 1] = 09 
+ 0 1 0 1 0  ->  [0 * 16] + [1 * 8] + [0 * 4] + [1 * 2] + [0 * 1] = 10 
+ 0 1 0 1 1  ->  [0 * 16] + [1 * 8] + [0 * 4] + [1 * 2] + [1 * 1] = 11 
+ 0 1 1 0 0  ->  [0 * 16] + [1 * 8] + [1 * 4] + [0 * 2] + [0 * 1] = 12 
+ 0 1 1 0 1  ->  [0 * 16] + [1 * 8] + [1 * 4] + [0 * 2] + [1 * 1] = 13 
+ 0 1 1 1 0  ->  [0 * 16] + [1 * 8] + [1 * 4] + [1 * 2] + [0 * 1] = 14 
+ 0 1 1 1 1  ->  [0 * 16] + [1 * 8] + [1 * 4] + [1 * 2] + [1 * 1] = 15 
+ 1 0 0 0 0  ->  [1 * 16] + [0 * 8] + [0 * 4] + [0 * 2] + [0 * 1] = 16                  
+ 1 0 0 0 1  ->  [1 * 16] + [0 * 8] + [0 * 4] + [0 * 2] + [1 * 1] = 17 
+ 1 0 0 1 0  ->  [1 * 16] + [0 * 8] + [0 * 4] + [1 * 2] + [0 * 1] = 18 
+ 1 0 0 1 1  ->  [1 * 16] + [0 * 8] + [0 * 4] + [1 * 2] + [1 * 1] = 19 
+ 1 0 1 0 0  ->  [1 * 16] + [0 * 8] + [1 * 4] + [0 * 2] + [0 * 1] = 20
+ 
+3) Octal
+
+Symbols used -> 0 1 2 3 4 5 6 7
+base(count)  -> 8 
+                    
+Every time the count will gets increased exponential based on base 8 
+
+... 4096 256  64   8    1
+
+      8⁴  8³  8²  8¹   8⁰ 
+      
+    64 8 1                
+0 -> 0 0 0 -> [0 * 64] + [0 * 8] + [0 * 1] = 00 
+1 -> 0 0 1 -> [0 * 64] + [0 * 8] + [1 * 1] = 01 
+2 -> 0 0 2 -> [0 * 64] + [0 * 8] + [2 * 1] = 02 
+3 -> 0 0 3 -> [0 * 64] + [0 * 8] + [3 * 1] = 03
+4 -> 0 0 4 -> [0 * 64] + [0 * 8] + [4 * 1] = 04 
+5 -> 0 0 5 -> [0 * 64] + [0 * 8] + [5 * 1] = 05 
+6 -> 0 0 6 -> [0 * 64] + [0 * 8] + [6 * 1] = 06 
+7 -> 0 0 7 -> [0 * 64] + [0 * 8] + [7 * 1] = 07 
+8 -> 0 1 0 -> [0 * 64] + [1 * 8] + [0 * 1] = 08
+9 -> 0 1 1 -> [0 * 64] + [1 * 8] + [1 * 1] = 09
+10-> 0 1 2 -> [0 * 64] + [1 * 8] + [2 * 1] = 10
+11-> 0 1 3 -> [0 * 64] + [1 * 8] + [3 * 1] = 11
+12-> 0 1 4 -> [0 * 64] + [1 * 8] + [4 * 1] = 12
+13-> 0 1 5 -> [0 * 64] + [1 * 8] + [5 * 1] = 13
+14-> 0 1 6 -> [0 * 64] + [1 * 8] + [6 * 1] = 14
+15-> 0 1 7 -> [0 * 64] + [1 * 8] + [7 * 1] = 15
+16-> 0 2 0 -> [0 * 64] + [2 * 8] + [0 * 1] = 16
+17-> 0 2 1 -> [0 * 64] + [2 * 8] + [1 * 1] = 17
+18-> 0 2 2 -> [0 * 64] + [2 * 8] + [2 * 1] = 18
+19-> 0 2 3 -> [0 * 64] + [2 * 8] + [3 * 1] = 19
+20-> 0 2 4 -> [0 * 64] + [2 * 8] + [4 * 1] = 20
+
+
+4) Hexa Decimal
+
+Symbols used -> 0 1 2 3 4 5 6 7 8 9 A B C D E F
+base(count)  -> 16
+                    
+Every time the count will gets increased exponential based on base 8 
+
+... 4096 512   16     1
+
+     16³ 16²  16¹   16⁰ 
+
+512 16  1                
+  0  0  0 -> [0 * 512] + [0 * 16] + [0 * 1] = 00 
+  0  0  1 -> [0 * 512] + [0 * 16] + [1 * 1] = 01 
+  0  0  2 -> [0 * 512] + [0 * 16] + [2 * 1] = 02 
+  0  0  3 -> [0 * 512] + [0 * 16] + [3 * 1] = 03
+  0  0  4 -> [0 * 512] + [0 * 16] + [4 * 1] = 04 
+  0  0  5 -> [0 * 512] + [0 * 16] + [5 * 1] = 05 
+  0  0  6 -> [0 * 512] + [0 * 16] + [6 * 1] = 06 
+  0  0  7 -> [0 * 512] + [0 * 16] + [7 * 1] = 07 
+  0  0  8 -> [0 * 512] + [0 * 16] + [0 * 1] = 08
+  0  0  9 -> [0 * 512] + [0 * 16] + [1 * 1] = 09
+  0  0  A -> [0 * 512] + [0 * 16] + [2 * 1] = 10
+  0  0  B -> [0 * 512] + [0 * 16] + [3 * 1] = 11
+  0  0  C -> [0 * 512] + [0 * 16] + [4 * 1] = 12
+  0  0  D -> [0 * 512] + [0 * 16] + [5 * 1] = 13
+  0  0  E -> [0 * 512] + [0 * 16] + [6 * 1] = 14
+  0  0  F -> [0 * 512] + [0 * 16] + [7 * 1] = 15
+  0  1  0 -> [0 * 512] + [1 * 16] + [0 * 1] = 16
+  0  1  1 -> [0 * 512] + [1 * 16] + [1 * 1] = 17
+  0  1  2 -> [0 * 512] + [1 * 16] + [2 * 1] = 18
+  0  1  3 -> [0 * 512] + [1 * 16] + [3 * 1] = 19
+  0  1  4 -> [0 * 512] + [1 * 16] + [4 * 1] = 20
+
+Number System Conversion:
+
+Decimal to Binary
+-----------------
+divide the value by 2 and make note of the remainders in reverse order 
+
+input = 57
+
+2 | 57 -> 1 
+  ---- 
+2 | 28 -> 0
+  ---- 
+2 | 14 -> 0
+  ---- 
+2 |  7 -> 1 
+  ---- 
+2 |  3 -> 1 
+  ---- 
+2 |  1 -> 1 
+  ---- 
+     0 
+     
+(57)₁₀ = (0111001)₂   
+
+
+  
+Binary to Decimal
+-----------------
+input = 0111001
+
+64 32 16  8  4  2  1
+ 0  1  1  1  0  0  1  -> 32 + 16 + 8 + 1 = 57
+
+(0111001)₂ = (57)₁₀
+
+
+
+Decimal to Octal
+
+input = 58
+
+8 | 58 -> 2 
+  ----  
+8 |  7 -> 7 
+  ---- 
+     0 
+     
+(58)₁₀ = (72)₈
+
+
+
+Octal to Decimal
+
+input = 72
+
+ 256 64  8  1 
+   0  0  7  2 -> 7*8 + 2*1 = 56 + 2 = (58)
+
+(58)₁₀ = (72)₈
+
+
+
+Decimal to Hexa Decimal
+
+16 | 59 -> 11(b)
+   ----
+16 |  3 ->  3 
+   ---- 
+      0 
+      
+(59)₁₀ = (3b)₁₆    
+      
+
+Hexa Decimal to Decimal
+
+256  16   1 
+  0   3   b -> (3 * 16) + (1 * 11) = (59)
+  
+(3b)₁₆ = (59)₁₀
+
+Octal to Binary
+
+136 
+
+|   1   |   3   |   6   |
+| 0 0 1 | 0 1 1 | 1 1 0 |  
+
+
+Binary to Octal
+
+101010111101
+
+| 1 0 1 | 0 1 0 | 1 1 1 | 1 0 1 | 
+|   5   |   2   |   7   |   5   |
+
+Hexa Decimal to Binary
+
+a6df3 
+
+|   a         6         d         f         3    |
+|1 0 1 0 | 0 1 1 0 | 1 1 0 1 | 1 1 1 1 | 0 0 1 1 | 
+
+Binary to Hexa Decimal
+
+10100110110111110011
+
+|1 0 1 0 | 0 1 1 0 | 1 1 0 1 | 1 1 1 1 | 0 0 1 1 | 
+|   a         6         d         f         3    |
+
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+|Writing the Source Code -----> Preprocessing -----> Compilation -----> Assembly -----> Linking -----> Loading -----> Program Startup (Runtime Initialization) -----> Execution by the Processor -----> Program Termination|
+
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+header file
+
+A header file in C contains declarations of functions, macros, types, and variables that allow multiple source files to share information during compilation.
+
+Its job is to tell the compiler what exists.
+
+Without headers, you’d be forced to:
+    -> Rewrite function declarations everywhere
+    -> Risk mismatched types
+    -> Break modular programming
+    -> Lose compile-time checking
+Header files solve:
+    -> Code reuse
+    -> Separation of interface vs implementation
+    -> Clean multi-file projects
+    -> Faster development & maintenance
+
+How header files actually work (compiler flow)
+    -> #include "file.h"
+    -> Preprocessor literally pastes the header content
+    -> Compiler checks function usage
+    -> Linker matches declarations with definitions
+
+Some Standard C Header Files & Usage (One-Line Each)
+
+    -> [<stdio.h  >] – Input/output operations like printf, scanf, file handling
+    -> [<stdlib.h >] – Memory allocation, process control, conversions (malloc, exit, atoi)
+    -> [<string.h >] – String manipulation functions (strcpy, strlen, strcmp)
+    -> [<math.h   >] – Mathematical functions (sqrt, pow, sin, log)
+    -> [<ctype.h  >] – Character handling (isdigit, isalpha, toupper)
+    -> [<time.h   >] – Date and time functions (time, clock, difftime)
+    -> [<limits.h >] – Data type limits (INT_MAX, CHAR_BIT)
+    -> [<float.h  >] – Floating-point limits (FLT_MAX, DBL_MIN)
+    -> [<stdbool.h>] – Boolean data type support (bool, true, false)
+    -> [<stddef.h >] – Common definitions (NULL, size_t, ptrdiff_t)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+main function 
+
+1) main() is the entry point of user-level execution in a C program.
+2) It is the first function your code runs, but not the first function that executes in the process.
+3) The OS starts the program at a lower-level startup routine (like _start), which then:
+    * sets up the runtime
+    * prepares the stack
+    * initializes globals
+    * calls main()
+
+main() serves to:
+    * Start program logic
+    * Receive command-line arguments
+    * Return exit status to the OS
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+return EXIT_SUCCESS;
+
+return is used to:
+    * Send a value back to the calling function
+    * Terminate the execution of the current function
+    * Destroy the current stack frame
+    * Once return executes, control immediately leaves the function.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Print Format
+
+printf("How to print",what to print);
+		How to print:
+    -> Text -> print as it is
+		-> Format specifier
+    	->%i - integer - (010 - 8 - octal), (0x10 - 16 - Hexa decimal) , (10 - 10 - Decimal)
+    	->%hi - short integer
+    	->%d - decimal
+    	->%hd - short decimal
+    	->%ld - long decimal
+    	->%lld - ling long decimal
+    	->%u - unsigned
+    	->%lu - long unsigned
+    	->%llu - long long unsigned
+    	->%o - Octal
+    	->%x - hexa decimal
+    	->%X - HEXA DECIMAL
+    	->%c - char
+    	->%S - string
+    	->%f - float
+    	->%lf - long float(Double)
+    	->%Lf - long double
+    	->%p - pointer -> address
+    	->%g - ground - trailing zeros remove - (123.301200 - 123.3012)
+    	->%n - reads nothing but copy data from scanf
+    	->%e - exponential
+      
+      ->escape sequesce "" \ %
+      
+      ->width and precision num , 0 , + , - , * , . ,Example , %5d , %05d , %-5d , %+d , %*d , %.3f(. only for float)
+
+
+Sample code 
+
+#include <stdio.h>
+
+int main() {
+
+    int a = 10, b = 010, c = 0x10;
+    short s = 100;
+    long l = 100000;
+    long long ll = 123456789;
+
+    unsigned u = 50;
+    char ch = 'A';
+    char str[] = "C Programming";
+
+    float f = 123.301200;
+    double d = 456.789;
+    long double ld = 789.12345;
+
+    int count;
+
+    printf("---- Integer formats ----\n");
+    printf("%%d = %d\n", a);
+    printf("%%i = %i %i %i\n", a, b, c);
+    printf("%%hd = %hd\n", s);
+    printf("%%ld = %ld\n", l);
+    printf("%%lld = %lld\n", ll);
+    printf("%%u = %u\n", u);
+    printf("%%o = %o\n", a);
+    printf("%%x = %x\n", a);
+    printf("%%X = %X\n", a);
+
+    printf("\n---- Character & String ----\n");
+    printf("%%c = %c\n", ch);
+    printf("%%s = %s\n", str);
+
+    printf("\n---- Floating point ----\n");
+    printf("%%f = %f\n", f);
+    printf("%%.3f = %.3f\n", f);
+    printf("%%lf = %lf\n", d);
+    printf("%%Lf = %Lf\n", ld);
+    printf("%%e = %e\n", d);
+    printf("%%g = %g\n", f);
+
+    printf("\n---- Width & Flags ----\n");
+    printf("|%5d|\n", a);
+    printf("|%05d|\n", a);
+    printf("|%-5d|\n", a);
+    printf("|%+d|\n", a);
+    printf("|%*d|\n", 6, a);
+
+    printf("\n---- Pointer ----\n");
+    printf("%%p = %p\n", &a);
+
+    printf("\n---- Escape sequences ----\n");
+    printf("New line\\n\nTab\\tDone\n");
+    printf("Double quote: \"Hello\"\n");
+    printf("Percent sign: %%\n");
+
+    printf("Hello World%n\n", &count);
+    printf("Characters printed before %%n = %d\n", count);
+
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Scan format 
+
+scanf("How to read" , where to store);
+		How to read:
+    	similar to printf
+    where to store:
+    	Address of a variable -> &number
+          
+#include <stdio.h>
+
+int main() {
+
+    int a;
+    float f;
+    double d;
+    char ch;
+    char name[20];
+
+    printf("Enter integer: ");
+    scanf("%d", &a);
+
+    printf("Enter float: ");
+    scanf("%f", &f);
+
+    printf("Enter double: ");
+    scanf("%lf", &d);
+
+    printf("Enter character: ");
+    scanf(" %c", &ch);   // space ignores newline
+
+    printf("Enter name: ");
+    scanf("%19s", name);
+
+    printf("\n--- Output ---\n");
+    printf("Integer = %d\n", a);
+    printf("Float = %f\n", f);
+    printf("Double = %lf\n", d);
+    printf("Character = %c\n", ch);
+    printf("Name = %s\n", name);
+
+    return 0;
+}
+          
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------       
+          
+Data types 
+
+Note:- Depents on compiler and version data types size may change
+
+Data Types
+│
+├── Primitive
+│   ├── Integral
+│   │   ├── char                   (1 Byte  -> 2⁸  -> [-2⁷  to 2⁷  - 1] -> -127                     to 128                 ) 
+│   │   ├── short int              (2 Bytes -> 2¹⁶ -> [-2¹⁵ to 2¹⁵ - 1] -> -32768                   to 32768               )                    
+│   │   ├── int                    (4 Bytes -> 2³² -> [-2³¹ to 2³¹ - 1] -> -2147483648              to 2747483647          )             
+│   │   ├── long int               (8 Bytes -> 2⁶⁴ -> [-2⁶³ to 2⁶³ - 1] -> -9223372036854775808     to -9223372036854775807)                                                 
+│   │   └── long long int          (8 Bytes -> 2⁶⁴ -> [-2⁶³ to 2⁶³ - 1] -> -9223372036854775808     to -9223372036854775807)   
+│   │   ├── unsigned char          (1 Byte  -> 2⁸  -> [0    to 2⁸     ] -> 0                        to 255                 )                                                            
+│   │   ├── unsigned short int     (2 Bytes -> 2¹⁶ -> [0    to 2¹⁶    ] -> 0                        to 65535               )                              
+│   │   ├── unsigned int           (4 Bytes -> 2³² -> [0    to 2³²    ] -> 0                        to 4294967495          )                                          
+│   │   ├── unsigned long int      (8 Bytes -> 2⁶⁴ -> [0    to 2⁶⁴    ] -> 0                        to 18446744073709551615)      
+│   │   └── unsigned long long int (8 Bytes -> 2⁶⁴ -> [0    to 2⁶⁴    ] -> 0                        to 18446744073709551615)
+│   └── Floating Point
+│       ├── float                  (4  Bytes )
+│       ├── double                 (8  Bytes ) 
+│       └── long double            (16 Bytes )
+│
+├── Derived
+│   ├── arrays
+│   └── pointers
+│
+└── User Defined
+    ├── struct
+    ├── union
+    └── enum
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------          
+          
+Variables 
+
+Variable – A variable is a named memory location used to store data that can change during program execution.
+    * Local Variable – A variable declared inside a function or block and accessible only within it.
+    * Global Variable – A variable declared outside all functions and accessible throughout the program.
+    * Static Variable – A variable that retains its value between function calls and exists for the entire program lifetime.
+    * Automatic Variable – A local variable that is created and destroyed automatically with function execution.
+    * Register Variable – A variable stored in a CPU register for faster access and whose address cannot be accessed.
+    * Scope – The region of the program where a variable can be accessed.
+    * Lifetime – The duration for which a variable exists in memory.
+    
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+operators
+
+Operators – Symbols that perform operations on data values and variables in C.
+
+    * Arithmetic         (+ - * / %                      ) – Used to perform mathematical calculations.
+    * Assignment         (=                              ) – Used to assign a value to a variable.
+    * Compound Assignment(+= -= *= /= %= &= |= ^= <<= >>=) – Used to combine an operation with assignment in a single step.
+    * Relational         (== != < > <= >=                ) – Used to compare two values and return true or false.
+    * Logical            (&& || !                        ) – Used to combine or negate conditions in decision making.
+    * Bitwise            (& | ^ ~                        ) – Used to perform operations at the bit level.
+    * Shift              (<< >>                          ) – Used to shift bits left or right by a specified number of positions.
+    * Unary              (++ --                          ) – Used to increment or decrement a variable by one (pre or post).
+    * Ternary            (?:                             ) – Used as a compact conditional expression.
+    * Special            (sizeof , & , *                 ) – Used to get memory size, address of a variable, and value at an address.
+    * Boolean            (true , false                   ) – Used to represent logical truth values in C.
+    
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+control statements:
+
+Control Statements
+│
+├── Conditional
+│   ├── if
+│   ├── if else
+│   ├── else if ladder
+│   ├── nested if
+│   └── switch
+│
+├── Looping
+│   ├── for
+│   ├── while
+│   └── do while
+│
+└── Jump
+    ├── break
+    ├── continue
+    ├── goto
+    └── return
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Decision making statements (or) conditional statements 
+    
+1) if statement (or) simple if (or) single state if 
+
+    if(condition)
+    {
+        statements;
+    }
+
+2) if else statement (or) two state if 
+
+    if(condition) 
+    {
+        statements;//true
+    }
+    else
+    {
+        statements;//false
+    }
+
+3) else if ladder (or) cascaded if (or) multi state if
+
+    if(condition)
+    {
+        statements;
+    }
+    else if(condition)
+    {
+        statement;
+    }
+    else if(condition)
+    {
+        statement;
+    }
+    else if(condition)
+    {
+        statement;
+    }
+    else 
+    {
+        statements;(optional)
+    }
+
+4) Nested if
+
+    if(condition)
+    {
+        statements;
+        if(condition)
+        {
+            statements;
+        }
+    }
+    else 
+    {
+        statements;
+    }
+
+
+/* Q1: Find the greater value from the given integers */
+#include <stdio.h>
+int main() {
+    int num1, num2;
+    scanf("%d", &num1);
+    scanf("%d", &num2);
+    if (num1 > num2)
+        printf("%d", num1);
+    else
+        printf("%d", num2);
+    return 0;
+}
+
+
+/* Q2: Accept the integer and check if it is even or odd */
+#include <stdio.h>
+int main() {
+    int num1;
+    scanf("%d", &num1);
+    if (num1 % 2 == 1)
+        printf("Odd");
+    else
+        printf("Even");
+    return 0;
+}
+
+
+/* Q3: Hi / Hello / HiHello using if–else ladder */
+#include <stdio.h>
+int main() {
+    int num;
+    scanf("%d", &num);
+    if (num % 3 == 0 && num % 5 == 0)
+        printf("HiHello");
+    else if (num % 3 == 0)
+        printf("Hi");
+    else if (num % 5 == 0)
+        printf("Hello");
+    return 0;
+}
+
+
+/* Q4: Hi / Hello using two separate if statements */
+#include <stdio.h>
+int main() {
+    int num;
+    scanf("%d", &num);
+    if (num % 3 == 0)
+        printf("Hi");
+    if (num % 5 == 0)
+        printf("Hello");
+    return 0;
+}
+
+
+/* Q5: Accept three numbers and print min < mid < max */
+#include <stdio.h>
+int main() {
+    int num1, num2, num3;
+    int max = 0, min = 0, mid = 0;
+    scanf("%d", &num1);
+    scanf("%d", &num2);
+    scanf("%d", &num3);
+
+    if (num1 > num2 && num1 > num3)
+        max = num1;
+    else if (num2 > num3)
+        max = num2;
+    else
+        max = num3;
+
+    if (num1 < num2 && num1 < num3)
+        min = num1;
+    else if (num2 < num3)
+        min = num2;
+    else
+        min = num3;
+
+    mid = (num1 + num2 + num3) - (min + max);
+    printf("%d < %d < %d", min, mid, max);
+    return 0;
+}
+
+
+#include <stdio.h>
+#define Max(a , b) a > b ? a : b
+#define Min(a , b) a < b ? a : b
+int main() {
+    int num1, num2, num3;
+    int max = 0, min = 0, mid = 0;
+    scanf("%d", &num1);
+    scanf("%d", &num2);
+    scanf("%d", &num3);
+    max = Max((Max(num1 , num2)) , num3);
+    min = Min((Min(num1 , num2)) , num3);
+    mid = (num1 + num2 + num3) - (min + max);
+    printf("%d < %d < %d", min, mid, max);
+    return 0;
+}
+
+
+// for 4 values 
+
+30 40 10 20 
+10 < 20 < 30 < 40
+
+#include <stdio.h>
+#define Max(a , b) a > b ? a : b
+#define Min(a , b) a < b ? a : b
+#define swap(a , b) b = (a + b) - (a = b)
+int main() {
+    int num1, num2, num3 , num4;
+    int max = 0, min = 0, mid1 = 0, mid2 = 0;
+    scanf("%d", &num1);
+    scanf("%d", &num2);
+    scanf("%d", &num3);
+    scanf("%d", &num4);
+    max = Max((Max(num1 , num2)) , (Max(num3 , num4)));
+    min = Min((Min(num1 , num2)) , (Min(num3 , num4)));
+    mid1 = Min((Max(num1 , num2)) , (Max(num3 , num4)));
+    mid2 = Max((Min(num1 , num2)) , (Min(num3 , num4)));
+    if(mid1 > mid2)
+        swap(mid1 , mid2);
+    printf("%d < %d < %d < %d", min, mid1, mid2, max);
+    return 0;
+}
+
+
+
+/* Q6: Find the greatest of four numbers */
+#include <stdio.h>
+int main() 
+{
+    int num1, num2, num3, num4;
+    int max;
+    scanf("%d", &num1);
+    scanf("%d", &num2);
+    scanf("%d", &num3);
+    scanf("%d", &num4);
+
+    max = num1;
+    if (max < num2) max = num2;
+    if (max < num3) max = num3;
+    if (max < num4) max = num4;
+
+    printf("%d", max);
+    return 0;
+}
+
+
+/* Q7: Accept a character and display its type */
+#include <stdio.h>
+int main() 
+{
+    char ch;
+    scanf(" %c", &ch);
+    if (ch >= '0' && ch <= '9')
+        printf("Digit");
+    else if (ch >= 'A' && ch <= 'Z')
+        printf("Uppercase");
+    else if (ch >= 'a' && ch <= 'z')
+        printf("Lowercase");
+    else
+        printf("Special Char");
+    return 0;
+}
+
+
+/* Q8: Check whether the given year is leap year or not */
+#include <stdio.h>
+int main() {
+    int year;
+    scanf("%d", &year);
+    if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
+        printf("Leap Year");
+    else
+        printf("Not a Leap Year");
+    return 0;
+}
+
+
+/* Q9: Accept DOB of two persons and find the elder one */
+#include <stdio.h>
+int main() {
+    int d1, m1, y1, d2, m2, y2;
+    scanf("%d %d %d", &d1, &m1, &y1);
+    scanf("%d %d %d", &d2, &m2, &y2);
+
+    if (y1 < y2 ||
+       (y1 == y2 && m1 < m2) ||
+       (y1 == y2 && m1 == m2 && d1 < d2))
+        printf("%d %d %d", d1, m1, y1);
+    else
+        printf("%d %d %d", d2, m2, y2);
+    return 0;
+}
+
+#include <stdio.h>
+int main() {
+    int d1, m1, y1, d2, m2, y2;
+    scanf("%d %d %d", &d1, &m1, &y1);
+    scanf("%d %d %d", &d2, &m2, &y2);
+    int date_of_birth1 = (y1 * 100 + m1) * 100 + d1;
+    int date_of_birth2 = (y2 * 100 + m2) * 100 + d2;
+    if (date_of_birth1 < date_of_birth2)
+        printf("%d %d %d", d1, m1, y1);
+    else
+        printf("%d %d %d", d2, m2, y2);
+    return 0;
+}
+
+
+/* Q10: Accept a character and check Vowel or Consonant */
+#include <stdio.h>
+int main() {
+    char ch;
+    scanf(" %c", &ch);
+
+    if (ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u'||
+        ch=='A'||ch=='E'||ch=='I'||ch=='O'||ch=='U')
+        printf("Vowel");
+    else
+        printf("Consonant");
+    return 0;
+}
+
+
+#include <stdio.h>
+int main() {
+    char ch;
+    scanf(" %c", &ch);
+    if(ch >= 'A' && ch <= 'Z')
+        ch += 32;
+    if (ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u')
+        printf("Vowel");
+    else
+        printf("Consonant");
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Looping 
+
+What is Looping?
+     * Looping means executing a block of code repeatedly
+     * Used when the same task must be done multiple times
+     
+Types of Loops in C
+ * for loop
+ * while loop
+ * do-while loop
+ 
+for Loop
+    for(initialization; condition; updation) 
+    {
+        statements;
+    }
+    Entry-controlled loop
+Best when number of iterations is known
+
+while Loop
+    while(condition) 
+    {
+        statements;
+    }
+    Entry-controlled loop
+    Used when iterations are not known in advance
+    
+do-while Loop
+    do 
+    {
+        statements;
+    } while(condition);
+    Exit-controlled loop
+    Executes at least once, even if condition is false
+    
+Loop Control Statements
+    * break → exits the loop immediately
+    * continue → skips current iteration
+    * goto → jumps to labeled statement (rarely used)
+    
+Nested Loops
+    Loop inside another loop
+    for(i=1;i<=3;i++)
+    {
+        for(j=1;j<=2;j++)
+        {
+            printf("*");
+        }
+    }
+    Commonly used in patterns and matrices
+    
+Loop Execution Flow
+    * Initialization → Condition → Body → Update → Condition…
+    * Stops when condition becomes false
+    
+Infinite Loops
+    while(1) { }
+    or
+    for(;;) { }
+    Condition never becomes false
+    Used in embedded systems & servers
+
+Common Loop Errors
+    * Missing update statement
+    * Wrong condition
+    * Infinite loop
+    * Using = instead of == in condition
+Advantages
+    * Reduces code repetition
+    * Improves readability
+    * Efficient execution
+Applications
+    * Array traversal
+    * Pattern printing
+    * Searching & sorting
+    * Repetitive calculations   
+
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Number theory 
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Number crunching (or) digit manipulation (or) Number integration and dis integration
+&
+Number based problems
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+[Extraction]
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Right side extraction]
+
+[Hard method] 
+
+input = 12345
+
+d = input % 10 ; input= input / 10 ;
+
+5 = 12345 % 10 ; 1234 = 12345 / 10 ; 
+4 = 1234  % 10 ; 123  = 1234  / 10 ; 
+3 = 123   % 10 ; 12   = 123   / 10 ; 
+2 = 12    % 10 ; 1    = 12    / 10 ; 
+1 = 1     % 10 ; 0    = 1     / 10 ; 
+
+input == 0 (stop)
+
+[Soft method]
+
+input = 12345
+
+d = (input / pos_v) % 10 ; pos_v  = pos_v * 10 ;
+
+5 = (12345 / 1    ) % 10 ; 10     = 1     * 10 ;
+4 = (12345 / 10   ) % 10 ; 100    = 10    * 10 ;
+3 = (12345 / 100  ) % 10 ; 1000   = 100   * 10 ;
+2 = (12345 / 1000 ) % 10 ; 10000  = 1000  * 10 ;
+1 = (12345 / 10000) % 10 ; 100000 = 10000 * 10 ;
+
+input < pos_v (stop)
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[digits count and pos_v Formation]
+
+[Hard method]       count_digit  creating_pos_value ;
+
+input= input / 10 ; c = c + 1 ; pos_v  = pos_v * 10 ;
+
+1234 = 12345 / 10 ; 1 = 0 + 1 ; 10     = 1     * 10 ; 
+123  = 1234  / 10 ; 2 = 1 + 1 ; 100    = 10    * 10 ; 
+12   = 123   / 10 ; 3 = 2 + 1 ; 1000   = 100   * 10 ; 
+1    = 12    / 10 ; 4 = 3 + 1 ; 10000  = 1000  * 10 ; 
+0    = 1     / 10 ; 5 = 4 + 1 ; 100000 = 10000 * 10 ; 
+
+[Soft method]              count_digit  creating_pos_value ;
+
+d = (input / pos_v) % 10 ; c = c + 1 ; pos_v  = pos_v * 10 ;
+
+5 = (12345 / 1    ) % 10 ; 1 = 0 + 1 ; 10     = 1     * 10 ;
+4 = (12345 / 10   ) % 10 ; 2 = 1 + 1 ; 100    = 10    * 10 ;
+3 = (12345 / 100  ) % 10 ; 3 = 2 + 1 ; 1000   = 100   * 10 ;
+2 = (12345 / 1000 ) % 10 ; 4 = 3 + 1 ; 10000  = 1000  * 10 ;
+1 = (12345 / 10000) % 10 ; 5 = 4 + 1 ; 100000 = 10000 * 10 ;
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Left side extraction ( calculate the digits and create a pos_v )]
+
+[Hard method]
+
+input = 12345 
+
+d = input / pos_v ; input= input % pos_v ; pos_v = pos_v / 10 ;
+
+1 = 12345 / 10000 ; 2345 = 12345 % 10000 ; 1000  = 10000 / 10 ;  
+2 =  2345 / 1000  ;  345 =  2345 % 1000  ; 100   = 1000  / 10 ;  
+3 =   345 / 100   ;   45 =   345 % 100   ; 10    = 100   / 10 ;  
+4 =    45 / 10    ;    5 =    45 % 10    ; 1     = 10    / 10 ;  
+5 =     5 / 1     ;    0 =     5 % 1     ; 0     = 1     / 10 ;
+
+input == 0 (stop)
+
+[Soft method]
+
+d = (input / pos_v) % 10 ; pos_v= pos_v / 10 ;
+
+1 = (12345 / 10000) % 10 ; 1000 = 10000 / 10 ;
+2 = (12345 / 1000 ) % 10 ; 100  = 1000  / 10 ;
+3 = (12345 / 100  ) % 10 ; 10   = 100   / 10 ;
+4 = (12345 / 10   ) % 10 ; 1    = 10    / 10 ;
+5 = (12345 / 1    ) % 10 ; 0    = 1     / 10 ;
+
+input < pos_v (stop)
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Formation]
+
+[Right side formation] 
+
+input = 12345 -> segregated digits [ 5 , 4 , 3 , 2 , 1 ]
+
+rev   = d + 10 * rev
+
+5     = 5 + 10 * 0 
+54    = 4 + 10 * 5 
+543   = 3 + 10 * 54 
+5432  = 2 + 10 * 543 
+54321 = 1 + 10 * 5432 
+
+[Left side formation]
+
+input = 12345 -> segregated digits [ 1 , 2 , 3 , 4 , 5 ]
+
+rev   = d * pos_v + rev  ; base  = base  * 10 ;
+
+1     = 1 * 1     + 0    ; 1     = 1     * 10 ;
+21    = 2 * 10    + 1    ; 10    = 10    * 10 ;
+321   = 3 * 100   + 21   ; 100   = 100   * 10 ;
+4321  = 4 * 1000  + 321  ; 1000  = 1000  * 10 ;
+54321 = 5 * 10000 + 4321 ; 10000 = 10000 * 10 ;
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Practice problems:
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Adam number] 
+
+12 --- 21  | [Accept the input from the user and reverse the number]
+ |      |  | 
+ |     441 | [take a square of a reversed number] 
+ |      |  | 
+144 == 144 | [if input² == reversed_(reversed_input²) - [Adam number]]
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Armstrong number] 
+
+    153----| [Accept the input from the user]
+   / | \   | 
+  1  5  3  | [count the digits and segregate the digits]
+  |  |  |  | 
+  1+125+27 | [calculate the exponential based on digits count for each digits and do sum]
+   \ | /   | 
+    153----| [if sum == input [Armstrong number]]
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Strong number]
+
+    145----| [Accept the input from the user]
+   / | \   | 
+  1  4  5  | [segregate the digits]
+  |  |  |  | 
+  1+24+120 | [calculate the factorial based on digits and do sum]
+   \ | /   | 
+    145----| [if sum == input [Strong number]]
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Magic number] 
+
+    1927    | [Accept the input from the user] 
+  / |  | \  |  
+ 1  9  2  7 | [segregate the digits] 
+ |  |  |  | | 
+ 1+ 9+ 2+ 7 | [do sum of all the digits] 
+  \ |  | /  |  
+    (19)    | [if sum == 1 [Magic]][if 2≤sum≤9 [Not a Magic]][if sum>9 do repeat from step 2] 
+   /    \ 
+  1      9 
+  |      |
+  1   +  9 
+   \    /
+    (10)
+   /    \ 
+  1      0 
+  |      |
+  1   +  0 
+   \    /
+    (01)
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Happy number] 
+
+    82   | [Accept the input from the user]   
+   /  \  |     
+  8    2 | [Seperate the digits] 
+  |    | | 
+  64 + 4 | [do the sum of all the digit²] 
+   \  /  | 
+    68   | [if sum == 1 [happy number]][if 2≤sum≤9 [Not a happy number]][else do repeat from step 2]
+   /  \
+  6    8 
+  |    |
+  36 +64 
+   \  /
+   +100
+   / | \
+  1  0  0 
+  |  |  |
+  1 +0 +0 
+   \ | / 
+    (1)
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+ 
+[Kapreker number] 
+
+297² = 88209
+
+8 + 8209 = 8217 
+88 + 209 =  297 
+882 + 09 =  891 
+8820 + 9 = 8829 
+
+if the sum of splitted values of input² == input [Kapreker] 
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Perfect number] 
+
+Sum of the factors of the input (Excluding input) == input
+
+Example., 1)  6 = 1 + 2 + 3 
+
+          2) 28 = 1 + 2 + 4 + 7 + 14
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Extra perfect number]
+
+Number which contains 1's only at the starting and ending of a binary representation
+
+Example., 
+
+11       = 3 
+101      = 5 
+1001     = 9 
+10001    = 17 
+100001   = 33 
+1000001  = 65 
+10000001 = 129
+
+if input == ( 2ⁿ + 1 ) -> [Extra perfect number]
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Abundant number]
+
+Sum of the factors of the input (Excluding input) > input
+
+Example., 1) 20 < 1 + 2 + 4 + 5 + 10 
+
+          2) 40 = 1 + 2 + 4 + 5 + 8 + 10 + 20
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Deficient number]
+
+Sum of the factors of the input (Excluding input) < input
+
+Example., 1) 10 > 1 + 2 + 5 
+
+          2) 15 = 1 + 3 + 5
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Mersenne number]
+
+Number which contains 1's continuously without 0's starting to ending of a binary representation
+
+Example., 
+
+11       = 3 
+111      = 7 
+1111     = 15
+11111    = 31 
+111111   = 63 
+1111111  = 127 
+
+if input == ( 2ⁿ - 1 ) -> [Mersenne number]
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Extra: 
+
+Pentagon number 
+Proth number 
+Harshad number 
+Fibonacci number 
+Catalan number 
+Amicable pairs
+Strobogrammatic number
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+
+
+
+Basic Looping Algorithms
+    * Loop Execution Algorithm
+    * Loop Counter Algorithm
+    * Finite Loop Algorithm
+    * Infinite Loop Algorithm
+    * Pre-test Loop Algorithm
+    * Post-test Loop Algorithm
+    
+for Loop Based Algorithms
+    * Counting Loop Algorithm
+    * Sum of N Numbers Algorithm
+    * Factorial Using for Loop
+    * Table Generation Algorithm
+    * Power Calculation Algorithm
+    * Series Generation Using for Loop
+    
+while Loop Based Algorithms
+    * Condition-Controlled Loop Algorithm
+    * Sentinel-Controlled Loop Algorithm
+    * Reverse Number Algorithm
+    * Digit Count Algorithm
+    * Palindrome Check Algorithm
+    * Armstrong Number Algorithm
+    
+do-while Loop Based Algorithms
+    * At-Least-Once Execution Algorithm
+    * Menu-Driven Program Algorithm
+    * Input Validation Algorithm
+    * Repetitive Task Confirmation Algorithm
+    
+Nested Loop Algorithms
+    * Pattern Printing Algorithm
+    * Matrix Traversal Algorithm
+    * Multiplication Table Grid Algorithm
+    * Star Pattern Algorithms
+    * Number Pattern Algorithms
+    
+Loop Control Algorithms
+    * Loop Termination Algorithm (break)
+    * Loop Skipping Algorithm (continue)
+    * Early Exit Algorithm
+    * Conditional Jump Algorithm (goto)
+    
+Mathematical Algorithms Using Loops
+    * Prime Number Algorithm
+    * Fibonacci Series Algorithm
+    * GCD Algorithm
+    * LCM Algorithm
+    * Sum of Digits Algorithm
+    * Reverse Digits Algorithm
+
+Loop-Based Array Algorithms
+    * Array Traversal Using Loop
+    * Array Search Using Loop
+    * Array Sum Using Loop
+    * Array Copy Using Loop
+    * Array Reverse Using Loop
+    
+Loop Optimization Techniques
+    * Loop Unrolling Technique
+    * Loop Invariant Code Motion
+    * Loop Fusion Technique
+    * Loop Fission Technique
+    
+Common Loop Problem Algorithms
+    * Input Until Condition Algorithm
+    * Maximum of N Numbers Algorithm
+    * Minimum of N Numbers Algorithm
+    * Count Positive/Negative Numbers Algorithm
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Arrays 
+ 
+Definition
+    * An array is a collection of same data type elements
+    * Stored in contiguous memory locations
+    * Index starts from 0
+Declaration
+    * datatype array_name[size];
+    * Example: int a[10];
+    * Size must be positive
+Memory & Address
+    * Array elements stored continuously
+    * array_name gives base address
+    * &a[0] == a
+Arrays and Pointers
+    * Array name acts as a pointer to first element
+    * a[i] == *(a + i)
+    * sizeof(array) ≠ sizeof(pointer)
+Types of Arrays
+    * One-dimensional array
+    * Two-dimensional array
+    * Multi-dimensional array
+    * Character array (string)
+Passing Array to Function
+    * Arrays passed as pointer
+    * Size must be passed separately
+Advantages
+    * Fast access using index
+    * Simple data storage
+    * Efficient memory usage
+Limitations
+    * Fixed size
+    * No bounds checking
+    * Insertion/deletion is costly    
+
+#include<stdio.h>
+int main(void)
+{
+    int num;
+    int num1[] = {4,3,5,2,6,7,83,8,4,6,1,6,2,4534,6,4567,235,2,42,56,34,634};
+    printf("%d %d",sizeof(num),sizeof(num1) / sizeof(num1[0]));
+    return 0;
+}
+
+#include<stdio.h>
+#define M 10
+int main(void)
+{
+    int arr1[]  = {1,2,3,4,5,6}; // size of the arr is 6 -> created on compile time 
+    int arr2[10]= {1,2,3,4,5,6,7,8,9,10}; //size of the arr is 10 -> created on compile time
+    int arr3[8] = {1,2,3,4}; //size of the arr is 8 -> created on compile time
+    int arr4[2] = {1,2,3,4}; // not acceptable
+    // main.c: In function ‘main’:
+    // main.c:7:24: warning: excess elements in array initializer
+    //     7 |     int arr4[2] = {1,2,3,4}; // not acceptable
+    //       |                        ^
+    // main.c:7:24: note: (near initialization for ‘arr4’)
+    // main.c:7:26: warning: excess elements in array initializer
+    //     7 |     int arr4[2] = {1,2,3,4}; // not acceptable
+    //       |                          ^
+    // main.c:7:26: note: (near initialization for ‘arr4’)
+    int arr5[100] = {0}; // assigned 0 in all places;
+    int arr6[100] = {1}; // assigned 1 in index 0 , will assign 0 in all the remaining places
+    int arr7[100] = {1,4,10,0,13}; // first 5 places will get assigned with these numbers , remaining 10
+    int arr8[100] = {[10] = 25 , [25] = 10}; // it will assign the corresponding data in the specified position;
+    int N = 10;
+    int arr9[N]; // create array on compile time with random size and it will change the size to N on run time
+    int arr10[N] = {4,2,6,7,10};
+    // main.c:7:26: note: (near initialization for ‘arr4’)
+    // main.c:23:20: error: variable-sized object may not be initialized except with an empty initializer
+    //   23 |     int arr10[N] = {4,2,6,7,10};
+    int arr11[M] = {4,2,6,7,10}; // Macros - compile time text replacement -> M will be replaced with 10 on compile time itself
+    int arr12[5];
+    scanf("%d",arr[0]);
+    scanf("%d",arr[1]);
+    scanf("%d",arr[2]);
+    scanf("%d",arr[3]);
+    scanf("%d",arr[4]);
+    int arr13[5];
+    for(int ind = 0 ; ind < 5 ; ind++)
+    {
+        scanf("%d",arr13[ind]);
+    }
+    for(int ind = 0 ; ind < 5 ; ind++)
+    {
+        printf("%d ",arr13[ind]);
+    }
+    printf("1");
+    return 0;
+}
+
+Sample program to practice with arrays
+
+Range 
+
+create and store 100 values from 1 to 100
+
+    #include<stdio.h>
+    int main() 
+    {
+        int values[100];
+        int index;
+        for (index = 0; index < 100; index++) 
+        {
+            values[index] = index + 1;
+        }
+        for (index = 0; index < 100; index++) 
+        {
+            printf("%d ", numbers[index]);
+        }
+        return 0;
+    }
+
+create and store N values from 1 to N 
+
+    #include <stdio.h>
+    int main() 
+    {
+        int size;
+        scanf("%d", &size);
+        int values[size];
+        int index;
+        for (index = 0; index < size; index++) 
+        {
+            values[index] = index + 1;
+        }
+        for (index = 0; index < size; index++) 
+        {
+            printf("%d ", numbers[index]);
+        }
+        return 0;
+    }
+
+create an array with 100 index and store only odd numbers
+
+    #include <stdio.h>
+    int main() 
+    {
+        int oddNumbers[100];
+        int index;
+        for (index = 0; index < 100; index++) 
+        {
+            oddNumbers[index] = 2 * index + 1;
+        }
+        for (index = 0; index < 100; index++) 
+        {
+            printf("%d ", numbers[index]);
+        }
+        return 0;
+    }
+
+create an array with 100 index and store only even numbers
+
+    #include <stdio.h>
+    int main() 
+    {
+        int evenNumbers[100];
+        int index;
+        for (index = 0; index < 100; index++) 
+        {
+            evenNumbers[index] = 2 * (index + 1);
+        }
+        for (index = 0; index < 100; index++) 
+        {
+            printf("%d ", numbers[index]);
+        }
+        return 0;
+    }
+
+create an array with 50 and store multiples of 3 , 5 , 3&5 
+
+    #include <stdio.h>
+    int main() 
+    {
+        int multiples[50];
+        int count = 0;
+        int number = 1;
+        while (count < 50) 
+        {
+            if (number % 3 == 0 || number % 5 == 0) 
+            {
+                multiples[count] = number;
+                count++;
+            }
+            number++;
+        }
+        for (index = 0; index < 50; index++) 
+        {
+            printf("%d ", numbers[index]);
+        }
+        return 0;
+    }
+
+create an array to store first 25 fibonacci series 
+
+    #include <stdio.h>
+    int main() 
+    {
+        int fibonacci[25];
+        fibonacci[0] = 0;
+        fibonacci[1] = 1;
+        int index;
+        for (index = 2; index < 25; index++) 
+        {
+            fibonacci[index] = fibonacci[index - 1] + fibonacci[index - 2];
+        }
+        for (index = 0; index < 25; index++) 
+        {
+            printf("%d ", numbers[index]);
+        }
+        return 0;
+    }
+
+create and store 100 values from 100 to 1
+
+    #include <stdio.h>
+    int main() 
+    {
+        int values[100];
+        int index;
+        for (index = 0; index < 100; index++) 
+        {
+            values[index] = 100 - index;
+        }
+        for (index = 0; index < 100; index++) 
+        {
+            printf("%d ", numbers[index]);
+        }
+        return 0;
+    }
+
+create and store N values from N to 1 
+
+    #include <stdio.h>
+    int main() 
+    {
+        int size;
+        scanf("%d", &size);
+        int values[size];
+        int index;
+        for (index = 0; index < size; index++) 
+        {
+            values[index] = size - index;
+        }
+        for (index = 0; index < size; index++) 
+        {
+            printf("%d ", numbers[index]);
+        }
+        return 0;
+    }
+
+
+Operations 
+
+Shifting
+    |->right shifting
+    
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            scanf("%d", &arraySize);
+            int index;
+            for (index = arraySize; index > 0; index--) 
+            {
+                numbers[index] = numbers[index - 1];
+            }
+            numbers[0] = 0;
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+
+    |->left shifting
+    
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            scanf("%d", &arraySize);
+            int index;
+            for (index = 0; index < arraySize - 1; index++) 
+            {
+                numbers[index] = numbers[index + 1];
+            }
+            arraySize--;
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+    
+Insertion (needs right shifting)
+    |-> begin
+
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            int newValue;
+            scanf("%d", &arraySize);
+            int index;
+            for (index = arraySize; index > 0; index--) 
+            {
+                numbers[index] = numbers[index - 1];
+            }
+            scanf("%d", &newValue);
+            numbers[0] = newValue;
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+
+    |-> mid 
+
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            int position;
+            int newValue;
+            scanf("%d %d", &arraySize, &position);
+            int index;
+            for (index = arraySize; index > position; index--) 
+            {
+                numbers[index] = numbers[index - 1];
+            }
+            scanf("%d", &newValue);
+            numbers[position] = newValue;
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+
+    |-> end
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            int newValue;
+            int index;
+            scanf("%d", &arraySize);
+            for (index = 0; index < arraySize; index++) 
+            {
+                scanf("%d", &numbers[index]);
+            }
+            scanf("%d", &newValue);
+            numbers[arraySize] = newValue;
+            arraySize++;
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+
+    |-> postional
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            int position;
+            int newValue;
+            int index;
+            scanf("%d", &arraySize);
+            for (index = 0; index < arraySize; index++) 
+            {
+                scanf("%d", &numbers[index]);
+            }
+            scanf("%d", &position);
+            scanf("%d", &newValue);
+            for (index = arraySize; index > position; index--) 
+            {
+                numbers[index] = numbers[index - 1];
+            }
+            numbers[position] = newValue;
+            arraySize++;
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+
+Deletion (needs left shifting)
+    |-> begin
+    
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            scanf("%d", &arraySize);
+            int index;
+            for (index = 0; index < arraySize - 1; index++) 
+            {
+                numbers[index] = numbers[index + 1];
+            }
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+
+    |-> mid 
+
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            int position;
+            scanf("%d %d", &arraySize, &position);
+            int index;
+            for (index = position; index < arraySize - 1; index++) 
+            {
+                numbers[index] = numbers[index + 1];
+            }
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+
+    |-> end 
+
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            scanf("%d", &arraySize);
+            arraySize--;
+            return 0;
+        }
+
+    |-> postional
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            int position;
+            int index;
+            scanf("%d", &arraySize);
+            for (index = 0; index < arraySize; index++) 
+            {
+                scanf("%d", &numbers[index]);
+            }
+            scanf("%d", &position);
+            for (index = position; index < arraySize - 1; index++) 
+            {
+                numbers[index] = numbers[index + 1];
+            }
+            arraySize--;
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+
+rotation (needs shifting within the range)
+    |-> right rotation
+    
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            scanf("%d", &arraySize);
+            int lastValue = numbers[arraySize - 1];
+            int index;
+            for (index = arraySize - 1; index > 0; index--) 
+            {
+                numbers[index] = numbers[index - 1];
+            }
+            numbers[0] = lastValue;
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+    
+    |-> left rotation
+    
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            scanf("%d", &arraySize);
+            int firstValue = numbers[0];
+            int index;
+            for (index = 0; index < arraySize - 1; index++) 
+            {
+                numbers[index] = numbers[index + 1];
+            }
+            numbers[arraySize - 1] = firstValue;
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+
+Searching
+    |-> linear search -> 11 (O(N))
+
+        iterate through the array from index 0 t0 size-1 or till the search element
+        
+        1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
+        
+        <>                         |-> 1
+        <->                        |-> 2
+        <--->                      |-> 3     
+        <----->                    |-> 4       
+        <------->                  |-> 5         
+        <--------->                |-> 6           
+        <----------->              |-> 7             
+        <------------->            |-> 8               
+        <--------------->          |-> 9                 
+        <------------------>       |-> 10                    
+        <--------------------->    |-> 11 
+
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            int searchValue;
+            scanf("%d", &arraySize);
+            int index;
+            for (index = 0; index < arraySize; index++) 
+            {
+                if (numbers[index] == searchValue) 
+                {
+                    break;
+                }
+            }
+            if( index == arraySize )
+                printf("Element not found");
+            else 
+                printf("Found");
+            return 0;
+        }
+
+    |-> Binary search -> 11 (log2(N))
+
+        if the datas are in sorted order divide the range by 2 to reduce the index count for searching on each cycles 
+
+        1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
+        <---------------^-----------------------> 9
+                          <---------^-----------> 13
+                          <---^-->                11
+
+        #include <stdio.h>
+        int main() {
+            int numbers[100];
+            int arraySize;
+            int searchValue;
+            scanf("%d", &arraySize);
+            int low = 0;
+            int high = arraySize - 1;
+            int middle;
+            while (low <= high) 
+            {
+                middle = (low + high) / 2;
+                if (numbers[middle] == searchValue) 
+                {
+                    printf("Element Found");
+                    break;
+                } 
+                else if (numbers[middle] < searchValue) 
+                {
+                    low = middle + 1;
+                } 
+                else 
+                {
+                    high = middle - 1;
+                }
+            }
+            return 0;
+        }
+
+    |-> Jump search -> 11 
+
+        take a sqrt and check for the window that contains the element then appy linear search 
+        
+        1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 -> take sqrt of 17 -> 4
+        
+        window size = 4 
+        
+        1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
+              4 
+                      8 
+                                12
+        
+                      8         12 -> search between 8 to 12
+                      
+        #include <stdio.h>
+        #include <math.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            int searchValue;
+            int index;
+            scanf("%d", &arraySize);
+            for (index = 0; index < arraySize; index++) 
+            {
+                scanf("%d", &numbers[index]);
+            }
+            scanf("%d", &searchValue);
+            int stepSize = sqrt(arraySize);
+            int previousIndex = 0;
+            while (numbers[(stepSize < arraySize ? stepSize : arraySize) - 1] < searchValue) 
+            {
+                previousIndex = stepSize;
+                stepSize += sqrt(arraySize);
+                if (previousIndex >= arraySize) 
+                {
+                    printf("Element not found");
+                    return 0;
+                }
+            }
+            for (index = previousIndex; index < stepSize && index < arraySize; index++) 
+            {
+                if (numbers[index] == searchValue) 
+                {
+                    printf("Element found at position %d", index);
+                    return 0;
+                }
+            }
+            printf("Element not found");
+            return 0;
+        }
+
+
+Sorting
+    |-> bubble sort 
+    
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            scanf("%d", &arraySize);
+            int outerIndex, innerIndex, tempValue;
+            for (outerIndex = 0; outerIndex < arraySize - 1; outerIndex++) 
+            {
+                for (innerIndex = 0; innerIndex < arraySize - outerIndex - 1; innerIndex++) 
+                {
+                    if (numbers[innerIndex] > numbers[innerIndex + 1]) 
+                    {
+                        tempValue = numbers[innerIndex];
+                        numbers[innerIndex] = numbers[innerIndex + 1];
+                        numbers[innerIndex + 1] = tempValue;
+                    }
+                }
+            }
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+    
+    |-> selection sort 
+
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            scanf("%d", &arraySize);
+            int currentIndex, searchIndex, minimumIndex, tempValue;
+            for (currentIndex = 0; currentIndex < arraySize - 1; currentIndex++) 
+            {
+                minimumIndex = currentIndex;
+                for (searchIndex = currentIndex + 1; searchIndex < arraySize; searchIndex++) 
+                {
+                    if (numbers[searchIndex] < numbers[minimumIndex]) 
+                    {
+                        minimumIndex = searchIndex;
+                    }
+                }
+                tempValue = numbers[currentIndex];
+                numbers[currentIndex] = numbers[minimumIndex];
+                numbers[minimumIndex] = tempValue;
+            }
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+
+    |-> insertion sort 
+
+        #include <stdio.h>
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            scanf("%d", &arraySize);
+            int currentIndex, previousIndex, keyValue;
+            for (currentIndex = 1; currentIndex < arraySize; currentIndex++) 
+            {
+                keyValue = numbers[currentIndex];
+                previousIndex = currentIndex - 1;
+                while (previousIndex >= 0 && numbers[previousIndex] > keyValue) 
+                {
+                    numbers[previousIndex + 1] = numbers[previousIndex];
+                    previousIndex--;
+                }
+                numbers[previousIndex + 1] = keyValue;
+            }
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+
+    |-> quick sort 
+
+        #include <stdio.h>
+        int partition(int numbers[], int startIndex, int endIndex) 
+        {
+            int pivotValue = numbers[endIndex];
+            int smallerIndex = startIndex - 1;
+            int currentIndex, tempValue;
+            for (currentIndex = startIndex; currentIndex < endIndex; currentIndex++) 
+            {
+                if (numbers[currentIndex] < pivotValue) 
+                {
+                    smallerIndex++;
+                    tempValue = numbers[smallerIndex];
+                    numbers[smallerIndex] = numbers[currentIndex];
+                    numbers[currentIndex] = tempValue;
+                }
+            }
+            tempValue = numbers[smallerIndex + 1];
+            numbers[smallerIndex + 1] = numbers[endIndex];
+            numbers[endIndex] = tempValue;
+            return smallerIndex + 1;
+        }
+        
+        void quickSort(int numbers[], int startIndex, int endIndex) 
+        {
+            if (startIndex < endIndex) 
+            {
+                int partitionIndex = partition(numbers, startIndex, endIndex);
+                quickSort(numbers, startIndex, partitionIndex - 1);
+                quickSort(numbers, partitionIndex + 1, endIndex);
+            }
+        }
+        
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            scanf("%d", &arraySize);
+            quickSort(numbers, 0, arraySize - 1);
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+
+
+    |-> merge sort 
+
+        #include <stdio.h>
+        void merge(int numbers[], int leftIndex, int middleIndex, int rightIndex) 
+        {
+            int leftSize = middleIndex - leftIndex + 1;
+            int rightSize = rightIndex - middleIndex;
+            int leftArray[leftSize];
+            int rightArray[rightSize];
+            int leftCounter, rightCounter, mergeCounter;
+            for (leftCounter = 0; leftCounter < leftSize; leftCounter++) 
+            {
+                leftArray[leftCounter] = numbers[leftIndex + leftCounter];
+            }
+            for (rightCounter = 0; rightCounter < rightSize; rightCounter++) 
+            {
+                rightArray[rightCounter] = numbers[middleIndex + 1 + rightCounter];
+            }
+            leftCounter = 0;
+            rightCounter = 0;
+            mergeCounter = leftIndex;
+            while (leftCounter < leftSize && rightCounter < rightSize) 
+            {
+                if (leftArray[leftCounter] <= rightArray[rightCounter]) 
+                {
+                    numbers[mergeCounter++] = leftArray[leftCounter++];
+                } 
+                else 
+                {
+                    numbers[mergeCounter++] = rightArray[rightCounter++];
+                }
+            }
+            while (leftCounter < leftSize) 
+            {
+                numbers[mergeCounter++] = leftArray[leftCounter++];
+            }
+            while (rightCounter < rightSize) 
+            {
+                numbers[mergeCounter++] = rightArray[rightCounter++];
+            }
+        }
+        
+        void mergeSort(int numbers[], int leftIndex, int rightIndex) 
+        {
+            if (leftIndex < rightIndex) 
+            {
+                int middleIndex = (leftIndex + rightIndex) / 2;
+                mergeSort(numbers, leftIndex, middleIndex);
+                mergeSort(numbers, middleIndex + 1, rightIndex);
+                merge(numbers, leftIndex, middleIndex, rightIndex);
+            }
+        }
+        
+        int main() 
+        {
+            int numbers[100];
+            int arraySize;
+            scanf("%d", &arraySize);
+            mergeSort(numbers, 0, arraySize - 1);
+            for (index = 0; index < arraySize; index++) 
+            {
+                printf("%d ", numbers[index]);
+            }
+            return 0;
+        }
+
+
+Subconcepts 
+    |->Subarray 
+    |->Subsequence 
+    |->Subset 
+
+Algorithms and accesing approaches 
+Examples.,
+    |->sliding window 
+    |->two pointer
+    |->kadane's algorithm 
+    |->moore voting algorithm 
+
+
+
+Basic Array Algorithms
+    * Array Traversal Algorithm
+    * Array Insertion Algorithm
+    * Array Deletion Algorithm
+    * Array Update Algorithm
+    * Array Copy Algorithm
+    * Array Merge Algorithm
+    * Array Reverse Algorithm
+    * Array Rotation Algorithm
+    
+Searching Algorithms on Arrays
+    * Linear Search
+    * Binary Search
+    * Jump Search
+    * Interpolation Search
+    * Exponential Search
+    * Ternary Search
+    * Fibonacci Search
+    
+Sorting Algorithms on Arrays
+    * Bubble Sort
+    * Selection Sort
+    * Insertion Sort
+    * Merge Sort
+    * Quick Sort
+    * Heap Sort
+    * Shell Sort
+    * Counting Sort
+    * Radix Sort
+    * Bucket Sort
+    * Tim Sort
+    
+Subarray & Range Algorithms
+    * Maximum Subarray Sum (Kadane’s Algorithm)
+    * Minimum Subarray Sum
+    * Subarray with Given Sum
+    * Longest Subarray with Sum K
+    * Shortest Subarray with Sum ≥ K
+    * Sliding Window Algorithm
+    * Prefix Sum Algorithm
+    
+Array Rearrangement Algorithms
+    * Rearrange Array Alternately
+    * Segregate Even and Odd Elements
+    * Segregate 0s, 1s and 2s (Dutch National Flag Algorithm)
+    * Move All Zeros to End
+    * Rearrange Array by Sign
+    * Wave Array Algorithm
+    
+Duplicate & Frequency Algorithms
+    * Find Duplicate Elements in Array
+    * Remove Duplicates from Sorted Array
+    * Count Frequencies of Elements
+    * Majority Element Algorithm
+    * Moore’s Voting Algorithm
+    
+Order Statistics & Optimization
+    * Find Maximum and Minimum in Array
+    * Kth Largest Element Algorithm
+    * Kth Smallest Element Algorithm
+    * Median of Array
+    * Two Sum Algorithm
+    * Three Sum Algorithm
+    
+Array Mathematical Algorithms
+    * Product of Array Except Self
+    * Maximum Product Subarray
+    * Equilibrium Index Algorithm
+    * Rain Water Trapping Algorithm
+    * Stock Buy and Sell Algorithm
+    
+Matrix / 2D Array Algorithms
+    * Matrix Traversal Algorithm
+    * Matrix Transpose Algorithm
+    * Spiral Matrix Traversal
+    * Rotate Matrix Algorithm
+    * Search in Sorted Matrix
+    
+Advanced / Interview-Level Array Algorithms
+    * Boyer–Moore Majority Vote Algorithm
+    * Kadane’s Algorithm
+    * Dutch National Flag Algorithm
+    * Prefix XOR Algorithm
+    * Difference Array Technique
+
+
+Recursion — One-Liners
+
+    What:
+        Recursion is a function calling itself to solve smaller instances of the same problem.
+    Why:
+        To simplify complex, self-similar problems by breaking them into smaller parts.
+    Where:
+        Used in trees, graphs, backtracking, divide-and-conquer, and nested structures.
+    When:
+        When a problem can be reduced into smaller identical subproblems with a clear base case.
+    How:
+        By defining a base case and repeatedly calling the function with reduced input until it stops.
+        
+Ultra-Short Memory Version
+
+    What  → function calls itself
+    Why   → simplify complex problems
+    Where → trees, graphs, recursion-heavy problems
+    When  → self-similar breakdown exists
+    How   → base case + recursive call
+
+
+Recursion(Self-calling function)
+
+what -> oru function athaye athu athoda definition part la call panna 
+atha recursion apdi nu solluvom
+
+ok va 
+
+Simple ah "re-occurance" apdindra word ah gnabagam vachukko 
+
+Looping   -> Repetition
+
+    CPU executes instructions repeatedly
+    No new memory allocation
+    
+    Scrolling Instagram
+    
+        Scroll → see post → scroll → repeat
+        Stops when you close app
+        
+    Other Examples:
+    
+        Walking Steps Counter
+        Eating Food
+        Traffic Signal System
+        Factory assembly line 
+        
+Recursion:
+
+    Each call → pushed into stack
+    Memory grows
+    Then shrinks when returning
+    Recursion -> Self-calling function(self-repetition)
+
+    Examples: 
+    
+        Opening Nested Boxes 
+        Family tree 
+        Mirror facing Mirror
+        File system navigation 
+        Solving Maze 
+    
+Loop = LINEAR THINKING
+
+    Do → Repeat → Stop
+    You control repetition
+    Loop → "Again and again"
+    
+Recursion = HIERARCHICAL THINKING
+
+    Solve → smaller version → smaller version → base case
+    Problem controls itself
+    Recursion → "Inside itself"
+    
+    
+Loop = explicit control -> outside control
+Recursion = implicit control (stack manages it) -> inside control
+
+
+Loop:
+    Climbing stairs step by step
+Recursion:
+    Opening a staircase inside a staircase inside a staircase
+
+
+
+#include<stdio.h>
+void print(int N)
+{
+    if(N > 0)
+    {
+        printf("%d ",N);
+        print(N - 1);
+    }
+}
+int main()
+{
+    int N = 5;
+    print(N);
+    return 0;
+}
+
+
+                 Stack
+|–––––––––––––––––––––––––––––––––––––|
+|                                     |
+|               Print(0)              |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 0            |  |  stack frame 6 -> 6th
+|  |                               |  |
+|  |-------------------------------|  |
+|               Print(1)              |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 1            |  |  stack frame 5 -> 5th
+|  |                               |  |
+|  |-------------------------------|  |
+|               Print(2)              |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 2            |  |  stack frame 4 -> 4th
+|  |                               |  |
+|  |-------------------------------|  |
+|               Print(3)              |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 3            |  |  stack frame 3 -> 3rd
+|  |                               |  |
+|  |-------------------------------|  |
+|               Print(4)              |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 4            |  |  stack frame 2 -> 2nd
+|  |                               |  |
+|  |-------------------------------|  |
+|               Print(5)              |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 5            |  |  stack frame 1 -> 1st call pann function block ithutha
+|  |                               |  |
+|  |-------------------------------|  |
+|                                     |
+|                Main                 |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 5            |  |
+|  |                               |  |
+|  |-------------------------------|  |
+|                                     |
+|–––––––––––––––––––––––––––––––––––––|
+
+
+input = 4
+
+Calling phase:-
+
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|             |     |     |             |     |     |             |     |     |             |     |      |   print(0)  |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|             |     |     |             |     |     |             |     |     |   print(1)  |     |      |   print(1)  |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|             |     |     |             |     |     |   print(2)  |     |     |   print(2)  |     |      |   print(2)  |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|             |     |     |   print(3)  |     |     |   print(3)  |     |     |   print(3)  |     |      |   print(3)  |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|   print(4)  |     |     |   print(4)  |     |     |   print(4)  |     |     |   print(4)  |     |      |   print(4)  |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|.   main()   |     |     |.   main()   |     |     |.   main()   |     |     |.   main()   |     |      |    main()   |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+
+
+
+Returning Phase:-
+
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|   print(0)  |     |     |             |     |     |             |     |     |             |     |      |             |  
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|   print(1)  |     |     |   print(1)  |     |     |             |     |     |             |     |      |             |   
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|   print(2)  |     |     |   print(2)  |     |     |   print(2)  |     |     |             |     |      |             | 
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|   print(3)  |     |     |   print(3)  |     |     |   print(3)  |     |     |   print(3)  |     |      |             |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|   print(4)  |     |     |   print(4)  |     |     |   print(4)  |     |     |   print(4)  |     |      |   print(4)  |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+|.   main()   |     |     |.   main()   |     |     |.   main()   |     |     |.   main()   |     |      |.   main()   |
+|-------------|     |     |-------------|     |     |-------------|     |     |-------------|     |      |-------------|
+ 
+
+Inga Extra memory thevei -> Naa update panna ovvoru valuevaiyum inga store panni vaikkalam so naa 
+backtrack panni varappo ella valuevaiyum again oru time reverse la eduthu work panna mudiyum
+
+
+#include<stdio.h>
+void print(int N)
+{
+    while(N > 0)
+    {
+        printf("%d ",N);
+        N = N - 1;
+    }
+}
+int main()
+{
+    int N = 5;
+    print(N);
+    return 0;
+}
+
+
+                 Stack
+|–––––––––––––––––––––––––––––––––––––|
+|                                     |
+|                Print                |
+|  |-------------------------------|  |
+|  |                               |  |    update_No ->     1 - 2 - 3 - 4 -  5
+|  |            num = 5            |  | -> parameter -> 5 - 4 - 3 - 2 - 1 - [0] -> Termination value
+|  |                               |  |
+|  |-------------------------------|  |
+|                                     |
+|                Main                 |
+|  |-------------------------------|  |
+|  |                               |  |
+|  |            num = 5            |  |
+|  |                               |  |
+|  |-------------------------------|  |
+|                                     |
+|–––––––––––––––––––––––––––––––––––––|
+
+it will print 5 then updated to 4
+it will print 4 then updated to 3
+it will print 3 then updated to 2
+it will print 2 then updated to 1
+it will print 1 then updated to 0
+
+No need of extra memory
+
+
+|–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|
+|  print(5) |   |   |  print(4) |   |   |  print(3) |   |   |  print(2) |   |   |  print(1) |   |   |  print(0) |
+|–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|
+|   main()  |   |   |   main()  |   |   |   main()  |   |   |   main()  |   |   |   main()  |   |   |   main()  |
+|–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|   |   |–––––––––––|
+
+
+
+Aspect         	         Loop  	                Recursion 
+Time Complexity	         Usually O(n)	        O(n) or worse (O(2ⁿ))
+Space Complexity         O(1)	                O(n)
+Memory Usage	         Low	                High
+Speed	                 Faster	                Slower(function call overhead)
+Risk	                 Infinite loop	        Stack overflow
+
+
+                        Recursion
+                            |
+                            |
+           |---------------------------------|
+           |                                 |
+        Direct                           Indirect   
+           |                                 |                                      
+           |-> Head                          |-> Head         
+           |-> Tail                          |-> Tail         
+           |-> Linear                        |-> Linear     
+           |-> Nested                        |-> Nested    
+           |-> Tree                          |-> Tree         
+           
+           
+Direct recursion   -> calling directly
+Indirect recursion -> calling with intermediate function
+
+Head recursion     -> calling will be on the top
+Tail recursion     -> calling will be on the bottom
+Linear recursion   -> mostly used with expression formation
+Nested recursion   -> function calling will be inside another function called
+Tree Recursion     -> more than one calling
+
+
+
+sum of natural numbers
+
+input = 5 
+
+15 = 5 + 4 + 3 + 2 + 1
+
+sum= v + sum
+15 = 5 + 10 
+10 = 4 + 06
+06 = 3 + 03 
+03 = 2 + 01
+01 = 1 + 00(priming)
+
+
+                      +15
+                       ^
+                       |
+                     f(05)
+                    /     \
+                 f(04)  +  5  
+                /     \
+             f(03)  +  4     
+            /     \
+         f(02)  +  3   
+        /     \
+     f(01)  +  2 
+    /     \
+ f(00)  +  1 
+   |
+return 0;                     till it reaches 0
+
+          f(04)  +  5  = f(N - 1) + N -> till 0
+
+
+#include<stdio.h>
+long long int sum(long long int num)
+{
+    if(num == 0)
+        return 0;
+    return sum(num - 1) + num;
+}
+int main()
+{
+    long long int num;
+    scanf("%lld",&num);
+    printf("%lld",sum(num));
+}
+
+
+
+Product of N natural numbers(factorial)
+
+input = 5 
+
+120 = 5 * 4 * 3 * 2 * 1 
+
+120 = 5 * 24
+024 = 4 * 06 
+006 = 3 * 02
+002 = 2 * 01 
+001 = 1 * 01(priming)
+
+
+                      120
+                       ^
+                       |
+                     f(05)
+                    /     \
+                 f(04)  *  5  
+                /     \
+             f(03)  *  4     
+            /     \
+         f(02)  *  3   
+        /     \
+     f(01)  *  2 
+    /     \
+ f(00)  *  1 
+   |
+return 1;                     till it reaches 0
+
+          f(04)  *  5  = f(N - 1) * N -> till 0
+
+
+
+#include<stdio.h>
+long long int fac(long long int num)
+{
+    if(num == 0)
+        return 1;
+    return fac(num - 1) * num;
+}
+int main()
+{
+    long long int num;
+    scanf("%lld",&num);
+    printf("%lld",fac(num));
+}
+
+
+
+exponential
+
+base 3 
+power 5
+
+243 = 3 * 3 * 3 * 3 * 3 
+
+
+243 = 3 * 81 
+081 = 3 * 27 
+027 = 3 * 09
+009 = 3 * 03 
+003 = 3 * 01
+
+
+                        243
+                         ^
+                         |
+                     f(3 , 5)
+                    /        \
+                 f(3 , 4)  *  3  
+                /        \
+             f(3 , 3)  *  3     
+            /        \
+         f(3 , 2)  *  3   
+        /        \
+     f(3 , 1)  *  3 
+    /        \
+ f(3 , 0)  *  3 
+   |
+return 1;                                   till it reaches 0
+
+          f(04)  *  3  = f(base , power - 1) * base -> till 0
+
+
+#include<stdio.h>
+long long int Exp(int base , int power)
+{
+    if(power == 0)
+        return 1;
+    return Exp(base , power - 1) * base;
+}
+int main()
+{
+    int base;
+    int power;
+    scanf("%d %d",&base, &power);
+    printf("%lld",Exp(base , power));
+}
+
+
+
+
+e(x , n) = x⁰ / 0! + x¹ / 1! + x² / 2! + x³ / 3! + x⁴ / 4! +...+xⁿ / n!
+e(2 , 4) = 2⁰ / 0! + 2¹ / 1! + 2² / 2! + 2³ / 3! + 2⁴ / 4!
+         = 1  / 1  + 2  / 1  + 4  / 2  + 8  / 6  + 16 / 24
+         = 1       + 2       + 2       + 1.3333  + 0.6667
+         = 7
+
+
+using indirect recursion
+
+#include<stdio.h>
+double fac(long long int num)
+{
+    if(num == 0)
+        return 1;
+    return fac(num - 1) * num;
+}
+double sum(long long int num)
+{
+    if(num == 0)
+        return 0;
+    return sum(num - 1) + num;
+}
+double Exp(int base , int power)
+{
+    if(power == 0)
+        return 1;
+    return Exp(base , power - 1) * base;
+}
+double taylor(int x , int n)
+{
+    if(n == 0) return 1;
+    return (Exp(x , n) / fac(n)) + taylor(x , n-1);
+}
+int main()
+{
+    int x;
+    int n;
+    scanf("%d %d",&x, &n);
+    printf("%f",taylor(x , n));
+}
+
+
+using direct recursion
+
+
+
+e(x , n) = x⁰ / 0! + x¹ / 1! + x² / 2! + x³ / 3! + x⁴ / 4! +...+xⁿ / n!
+e(2 , 4) = 2⁰ / 0! + 2¹ / 1! + 2² / 2! + 2³ / 3! + 2⁴ / 4!
+         = 1  / 1  + 2  / 1  + 4  / 2  + 8  / 6  + 16 / 24
+         = 1       + 2       + 2       + 1.3333  + 0.6667
+         = 7
+
+
+fac=val*fac; Exp= x *Exp; res = Exp/fac + res
+ 1 = 1 * 1 ; 2  = 2 * 1 ; 3.0 = 2  /  1 + 1.0
+ 2 = 2 * 1 ; 4  = 2 * 2 ; 5.0 = 4  /  2 + 3.0
+ 6 = 3 * 2 ; 8  = 2 * 4 ; 6.3 = 8  /  6 + 5.0
+24 = 4 * 6 ; 16 = 2 * 8 ; 7.0 = 16 / 24 + 6.3
+
+
+                 7.0 
+                /   \
+             6.3  +  16/24    e = 16, f = 24 , n = 4
+            /   \
+         5.0  +  8/6          e = 8 , f = 6  , n = 3
+        /   \
+     3.0  +  4/2              e = 4 , f = 2  , n = 2
+    /   \
+ 1.0  +  2/1                  e = 2 , f = 1  , n = 1
+
+
+
+#include<stdio.h>
+double taylor(int x , int n)
+{
+    static double Exp = 1.0;
+    static double fac = 1.0;
+    double res = 1.0;
+    if(n == 0) return 1;
+    else 
+    {
+        res = taylor(x , n - 1);
+        Exp = Exp * x;
+        fac = fac * n;
+        return (Exp/fac) + res;
+    }
+}
+int main()
+{
+    int x;
+    int n;
+    scanf("%d %d",&x, &n);
+    printf("%f",taylor(x , n));
+}
+
+
+Looping: 
+
+1. CPU Scheduling (Operating System)
+    CPU runs:
+    Process A → Process B → Process C → repeat
+    Happens millions of times per second
+    This is a high-speed loop
+    while system_running:
+        execute_next_process()
+        
+2. Heartbeat (Biological Loop)
+    Heart beats continuously
+    Lub → Dub → repeat
+    Stops only when condition fails (life ends)
+    
+3. Washing Machine Cycle
+    Fill water → wash → rinse → spin
+    Repeats cycles
+    Controlled loop with stages
+    
+4. CCTV Monitoring System
+    Camera continuously records frames
+    while camera_on:
+        capture_frame()
+        
+5. Game Loop (Very Important in Programming)
+    Every game runs on loop:
+    Input → Update → Render → repeat
+    
+    
+Recursion:
+
+1. Trees in Nature (Fractals)
+    Branch → smaller branches → smaller branches
+    Same pattern repeating at smaller scale
+    
+2. Google Maps Zoom System
+    World map → country → city → street → building
+    Each level is a smaller version of same structure
+    
+3. Company Hierarchy
+    CEO → Managers → Employees
+    Each manager manages a sub-tree
+    Recursive structure
+    
+4. Brain Thinking (Breaking Problems)
+    Big problem → smaller problem → smaller → solve
+    That’s recursion thinking
+    
+5. Website DOM Structure (HTML)
+    Page contains:
+    Div → contains div → contains div
+    Nested structure = recursion
+    
+
+
+
+
