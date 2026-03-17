@@ -1,0 +1,76 @@
+Looping 
+
+What is Looping?
+     * Looping means executing a block of code repeatedly
+     * Used when the same task must be done multiple times
+     
+Types of Loops in C
+ * for loop
+ * while loop
+ * do-while loop
+ 
+for Loop
+    for(initialization; condition; updation) 
+    {
+        statements;
+    }
+    Entry-controlled loop
+Best when number of iterations is known
+
+while Loop
+    while(condition) 
+    {
+        statements;
+    }
+    Entry-controlled loop
+    Used when iterations are not known in advance
+    
+do-while Loop
+    do 
+    {
+        statements;
+    } while(condition);
+    Exit-controlled loop
+    Executes at least once, even if condition is false
+    
+Loop Control Statements
+    * break → exits the loop immediately
+    * continue → skips current iteration
+    * goto → jumps to labeled statement (rarely used)
+    
+Nested Loops
+    Loop inside another loop
+    for(i=1;i<=3;i++)
+    {
+        for(j=1;j<=2;j++)
+        {
+            printf("*");
+        }
+    }
+    Commonly used in patterns and matrices
+    
+Loop Execution Flow
+    * Initialization → Condition → Body → Update → Condition…
+    * Stops when condition becomes false
+    
+Infinite Loops
+    while(1) { }
+    or
+    for(;;) { }
+    Condition never becomes false
+    Used in embedded systems & servers
+
+Common Loop Errors
+    * Missing update statement
+    * Wrong condition
+    * Infinite loop
+    * Using = instead of == in condition
+Advantages
+    * Reduces code repetition
+    * Improves readability
+    * Efficient execution
+Applications
+    * Array traversal
+    * Pattern printing
+    * Searching & sorting
+    * Repetitive calculations   
