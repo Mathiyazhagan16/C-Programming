@@ -1,0 +1,69 @@
+Basic Looping Algorithms
+    * Loop Execution Algorithm
+    * Loop Counter Algorithm
+    * Finite Loop Algorithm
+    * Infinite Loop Algorithm
+    * Pre-test Loop Algorithm
+    * Post-test Loop Algorithm
+    
+for Loop Based Algorithms
+    * Counting Loop Algorithm
+    * Sum of N Numbers Algorithm
+    * Factorial Using for Loop
+    * Table Generation Algorithm
+    * Power Calculation Algorithm
+    * Series Generation Using for Loop
+    
+while Loop Based Algorithms
+    * Condition-Controlled Loop Algorithm
+    * Sentinel-Controlled Loop Algorithm
+    * Reverse Number Algorithm
+    * Digit Count Algorithm
+    * Palindrome Check Algorithm
+    * Armstrong Number Algorithm
+    
+do-while Loop Based Algorithms
+    * At-Least-Once Execution Algorithm
+    * Menu-Driven Program Algorithm
+    * Input Validation Algorithm
+    * Repetitive Task Confirmation Algorithm
+    
+Nested Loop Algorithms
+    * Pattern Printing Algorithm
+    * Matrix Traversal Algorithm
+    * Multiplication Table Grid Algorithm
+    * Star Pattern Algorithms
+    * Number Pattern Algorithms
+    
+Loop Control Algorithms
+    * Loop Termination Algorithm (break)
+    * Loop Skipping Algorithm (continue)
+    * Early Exit Algorithm
+    * Conditional Jump Algorithm (goto)
+    
+Mathematical Algorithms Using Loops
+    * Prime Number Algorithm
+    * Fibonacci Series Algorithm
+    * GCD Algorithm
+    * LCM Algorithm
+    * Sum of Digits Algorithm
+    * Reverse Digits Algorithm
+
+Loop-Based Array Algorithms
+    * Array Traversal Using Loop
+    * Array Search Using Loop
+    * Array Sum Using Loop
+    * Array Copy Using Loop
+    * Array Reverse Using Loop
+    
+Loop Optimization Techniques
+    * Loop Unrolling Technique
+    * Loop Invariant Code Motion
+    * Loop Fusion Technique
+    * Loop Fission Technique
+    
+Common Loop Problem Algorithms
+    * Input Until Condition Algorithm
+    * Maximum of N Numbers Algorithm
+    * Minimum of N Numbers Algorithm
+    * Count Positive/Negative Numbers Algorithm
