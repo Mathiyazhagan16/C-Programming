@@ -1,0 +1,64 @@
+Data types 
+
+Note:- Depents on compiler and version data types size may change
+
+Data Types
+│
+├── Primitive
+│   ├── Integral
+│   │   ├── char                   (1 Byte  -> 2⁸  -> [-2⁷  to 2⁷  - 1] -> -127                     to 128                 ) 
+│   │   ├── short int              (2 Bytes -> 2¹⁶ -> [-2¹⁵ to 2¹⁵ - 1] -> -32768                   to 32768               )                    
+│   │   ├── int                    (4 Bytes -> 2³² -> [-2³¹ to 2³¹ - 1] -> -2147483648              to 2747483647          )             
+│   │   ├── long int               (8 Bytes -> 2⁶⁴ -> [-2⁶³ to 2⁶³ - 1] -> -9223372036854775808     to -9223372036854775807)                                                 
+│   │   └── long long int          (8 Bytes -> 2⁶⁴ -> [-2⁶³ to 2⁶³ - 1] -> -9223372036854775808     to -9223372036854775807)   
+│   │   ├── unsigned char          (1 Byte  -> 2⁸  -> [0    to 2⁸     ] -> 0                        to 255                 )                                                            
+│   │   ├── unsigned short int     (2 Bytes -> 2¹⁶ -> [0    to 2¹⁶    ] -> 0                        to 65535               )                              
+│   │   ├── unsigned int           (4 Bytes -> 2³² -> [0    to 2³²    ] -> 0                        to 4294967495          )                                          
+│   │   ├── unsigned long int      (8 Bytes -> 2⁶⁴ -> [0    to 2⁶⁴    ] -> 0                        to 18446744073709551615)      
+│   │   └── unsigned long long int (8 Bytes -> 2⁶⁴ -> [0    to 2⁶⁴    ] -> 0                        to 18446744073709551615)
+│   └── Floating Point
+│       ├── float                  (4  Bytes )
+│       ├── double                 (8  Bytes ) 
+│       └── long double            (16 Bytes )
+│
+├── Derived
+│   ├── arrays
+│   └── pointers
+│
+└── User Defined
+    ├── struct
+    ├── union
+    ├── enum
+    └── typedef
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------          
+          
+Variables 
+
+Variable – A variable is a named memory location used to store data that can change during program execution.
+    * Local Variable – A variable declared inside a function or block and accessible only within it.
+    * Global Variable – A variable declared outside all functions and accessible throughout the program.
+    * Static Variable – A variable that retains its value between function calls and exists for the entire program lifetime.
+    * Automatic Variable – A local variable that is created and destroyed automatically with function execution.
+    * Register Variable – A variable stored in a CPU register for faster access and whose address cannot be accessed.
+    * Scope – The region of the program where a variable can be accessed.
+    * Lifetime – The duration for which a variable exists in memory.
+    
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+operators
+
+Operators – Symbols that perform operations on data values and variables in C.
+
+    * Arithmetic         (+ - * / %                      ) – Used to perform mathematical calculations.
+    * Assignment         (=                              ) – Used to assign a value to a variable.
+    * Compound Assignment(+= -= *= /= %= &= |= ^= <<= >>=) – Used to combine an operation with assignment in a single step.
+    * Relational         (== != < > <= >=                ) – Used to compare two values and return true or false.
+    * Logical            (&& || !                        ) – Used to combine or negate conditions in decision making.
+    * Bitwise            (& | ^ ~                        ) – Used to perform operations at the bit level.
+    * Shift              (<< >>                          ) – Used to shift bits left or right by a specified number of positions.
+    * Unary              (++ --                          ) – Used to increment or decrement a variable by one (pre or post).
+    * Ternary            (?:                             ) – Used as a compact conditional expression.
+    * Special            (sizeof , & , *                 ) – Used to get memory size, address of a variable, and value at an address.
+    * Boolean            (true , false                   ) – Used to represent logical truth values in C.
+    
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
