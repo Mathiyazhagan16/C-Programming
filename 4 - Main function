@@ -1,0 +1,14 @@
+main function 
+
+1) main() is the entry point of user-level execution in a C program.
+2) It is the first function your code runs, but not the first function that executes in the process.
+3) The OS starts the program at a lower-level startup routine (like _start), which then:
+    * sets up the runtime
+    * prepares the stack
+    * initializes globals
+    * calls main()
+
+main() serves to:
+    * Start program logic
+    * Receive command-line arguments
+    * Return exit status to the OS
