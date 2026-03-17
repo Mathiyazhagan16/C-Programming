@@ -1,0 +1,36 @@
+
+header file
+
+A header file in C contains declarations of functions, macros, types, and variables that allow multiple source files to share information during compilation.
+
+Its job is to tell the compiler what exists.
+
+Without headers, you’d be forced to:
+    -> Rewrite function declarations everywhere
+    -> Risk mismatched types
+    -> Break modular programming
+    -> Lose compile-time checking
+Header files solve:
+    -> Code reuse
+    -> Separation of interface vs implementation
+    -> Clean multi-file projects
+    -> Faster development & maintenance
+
+How header files actually work (compiler flow)
+    -> #include "file.h"
+    -> Preprocessor literally pastes the header content
+    -> Compiler checks function usage
+    -> Linker matches declarations with definitions
+
+Some Standard C Header Files & Usage (One-Line Each)
+
+    -> [<stdio.h  >] – Input/output operations like printf, scanf, file handling
+    -> [<stdlib.h >] – Memory allocation, process control, conversions (malloc, exit, atoi)
+    -> [<string.h >] – String manipulation functions (strcpy, strlen, strcmp)
+    -> [<math.h   >] – Mathematical functions (sqrt, pow, sin, log)
+    -> [<ctype.h  >] – Character handling (isdigit, isalpha, toupper)
+    -> [<time.h   >] – Date and time functions (time, clock, difftime)
+    -> [<limits.h >] – Data type limits (INT_MAX, CHAR_BIT)
+    -> [<float.h  >] – Floating-point limits (FLT_MAX, DBL_MIN)
+    -> [<stdbool.h>] – Boolean data type support (bool, true, false)
+    -> [<stddef.h >] – Common definitions (NULL, size_t, ptrdiff_t)
