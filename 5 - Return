@@ -1,0 +1,8 @@
+
+return EXIT_SUCCESS;
+
+return is used to:
+    * Send a value back to the calling function
+    * Terminate the execution of the current function
+    * Destroy the current stack frame
+    * Once return executes, control immediately leaves the function.
