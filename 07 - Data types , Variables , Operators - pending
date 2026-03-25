@@ -195,6 +195,16 @@ Variable – A variable is a named memory location used to store data that can c
     * Scope – The region of the program where a variable can be accessed.
     * Lifetime – The duration for which a variable exists in memory.
     
+Must Remember:
+
+✔ Use letters, digits, underscore
+✔ Must not start with digit
+✔ No keywords
+✔ Case-sensitive
+✔ No spaces or special symbols
+✔ Unique in scope
+✔ Meaningful names preferred
+    
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 operators
