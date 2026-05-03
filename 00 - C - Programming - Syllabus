@@ -179,7 +179,12 @@ DSA
 Data Structures 
 
 Arrays 
+	1D
+	2D
+	MULTI
 strings 
+	1D
+	2D
 linked list 
     singly 
     doubly 
