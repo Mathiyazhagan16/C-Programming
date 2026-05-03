@@ -222,5 +222,104 @@ Operators – Symbols that perform operations on data values and variables in C.
     * Ternary            (?:                             ) – Used as a compact conditional expression.
     * Special            (sizeof , & , *                 ) – Used to get memory size, address of a variable, and value at an address.
     * Boolean            (true , false                   ) – Used to represent logical truth values in C.
-    
+
+
+	#include <stdio.h>
+	#include <stdbool.h>
+	
+	int main() {
+	    // Assignment
+	    int a = 10, b = 3;
+	    int result;
+	
+	    printf("Initial values: a = %d, b = %d\n\n", a, b);
+	
+	    // Arithmetic Operators
+	    printf("Arithmetic:\n");
+	    printf("a + b = %d\n", a + b);
+	    printf("a - b = %d\n", a - b);
+	    printf("a * b = %d\n", a * b);
+	    printf("a / b = %d\n", a / b);
+	    printf("a %% b = %d\n\n", a % b);
+	
+	    // Compound Assignment
+	    printf("Compound Assignment:\n");
+	    a += b;
+	    printf("a += b -> %d\n", a);
+	
+	    a -= b;
+	    printf("a -= b -> %d\n", a);
+	
+	    a *= b;
+	    printf("a *= b -> %d\n", a);
+	
+	    a /= b;
+	    printf("a /= b -> %d\n", a);
+	
+	    a %= b;
+	    printf("a %%= b -> %d\n\n", a);
+	
+	    // Relational Operators
+	    printf("Relational:\n");
+	    printf("a == b : %d\n", a == b);
+	    printf("a != b : %d\n", a != b);
+	    printf("a > b  : %d\n", a > b);
+	    printf("a < b  : %d\n", a < b);
+	    printf("a >= b : %d\n", a >= b);
+	    printf("a <= b : %d\n\n", a <= b);
+	
+	    // Logical Operators
+	    printf("Logical:\n");
+	    printf("(a > 5 && b < 5) : %d\n", (a > 5 && b < 5));
+	    printf("(a > 5 || b > 5) : %d\n", (a > 5 || b > 5));
+	    printf("!(a > b) : %d\n\n", !(a > b));
+	
+	    // Bitwise Operators
+	    printf("Bitwise:\n");
+	    printf("a & b = %d\n", a & b);
+	    printf("a | b = %d\n", a | b);
+	    printf("a ^ b = %d\n", a ^ b);
+	    printf("~a = %d\n\n", ~a);
+	
+	    // Shift Operators
+	    printf("Shift:\n");
+	    printf("a << 1 = %d\n", a << 1);
+	    printf("a >> 1 = %d\n\n", a >> 1);
+	
+	    // Unary Operators
+	    printf("Unary:\n");
+	    int x = 5;
+	    printf("x = %d\n", x);
+	    printf("++x = %d (pre increment)\n", ++x);
+	    printf("x++ = %d (post increment)\n", x++);
+	    printf("x after post increment = %d\n", x);
+	    printf("--x = %d (pre decrement)\n", --x);
+	    printf("x-- = %d (post decrement)\n", x--);
+	    printf("x after post decrement = %d\n\n", x);
+	
+	    // Ternary Operator
+	    printf("Ternary:\n");
+	    result = (a > b) ? a : b;
+	    printf("Max of a and b = %d\n\n", result);
+	
+	    // Special Operators
+	    printf("Special:\n");
+	    int num = 100;
+	    int *ptr = &num;
+	
+	    printf("sizeof(num) = %lu\n", sizeof(num));
+	    printf("Address of num = %p\n", &num);
+	    printf("Value at address (using *) = %d\n\n", *ptr);
+	
+	    // Boolean
+	    printf("Boolean:\n");
+	    bool isTrue = true;
+	    bool isFalse = false;
+	
+	    printf("isTrue = %d\n", isTrue);
+	    printf("isFalse = %d\n", isFalse);
+	
+	    return 0;
+	}
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
