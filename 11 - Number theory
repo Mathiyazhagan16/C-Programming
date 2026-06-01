@@ -1,0 +1,943 @@
+
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Number theory 
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Number crunching (or) digit manipulation (or) Number integration and dis integration
+&
+Number based problems
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+[Extraction]
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Right side extraction]
+
+[Hard method] 
+
+input = 12345
+
+d = input % 10 ; input= input / 10 ;
+
+5 = 12345 % 10 ; 1234 = 12345 / 10 ; 
+4 = 1234  % 10 ; 123  = 1234  / 10 ; 
+3 = 123   % 10 ; 12   = 123   / 10 ; 
+2 = 12    % 10 ; 1    = 12    / 10 ; 
+1 = 1     % 10 ; 0    = 1     / 10 ; 
+
+input == 0 (stop)
+
+[Soft method]
+
+input = 12345
+
+d = (input / pos_v) % 10 ; pos_v  = pos_v * 10 ;
+
+5 = (12345 / 1    ) % 10 ; 10     = 1     * 10 ;
+4 = (12345 / 10   ) % 10 ; 100    = 10    * 10 ;
+3 = (12345 / 100  ) % 10 ; 1000   = 100   * 10 ;
+2 = (12345 / 1000 ) % 10 ; 10000  = 1000  * 10 ;
+1 = (12345 / 10000) % 10 ; 100000 = 10000 * 10 ;
+
+input < pos_v (stop)
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[digits count and pos_v Formation]
+
+[Hard method]       count_digit  creating_pos_value ;
+
+input= input / 10 ; c = c + 1 ; pos_v  = pos_v * 10 ;
+
+1234 = 12345 / 10 ; 1 = 0 + 1 ; 10     = 1     * 10 ; 
+123  = 1234  / 10 ; 2 = 1 + 1 ; 100    = 10    * 10 ; 
+12   = 123   / 10 ; 3 = 2 + 1 ; 1000   = 100   * 10 ; 
+1    = 12    / 10 ; 4 = 3 + 1 ; 10000  = 1000  * 10 ; 
+0    = 1     / 10 ; 5 = 4 + 1 ; 100000 = 10000 * 10 ; 
+
+[Soft method]              count_digit  creating_pos_value ;
+
+d = (input / pos_v) % 10 ; c = c + 1 ; pos_v  = pos_v * 10 ;
+
+5 = (12345 / 1    ) % 10 ; 1 = 0 + 1 ; 10     = 1     * 10 ;
+4 = (12345 / 10   ) % 10 ; 2 = 1 + 1 ; 100    = 10    * 10 ;
+3 = (12345 / 100  ) % 10 ; 3 = 2 + 1 ; 1000   = 100   * 10 ;
+2 = (12345 / 1000 ) % 10 ; 4 = 3 + 1 ; 10000  = 1000  * 10 ;
+1 = (12345 / 10000) % 10 ; 5 = 4 + 1 ; 100000 = 10000 * 10 ;
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Left side extraction ( calculate the digits and create a pos_v )]
+
+[Hard method]
+
+input = 12345 
+
+d = input / pos_v ; input= input % pos_v ; pos_v = pos_v / 10 ;
+
+1 = 12345 / 10000 ; 2345 = 12345 % 10000 ; 1000  = 10000 / 10 ;  
+2 =  2345 / 1000  ;  345 =  2345 % 1000  ; 100   = 1000  / 10 ;  
+3 =   345 / 100   ;   45 =   345 % 100   ; 10    = 100   / 10 ;  
+4 =    45 / 10    ;    5 =    45 % 10    ; 1     = 10    / 10 ;  
+5 =     5 / 1     ;    0 =     5 % 1     ; 0     = 1     / 10 ;
+
+input == 0 (stop)
+
+[Soft method]
+
+d = (input / pos_v) % 10 ; pos_v= pos_v / 10 ;
+
+1 = (12345 / 10000) % 10 ; 1000 = 10000 / 10 ;
+2 = (12345 / 1000 ) % 10 ; 100  = 1000  / 10 ;
+3 = (12345 / 100  ) % 10 ; 10   = 100   / 10 ;
+4 = (12345 / 10   ) % 10 ; 1    = 10    / 10 ;
+5 = (12345 / 1    ) % 10 ; 0    = 1     / 10 ;
+
+input < pos_v (stop)
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Formation]
+
+[Right side formation] 
+
+input = 12345 -> segregated digits [ 5 , 4 , 3 , 2 , 1 ]
+
+rev   = d + 10 * rev
+
+5     = 5 + 10 * 0 
+54    = 4 + 10 * 5 
+543   = 3 + 10 * 54 
+5432  = 2 + 10 * 543 
+54321 = 1 + 10 * 5432 
+
+[Left side formation]
+
+input = 12345 -> segregated digits [ 1 , 2 , 3 , 4 , 5 ]
+
+rev   = d * pos_v + rev  ; base  = base  * 10 ;
+
+1     = 1 * 1     + 0    ; 1     = 1     * 10 ;
+21    = 2 * 10    + 1    ; 10    = 10    * 10 ;
+321   = 3 * 100   + 21   ; 100   = 100   * 10 ;
+4321  = 4 * 1000  + 321  ; 1000  = 1000  * 10 ;
+54321 = 5 * 10000 + 4321 ; 10000 = 10000 * 10 ;
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Practice problems:
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Adam number] 
+
+12 --- 21  | [Accept the input from the user and reverse the number]
+ |      |  | 
+ |     441 | [take a square of a reversed number] 
+ |      |  | 
+144 == 144 | [if input² == reversed_(reversed_input²) - [Adam number]]
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Armstrong number] 
+
+    153----| [Accept the input from the user]
+   / | \   | 
+  1  5  3  | [count the digits and segregate the digits]
+  |  |  |  | 
+  1+125+27 | [calculate the exponential based on digits count for each digits and do sum]
+   \ | /   | 
+    153----| [if sum == input [Armstrong number]]
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Strong number]
+
+    145----| [Accept the input from the user]
+   / | \   | 
+  1  4  5  | [segregate the digits]
+  |  |  |  | 
+  1+24+120 | [calculate the factorial based on digits and do sum]
+   \ | /   | 
+    145----| [if sum == input [Strong number]]
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Magic number] 
+
+    1927    | [Accept the input from the user] 
+  / |  | \  |  
+ 1  9  2  7 | [segregate the digits] 
+ |  |  |  | | 
+ 1+ 9+ 2+ 7 | [do sum of all the digits] 
+  \ |  | /  |  
+    (19)    | [if sum == 1 [Magic]][if 2≤sum≤9 [Not a Magic]][if sum>9 do repeat from step 2] 
+   /    \ 
+  1      9 
+  |      |
+  1   +  9 
+   \    /
+    (10)
+   /    \ 
+  1      0 
+  |      |
+  1   +  0 
+   \    /
+    (01)
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Happy number] 
+
+    82   | [Accept the input from the user]   
+   /  \  |     
+  8    2 | [Seperate the digits] 
+  |    | | 
+  64 + 4 | [do the sum of all the digit²] 
+   \  /  | 
+    68   | [if sum == 1 [happy number]][if 2≤sum≤9 [Not a happy number]][else do repeat from step 2]
+   /  \
+  6    8 
+  |    |
+  36 +64 
+   \  /
+   +100
+   / | \
+  1  0  0 
+  |  |  |
+  1 +0 +0 
+   \ | / 
+    (1)
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+ 
+[Kapreker number] 
+
+297² = 88209
+
+8 + 8209 = 8217 
+88 + 209 =  297 
+882 + 09 =  891 
+8820 + 9 = 8829 
+
+if the sum of splitted values of input² == input [Kapreker] 
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Perfect number] 
+
+Sum of the factors of the input (Excluding input) == input
+
+Example., 1)  6 = 1 + 2 + 3 
+
+          2) 28 = 1 + 2 + 4 + 7 + 14
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Extra perfect number]
+
+Number which contains 1's only at the starting and ending of a binary representation
+
+Example., 
+
+11       = 3 
+101      = 5 
+1001     = 9 
+10001    = 17 
+100001   = 33 
+1000001  = 65 
+10000001 = 129
+
+if input == ( 2ⁿ + 1 ) -> [Extra perfect number]
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Abundant number]
+
+Sum of the factors of the input (Excluding input) > input
+
+Example., 1) 20 < 1 + 2 + 4 + 5 + 10 
+
+          2) 40 = 1 + 2 + 4 + 5 + 8 + 10 + 20
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Deficient number]
+
+Sum of the factors of the input (Excluding input) < input
+
+Example., 1) 10 > 1 + 2 + 5 
+
+          2) 15 = 1 + 3 + 5
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+[Mersenne number]
+
+Number which contains 1's continuously without 0's starting to ending of a binary representation
+
+Example., 
+
+11       = 3 
+111      = 7 
+1111     = 15
+11111    = 31 
+111111   = 63 
+1111111  = 127 
+
+if input == ( 2ⁿ - 1 ) -> [Mersenne number]
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Extra: 
+
+Pentagon number 
+Proth number 
+Harshad number 
+Fibonacci number 
+Catalan number 
+Amicable pairs
+Strobogrammatic number
+
+—————————————––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Number Theory – Digit Manipulation and Number‑Based Problems
+
+───────────────────────────────────────────────────────────────────────────
+1.  DIGIT EXTRACTION
+───────────────────────────────────────────────────────────────────────────
+
+[Right‑side Extraction (least significant digit first)]
+
+    Hard method:
+        1. d = input % 10;
+        2. input = input / 10;
+        3. Repeat until input == 0.
+
+        Example: input = 12345
+        5 = 12345 % 10;  input = 1234
+        4 = 1234  % 10;  input = 123
+        3 = 123   % 10;  input = 12
+        2 = 12    % 10;  input = 1
+        1 = 1     % 10;  input = 0   → stop
+
+    Soft method:
+        1. d = (input / pos_v) % 10;
+        2. pos_v = pos_v * 10;
+        3. Repeat while input >= pos_v  (start pos_v = 1).
+
+        Example: input = 12345
+        5 = (12345 /    1) % 10;  pos_v = 10
+        4 = (12345 /   10) % 10;  pos_v = 100
+        3 = (12345 /  100) % 10;  pos_v = 1000
+        2 = (12345 / 1000) % 10;  pos_v = 10000
+        1 = (12345 /10000) % 10;  pos_v = 100000 → stop (input < pos_v)
+
+───────────────────────────────────────────────────────────────────────────
+2.  DIGIT COUNT AND POSITION VALUE (pos_v) FORMATION
+───────────────────────────────────────────────────────────────────────────
+
+    Hard method (counting while destroying the original number):
+        1. input = input / 10;
+        2. c = c + 1;
+        3. pos_v = pos_v * 10;
+        4. Repeat while input != 0.
+
+        Example:
+        input: 12345 → 1234 → 123 → 12 → 1 → 0
+        c    : 0 → 1 → 2 → 3 → 4 → 5
+        pos_v: 1 → 10 → 100 → 1000 → 10000 → 100000
+
+    Soft method (counting without destroying, using pos_v):
+        1. d = (input / pos_v) % 10;
+        2. c = c + 1;
+        3. pos_v = pos_v * 10;
+        4. Repeat while input >= pos_v.
+
+        Same result as above.
+
+───────────────────────────────────────────────────────────────────────────
+3.  LEFT‑SIDE EXTRACTION (most significant digit first)
+───────────────────────────────────────────────────────────────────────────
+    (Requires digit count and pos_v calculation first)
+
+    Hard method:
+        1. d = input / pos_v;
+        2. input = input % pos_v;
+        3. pos_v = pos_v / 10;
+        4. Repeat until input == 0.
+
+        Example: input = 12345, pos_v = 10000
+        1 = 12345 / 10000;  input = 2345;  pos_v = 1000
+        2 =  2345 / 1000 ;  input =  345;  pos_v = 100
+        3 =   345 / 100  ;  input =   45;  pos_v = 10
+        4 =    45 / 10   ;  input =    5;  pos_v = 1
+        5 =     5 / 1    ;  input =    0;  pos_v = 0  → stop
+
+    Soft method:
+        1. d = (input / pos_v) % 10;
+        2. pos_v = pos_v / 10;
+        3. Repeat while input >= pos_v.
+
+        Example: input = 12345, pos_v = 10000
+        1 = (12345/10000) % 10;  pos_v = 1000
+        2 = (12345/ 1000) % 10;  pos_v = 100
+        3 = (12345/  100) % 10;  pos_v = 10
+        4 = (12345/   10) % 10;  pos_v = 1
+        5 = (12345/    1) % 10;  pos_v = 0  → stop
+
+───────────────────────────────────────────────────────────────────────────
+4.  NUMBER FORMATION (joining digits)
+───────────────────────────────────────────────────────────────────────────
+
+    Right‑side formation (builds the reversed number):
+        rev = d + 10 * rev
+
+        Digits extracted (right‑side): 5, 4, 3, 2, 1
+        5 → rev = 5 + 10*0   = 5
+        4 → rev = 4 + 10*5   = 54
+        3 → rev = 3 + 10*54  = 543
+        2 → rev = 2 + 10*543 = 5432
+        1 → rev = 1 + 10*5432= 54321
+
+    Left‑side formation (builds the original number):
+        num = d * base + num;  base = base * 10;   (start base = 1, num = 0)
+
+        Digits extracted (left‑side): 1, 2, 3, 4, 5
+        1 → num = 1*1 + 0 = 1;     base = 10
+        2 → num = 2*10 + 1 = 21;   base = 100
+        3 → num = 3*100 + 21 = 321; base = 1000
+        4 → num = 4*1000 + 321 = 4321; base = 10000
+        5 → num = 5*10000 + 4321 = 54321; base = 100000
+
+───────────────────────────────────────────────────────────────────────────
+5.  NUMBER THEORY PROBLEMS AND SOLUTIONS
+───────────────────────────────────────────────────────────────────────────
+
+[Adam Number]
+    Definition:
+        12 → reverse → 21
+        12² = 144
+        21² = 441 → reverse → 144 == 12²  → Adam number
+
+    Steps:
+        1. Compute square of input (sq).
+        2. Reverse the input (rev).
+        3. Compute square of rev (sq_rev).
+        4. Reverse sq_rev (rev_sq_rev).
+        5. If sq == rev_sq_rev → Adam number.
+
+    Solution:
+        #include <stdio.h>
+        int reverse(int n) {
+            int r = 0;
+            while (n) {
+                r = r * 10 + n % 10;
+                n /= 10;
+            }
+            return r;
+        }
+        int main() {
+            int num;
+            scanf("%d", &num);
+            int sq = num * num;
+            int rev = reverse(num);
+            int sq_rev = rev * rev;
+            if (sq == reverse(sq_rev))
+                printf("Adam number\n");
+            else
+                printf("Not Adam number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Armstrong Number]
+    Example: 153
+    Digits: 1, 5, 3  (count = 3)
+    1³ + 5³ + 3³ = 1 + 125 + 27 = 153 == original → Armstrong
+
+    Steps:
+        1. Count digits (c).
+        2. Extract digits right‑side.
+        3. For each digit, compute digit^c and sum.
+        4. If sum == original → Armstrong.
+
+    Solution:
+        #include <stdio.h>
+        #include <math.h>
+        int main() {
+            int n, temp, digit, sum = 0, count = 0;
+            scanf("%d", &n);
+            temp = n;
+            while (temp) {
+                count++;
+                temp /= 10;
+            }
+            temp = n;
+            while (temp) {
+                digit = temp % 10;
+                sum += pow(digit, count);   // or use a custom power function
+                temp /= 10;
+            }
+            if (sum == n)
+                printf("Armstrong number\n");
+            else
+                printf("Not Armstrong number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Strong Number]
+    Example: 145
+    1! + 4! + 5! = 1 + 24 + 120 = 145 == original → Strong
+
+    Steps:
+        1. Extract digits (right‑side).
+        2. Compute factorial of each digit.
+        3. Sum the factorials.
+        4. If sum == original → Strong number.
+
+    Solution:
+        #include <stdio.h>
+        int factorial(int d) {
+            int f = 1;
+            for (int i = 2; i <= d; i++) f *= i;
+            return f;
+        }
+        int main() {
+            int n, temp, digit, sum = 0;
+            scanf("%d", &n);
+            temp = n;
+            while (temp) {
+                digit = temp % 10;
+                sum += factorial(digit);
+                temp /= 10;
+            }
+            if (sum == n)
+                printf("Strong number\n");
+            else
+                printf("Not Strong number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Magic Number]
+    Example: 1927
+    1+9+2+7 = 19 → 1+9 = 10 → 1+0 = 1 → Magic
+
+    Steps:
+        1. While n > 9, sum its digits (replace n with sum).
+        2. If final n == 1 → Magic number.
+
+    Solution:
+        #include <stdio.h>
+        int sum_of_digits(int n) {
+            int s = 0;
+            while (n) {
+                s += n % 10;
+                n /= 10;
+            }
+            return s;
+        }
+        int main() {
+            int n;
+            scanf("%d", &n);
+            while (n > 9)
+                n = sum_of_digits(n);
+            if (n == 1)
+                printf("Magic number\n");
+            else
+                printf("Not Magic number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Happy Number]
+    Example: 82
+    8² + 2² = 68 → 6²+8² = 100 → 1²+0²+0² = 1 → Happy
+
+    Steps:
+        1. While n != 1 and not repeating (loop detection can be added),
+           replace n by sum of squares of its digits.
+        2. If n becomes 1 → Happy number.
+
+    Solution (simple, but may loop infinitely for non‑happy; we can limit iterations):
+        #include <stdio.h>
+        int sum_sq(int n) {
+            int s = 0, d;
+            while (n) {
+                d = n % 10;
+                s += d * d;
+                n /= 10;
+            }
+            return s;
+        }
+        int main() {
+            int n, slow, fast;
+            scanf("%d", &n);
+            slow = fast = n;
+            do {
+                slow = sum_sq(slow);
+                fast = sum_sq(sum_sq(fast));
+            } while (slow != fast);
+            if (slow == 1)
+                printf("Happy number\n");
+            else
+                printf("Not Happy number\n");
+            return 0;
+        }
+
+    (The Floyd’s cycle detection is used here to avoid infinite loops.)
+
+───────────────────────────────────────────────────────────────────────────
+
+[Kaprekar Number]
+    Definition: 297² = 88209
+    Split 88209 into two parts and sum: 8+8209=8217, 88+209=297 (equals original) → Kaprekar
+
+    Steps:
+        1. Compute sq = n * n.
+        2. Count digits of sq → d.
+        3. For pos_v = 10; pos_v <= 10^d; pos_v *= 10:
+               right_part = sq % pos_v;
+               left_part  = sq / pos_v;
+               if (right_part > 0 && left_part + right_part == n) → Kaprekar.
+        4. If no split works → not Kaprekar.
+
+    Solution:
+        #include <stdio.h>
+        int main() {
+            int n, sq, temp, d, pos;
+            scanf("%d", &n);
+            sq = n * n;
+            temp = sq;
+            d = 0;
+            while (temp) { d++; temp /= 10; }
+            int isKap = 0;
+            for (pos = 10; pos <= pow(10,d); pos *= 10) {
+                int right = sq % pos;
+                int left = sq / pos;
+                if (right > 0 && left + right == n) {
+                    isKap = 1;
+                    break;
+                }
+            }
+            if (isKap) printf("Kaprekar number\n");
+            else printf("Not Kaprekar number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Perfect Number]
+    Sum of proper divisors (factors excluding the number itself) == number.
+    Example: 6 = 1+2+3 ; 28 = 1+2+4+7+14
+
+    Steps:
+        1. Sum = 1.
+        2. Loop i from 2 to sqrt(n):
+               if n % i == 0:
+                   sum += i;
+                   if (i != n/i) sum += n/i;
+        3. If sum == n (and n != 1) → Perfect.
+
+    Solution:
+        #include <stdio.h>
+        #include <math.h>
+        int main() {
+            int n, sum = 1;
+            scanf("%d", &n);
+            if (n == 1) { printf("Not Perfect\n"); return 0; }
+            for (int i = 2; i <= sqrt(n); i++) {
+                if (n % i == 0) {
+                    sum += i;
+                    if (i != n/i) sum += n/i;
+                }
+            }
+            if (sum == n) printf("Perfect number\n");
+            else printf("Not Perfect number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Extra Perfect Number]
+    Binary representation starts and ends with 1 (no internal zeros? Actually extra perfect means
+    binary representation has 1 at both ends only, i.e., the number is of the form 2ⁿ+1.)
+    Example: 3 (11), 5 (101), 9 (1001), 17 (10001) → all are 2ⁿ+1.
+
+    Steps:
+        1. Check if n-1 is a power of two: (n-1) & (n-2) == 0  (and n>1).
+        2. If yes → Extra perfect.
+
+    Solution:
+        #include <stdio.h>
+        int main() {
+            int n;
+            scanf("%d", &n);
+            if (n > 1 && ((n-1) & (n-2)) == 0)
+                printf("Extra perfect number\n");
+            else
+                printf("Not Extra perfect number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Abundant Number]
+    Sum of proper divisors > number.
+    Example: 20 → 1+2+4+5+10 = 22 > 20.
+
+    Steps: Same as perfect, check sum > n.
+
+    Solution:
+        #include <stdio.h>
+        #include <math.h>
+        int main() {
+            int n, sum = 1;
+            scanf("%d", &n);
+            for (int i = 2; i <= sqrt(n); i++) {
+                if (n % i == 0) {
+                    sum += i;
+                    if (i != n/i) sum += n/i;
+                }
+            }
+            if (sum > n) printf("Abundant number\n");
+            else printf("Not Abundant number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Deficient Number]
+    Sum of proper divisors < number.
+    Example: 10 → 1+2+5 = 8 < 10.
+
+    Steps: Similar, check sum < n.
+
+    Solution:
+        #include <stdio.h>
+        #include <math.h>
+        int main() {
+            int n, sum = 1;
+            scanf("%d", &n);
+            for (int i = 2; i <= sqrt(n); i++) {
+                if (n % i == 0) {
+                    sum += i;
+                    if (i != n/i) sum += n/i;
+                }
+            }
+            if (sum < n) printf("Deficient number\n");
+            else printf("Not Deficient number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Mersenne Number]
+    A number that is one less than a power of two: 2ⁿ – 1.
+    Binary representation is all 1's. Example: 3, 7, 15, 31, 63, 127, …
+
+    Steps:
+        1. Check if n+1 is a power of two: (n+1) & n == 0.
+        2. If true and n>1 → Mersenne.
+
+    Solution:
+        #include <stdio.h>
+        int main() {
+            int n;
+            scanf("%d", &n);
+            if (n > 1 && ((n+1) & n) == 0)
+                printf("Mersenne number\n");
+            else
+                printf("Not Mersenne number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+6.  EXTRA NUMBER TYPES (with explanations and solutions)
+───────────────────────────────────────────────────────────────────────────
+
+[Pentagon Number]
+    Definition: A number that can be represented as dots forming a regular pentagon.
+    Formula: Pn = n(3n-1)/2.
+    To check if a number is pentagonal:
+        Solve n = (sqrt(24x + 1) + 1) / 6. If n is an integer, it's pentagonal.
+
+    Solution:
+        #include <stdio.h>
+        #include <math.h>
+        int main() {
+            int x;
+            scanf("%d", &x);
+            double n = (sqrt(24*x + 1) + 1) / 6;
+            if (n == (int)n)
+                printf("Pentagon number\n");
+            else
+                printf("Not Pentagon number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Proth Number]
+    A number of the form k * 2ⁿ + 1, where k is odd and k < 2ⁿ.
+    To check: deduct 1, repeatedly divide by 2 while even, get k (odd).
+    If k < 2ⁿ, then Proth.
+
+    Solution:
+        #include <stdio.h>
+        int main() {
+            int n, temp, odd;
+            scanf("%d", &n);
+            if (n <= 1) { printf("Not Proth\n"); return 0; }
+            temp = n - 1;
+            int pow2 = 1;
+            while (temp % 2 == 0) {
+                temp /= 2;
+                pow2 *= 2;
+            }
+            odd = temp;   // k (must be odd)
+            if (odd < pow2 && odd % 2 == 1)
+                printf("Proth number\n");
+            else
+                printf("Not Proth number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Harshad Number (Niven Number)]
+    A number divisible by the sum of its digits.
+    Example: 12 → sum=3, 12%3==0.
+
+    Solution:
+        #include <stdio.h>
+        int main() {
+            int n, sum = 0, temp;
+            scanf("%d", &n);
+            temp = n;
+            while (temp) {
+                sum += temp % 10;
+                temp /= 10;
+            }
+            if (n % sum == 0)
+                printf("Harshad number\n");
+            else
+                printf("Not Harshad number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Fibonacci Number]
+    A number in the Fibonacci sequence: 0,1,1,2,3,5,8,13,...
+    Check: n is Fibonacci iff (5*n² + 4) or (5*n² - 4) is a perfect square.
+
+    Solution:
+        #include <stdio.h>
+        #include <math.h>
+        int isPerfectSquare(int x) {
+            int s = sqrt(x);
+            return (s*s == x);
+        }
+        int main() {
+            int n;
+            scanf("%d", &n);
+            if (isPerfectSquare(5*n*n + 4) || isPerfectSquare(5*n*n - 4))
+                printf("Fibonacci number\n");
+            else
+                printf("Not Fibonacci number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Catalan Number]
+    Sequence: 1,1,2,5,14,42,... Formula: Cₙ = (2n)! / (n!(n+1)!).
+    To check if x is a Catalan number: generate Catalan numbers until you reach or exceed x.
+
+    Solution:
+        #include <stdio.h>
+        unsigned long long catalan(int n) {
+            if (n <= 1) return 1;
+            unsigned long long res = 0;
+            for (int i = 0; i < n; i++)
+                res += catalan(i) * catalan(n-i-1);
+            return res;
+        }
+        int main() {
+            unsigned long long x;
+            int i = 0;
+            scanf("%llu", &x);
+            while (1) {
+                unsigned long long c = catalan(i);
+                if (c == x) { printf("Catalan number\n"); return 0; }
+                if (c > x)  { printf("Not Catalan number\n"); return 0; }
+                i++;
+            }
+        }
+    (Note: for larger numbers use dynamic programming to generate catalans efficiently.)
+
+───────────────────────────────────────────────────────────────────────────
+
+[Amicable Pairs]
+    Two numbers are amicable if sum of proper divisors of each equals the other.
+    Example: 220 and 284.
+    Check: sum_div(220)=284, sum_div(284)=220.
+
+    We'll just check if a given pair (a,b) is amicable.
+
+    Solution:
+        #include <stdio.h>
+        int sum_div(int n) {
+            int sum = 1;
+            for (int i = 2; i * i <= n; i++) {
+                if (n % i == 0) {
+                    sum += i;
+                    if (i != n/i) sum += n/i;
+                }
+            }
+            return sum;
+        }
+        int main() {
+            int a, b;
+            scanf("%d %d", &a, &b);
+            if (sum_div(a) == b && sum_div(b) == a)
+                printf("Amicable pair\n");
+            else
+                printf("Not Amicable pair\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
+
+[Strobogrammatic Number]
+    A number that reads the same when rotated 180 degrees.
+    Valid digits: 0,1,8, (6 and 9 become each other).
+    Example: 69 → rotated 180 becomes 69 (same) → strobogrammatic.
+    For numeric checking: reverse with mapping: 0→0, 1→1, 6→9, 8→8, 9→6; if the mapped reversed equals original, it's strobogrammatic.
+
+    Solution:
+        #include <stdio.h>
+        int main() {
+            int n, temp, rot = 0, valid = 1;
+            scanf("%d", &n);
+            temp = n;
+            while (temp) {
+                int d = temp % 10;
+                if (d == 0 || d == 1 || d == 8) rot = rot * 10 + d;
+                else if (d == 6) rot = rot * 10 + 9;
+                else if (d == 9) rot = rot * 10 + 6;
+                else { valid = 0; break; }
+                temp /= 10;
+            }
+            if (valid && rot == n)
+                printf("Strobogrammatic number\n");
+            else
+                printf("Not Strobogrammatic number\n");
+            return 0;
+        }
+
+───────────────────────────────────────────────────────────────────────────
