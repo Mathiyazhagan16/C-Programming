@@ -1,0 +1,782 @@
+
+100 Unique Pattern Designs – Visual Reference
+
+───────────────────────────────────────────────────────────────────────────
+1.  RIGHT‑ANGLED TRIANGLE (BOTTOM‑LEFT)
+        *
+        * *
+        * * *
+        * * * *
+        * * * * *
+
+2.  INVERTED RIGHT‑ANGLED TRIANGLE (BOTTOM‑LEFT)
+        * * * * *
+        * * * *
+        * * *
+        * *
+        *
+
+3.  RIGHT‑ANGLED TRIANGLE (BOTTOM‑RIGHT)
+                *
+              * *
+            * * *
+          * * * *
+        * * * * *
+
+4.  INVERTED RIGHT‑ANGLED TRIANGLE (BOTTOM‑RIGHT)
+        * * * * *
+          * * * *
+            * * *
+              * *
+                *
+
+5.  FULL PYRAMID (SPACED)
+            *
+           * *
+          * * *
+         * * * *
+        * * * * *
+
+6.  INVERTED FULL PYRAMID (SPACED)
+        * * * * *
+         * * * *
+          * * *
+           * *
+            *
+
+7.  SOLID PYRAMID (NO GAPS)
+            *
+           ***
+          *****
+         *******
+        *********
+
+8.  HOLLOW PYRAMID
+            *
+           * *
+          *   *
+         *     *
+        * * * * *
+
+9.  INVERTED HOLLOW PYRAMID
+        * * * * *
+         *     *
+          *   *
+           * *
+            *
+
+10. DIAMOND (FILLED)
+            *
+           ***
+          *****
+         *******
+        *********
+         *******
+          *****
+           ***
+            *
+
+11. HOLLOW DIAMOND
+            *
+           * *
+          *   *
+         *     *
+        *       *
+         *     *
+          *   *
+           * *
+            *
+
+12. HALF DIAMOND (RIGHT SIDE)
+        *
+        **
+        ***
+        ****
+        *****
+        ****
+        ***
+        **
+        *
+
+13. HALF DIAMOND (CENTERED)
+            *
+           **
+          ***
+         ****
+        *****
+         ****
+          ***
+           **
+            *
+
+14. RIGHT PASCAL’S TRIANGLE
+        *
+        * *
+        * * *
+        * * * *
+        * * * * *
+        * * * *
+        * * *
+        * *
+        *
+
+15. LEFT PASCAL’S TRIANGLE
+                *
+              * *
+            * * *
+          * * * *
+        * * * * *
+          * * * *
+            * * *
+              * *
+                *
+
+16. BUTTERFLY PATTERN
+        *                 *
+        * *             * *
+        * * *         * * *
+        * * * *     * * * *
+        * * * * * * * * * *
+        * * * *     * * * *
+        * * *         * * *
+        * *             * *
+        *                 *
+
+17. HOLLOW SQUARE
+        * * * * *
+        *       *
+        *       *
+        *       *
+        * * * * *
+
+18. HOLLOW SQUARE WITH DIAGONAL
+        * * * * *
+        * *   * *
+        *   *   *
+        * *   * *
+        * * * * *
+
+19. SQUARE OF STARS
+        * * * * *
+        * * * * *
+        * * * * *
+        * * * * *
+        * * * * *
+
+20. HOURGLASS (FILLED)
+        *********
+         *******
+          *****
+           ***
+            *
+           ***
+          *****
+         *******
+        *********
+
+21. HOLLOW HOURGLASS
+        *********
+         *     *
+          *   *
+           * *
+            *
+           * *
+          *   *
+         *     *
+        *********
+
+22. KITE PATTERN (DIAMOND VARIANT)
+            *
+           ***
+          *****
+         *******
+        *********
+         *******
+          *****
+           ***
+            *
+
+23. ARROWHEAD (UP)
+            *
+           ***
+          *****
+        *********
+           ***
+           ***
+
+24. ARROWHEAD (DOWN)
+        *********
+          *****
+           ***
+            *
+
+25. PLUS SIGN
+            *
+            *
+        * * * * *
+            *
+            *
+
+26. CROSS (X)
+        *       *
+          *   *
+            *
+          *   *
+        *       *
+
+27. HOLLOW RIGHT‑ANGLED TRIANGLE (BOTTOM‑LEFT)
+        *
+        * *
+        *   *
+        *     *
+        * * * * *
+
+28. HOLLOW INVERTED RIGHT‑ANGLED TRIANGLE (BOTTOM‑LEFT)
+        * * * * *
+        *     *
+        *   *
+        * *
+        *
+
+29. PARALLELOGRAM (LEFT LEANING)
+        * * * * *
+         * * * * *
+          * * * * *
+           * * * * *
+            * * * * *
+
+30. PARALLELOGRAM (RIGHT LEANING)
+            * * * * *
+           * * * * *
+          * * * * *
+         * * * * *
+        * * * * *
+
+31. HOLLOW RHOMBUS
+            * * * * *
+           *       *
+          *       *
+         *       *
+        * * * * *
+
+32. SANDGLASS (NUMERIC, HOLLOW)
+        *********
+         *     *
+          *   *
+           * *
+            *
+
+33. ZIGZAG LINE
+        *       *       *
+          *   *   *   *
+            *       *
+
+34. WAVE PATTERN
+        *     *     *
+         *   * *   * *
+          * *   * *
+
+35. TILDE / SINE WAVE
+          *       *
+        *   *   *   *
+      *       *       *
+
+36. DIAMOND OF NUMBERS (1’s only)
+            1
+           1 1
+          1   1
+         1     1
+          1   1
+           1 1
+            1
+
+37. NUMBER PYRAMID (INCREASING ROW)
+            1
+           2 2
+          3 3 3
+         4 4 4 4
+        5 5 5 5 5
+
+38. INVERTED NUMBER PYRAMID
+        5 5 5 5 5
+         4 4 4 4
+          3 3 3
+           2 2
+            1
+
+39. NUMBER PYRAMID (PALINDROME)
+            1
+          1 2 1
+        1 2 3 2 1
+      1 2 3 4 3 2 1
+    1 2 3 4 5 4 3 2 1
+
+40. FLOYD’S TRIANGLE
+        1
+        2   3
+        4   5   6
+        7   8   9  10
+        11 12  13  14 15
+
+41. PASCAL’S TRIANGLE (CENTERED)
+            1
+          1   1
+        1   2   1
+      1   3   3   1
+    1   4   6   4   1
+
+42. BINARY RIGHT TRIANGLE
+        1
+        0 1
+        1 0 1
+        0 1 0 1
+        1 0 1 0 1
+
+43. ZERO‑ONE PYRAMID
+            1
+          0   0
+        1   1   1
+      0   0   0   0
+    1   1   1   1   1
+
+44. SANDWICH NUMBER PATTERN
+        1 2 3 4 5
+        2 3 4 5 6
+        3 4 5 6 7
+        4 5 6 7 8
+        5 6 7 8 9
+
+45. SPIRAL NUMBER MATRIX
+         1  2  3  4 5
+        16 17 18 19 6
+        15 24 25 20 7
+        14 23 22 21 8
+        13 12 11 10 9
+
+46. HOLLOW NUMBER SQUARE
+        1 2 3 4 5
+        1       5
+        1       5
+        1       5
+        1 2 3 4 5
+
+47. ALPHABET PYRAMID
+            A
+          A B A
+        A B C B A
+      A B C D C B A
+    A B C D E D C B A
+
+48. ALPHABET RIGHT TRIANGLE (REPEATING)
+        A
+        B B
+        C C C
+        D D D D
+        E E E E E
+
+49. INVERTED ALPHABET RIGHT TRIANGLE
+        E E E E E
+        D D D D
+        C C C
+        B B
+        A
+
+50. ALPHABET TRIANGLE (INCREMENTING)
+        A
+        A B
+        A B C
+        A B C D
+        A B C D E
+
+51. HOLLOW ALPHABET SQUARE
+        A B C D E
+        A       E
+        A       E
+        A       E
+        A B C D E
+
+52. MIRRORED RIGHT TRIANGLE (NUMBERS)
+                1
+             2  2
+          3  3  3
+       4  4  4  4
+    5  5  5  5  5
+
+53. MIRRORED INVERTED RIGHT TRIANGLE (NUMBERS)
+    5  5  5  5  5
+       4  4  4  4
+          3  3  3
+             2  2
+                1
+
+54. PYRAMID OF EVEN NUMBERS
+            2
+          4   4
+        6   6   6
+      8   8   8   8
+   10  10  10  10  10
+
+55. PYRAMID OF ODD NUMBERS
+            1
+          3   3
+        5   5   5
+      7   7   7   7
+    9   9   9   9   9
+
+56. RIGHT TRIANGLE OF FIBONACCI NUMBERS
+        0
+        1   1
+        2   3   5
+        8  13  21 34
+       55  89 144 233 377
+
+57. CHARACTER DIAMOND
+            A
+          B B B
+        C C C C C
+      D D D D D D D
+    E E E E E E E E E
+      D D D D D D D
+        C C C C C
+          B B B
+            A
+
+58. HOLLOW CHARACTER DIAMOND
+            A
+          B   B
+        C       C
+      D           D
+    E               E
+      D           D
+        C       C
+          B   B
+            A
+
+59. SAND CLOCK OF NUMBERS (HOLLOW)
+        1 2 3 4 5
+        2     4
+        3   3
+        4 2
+        5 2 3 4 5
+
+60. STAIR CASE PATTERN
+        *
+        * *
+        * * *
+        * * * *
+        * * * * *
+        * * * * *
+        * * * *
+        * * *
+        * *
+        *
+
+61. DOUBLE HILL PATTERN
+        *       *
+        * *   * *
+        * * * * *
+        * *   * *
+        *       *
+
+62. DOUBLE PYRAMID
+        *   *   *
+        ** ** **
+        *********
+        ** ** **
+        *   *   *
+
+63. CHRISTMAS TREE
+            *
+           ***
+          *****
+         *******
+        *********
+           | |
+           | |
+
+64. HEART PATTERN (n=7 gives better shape)
+          ** **
+        *********
+        *********
+         *******
+          *****
+           ***
+            *
+
+65. BOW TIE
+        ***       ***
+        ****     ****
+        *************
+        ****     ****
+        ***       ***
+
+66. HOLLOW BUTTERFLY
+        *                 *
+        * *             * *
+        *   *         *   *
+        *     *     *     *
+        *       * *       *
+        *     *     *     *
+        *   *         *   *
+        * *             * *
+        *                 *
+
+67. ALTERNATING STARS AND NUMBERS
+        1
+        * 2
+        3 * 4
+        * 5 * 6
+        7 * 8 * 9
+
+68. SNAKE PATTERN OF NUMBERS
+        1  2  3  4  5
+        10 9  8  7  6
+        11 12 13 14 15
+        20 19 18 17 16
+
+69. REVERSE SNAKE PATTERN
+        1  8  9 16 17
+        2  7 10 15 18
+        3  6 11 14 19
+        4  5 12 13 20
+
+70. DIAGONAL LINE OF STARS
+        *
+         *
+          *
+           *
+            *
+
+71. ANTI‑DIAGONAL LINE OF STARS
+            *
+           *
+          *
+         *
+        *
+
+72. NUMBER TRIANGLE (ADDITIVE ROWS)
+        1
+        1 2
+        1 2 3
+        1 2 3 4
+        1 2 3 4 5
+
+73. MULTIPLICATION TABLE (GRID)
+        1   2   3   4   5
+        2   4   6   8  10
+        3   6   9  12  15
+        4   8  12  16  20
+        5  10  15  20  25
+
+74. HOLLOW NUMBER PYRAMID
+            1
+          2   2
+        3       3
+      4           4
+    5   5   5   5   5
+
+75. PYRAMID OF REPEATED NUMBERS
+            1
+          2 2 2
+        3 3 3 3 3
+      4 4 4 4 4 4 4
+    5 5 5 5 5 5 5 5 5
+
+76. NUMBER MATRIX (ROW‑WISE CONSTANT)
+        1  1  1  1  1
+        2  2  2  2  2
+        3  3  3  3  3
+        4  4  4  4  4
+        5  5  5  5  5
+
+77. ALPHABET MATRIX (ROW‑WISE CONSTANT)
+        A  A  A  A  A
+        B  B  B  B  B
+        C  C  C  C  C
+        D  D  D  D  D
+        E  E  E  E  E
+
+78. ALPHABET MATRIX (COLUMN‑WISE CONSTANT)
+        A  B  C  D  E
+        A  B  C  D  E
+        A  B  C  D  E
+        A  B  C  D  E
+        A  B  C  D  E
+
+79. SPIRAL ALPHABET MATRIX
+        A B C D E
+        P Q R S F
+        O X Y T G
+        N W V U H
+        M L K J I
+
+80. RIGHT TRIANGLE OF PRIME NUMBERS
+        2
+        3 5
+        7 11 13
+       17 19 23 29
+       31 37 41 43 47
+
+81. PYRAMID OF PRIME NUMBERS
+            2
+          3   5
+        7  11  13
+      17 19  23 29
+    31 37  41  43 47
+
+82. HOLLOW DIAMOND OF NUMBERS (1’s)
+            1
+          1   1
+        1       1
+      1           1
+        1       1
+          1   1
+            1
+
+83. ARROW (RIGHT DIRECTION)
+        *
+        * *
+        * * *
+        * * * *
+        * * * * *
+        * * * *
+        * * *
+        * *
+        *
+
+84. ARROW (LEFT DIRECTION)
+                *
+              * *
+            * * *
+          * * * *
+        * * * * *
+          * * * *
+            * * *
+              * *
+                *
+
+85. PYRAMID USING HASH
+            #
+           ###
+          #####
+         #######
+        #########
+
+86. TRIANGLE OF $ AND *
+        $
+        $ *
+        $ * $
+        $ * $ *
+        $ * $ * $
+
+87. CHECKERBOARD (5x5)
+        * - * - *
+        - * - * -
+        * - * - *
+        - * - * -
+        * - * - *
+
+88. PYRAMID OF ROMAN NUMERALS
+            I
+          I II
+        I II III
+      I II III IV
+    I II III IV V
+
+89. DIAMOND OF ZEROS
+            0
+          0 0 0
+        0 0 0 0 0
+      0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0
+      0 0 0 0 0 0 0
+        0 0 0 0 0
+          0 0 0
+            0
+
+90. REVERSE FLOYD’S TRIANGLE
+      15 14 13 12 11
+        10  9  8  7
+         6  5  4
+          3  2
+           1
+
+91. PASCAL’S TRIANGLE (LEFT ALIGNED)
+        1
+        1 1
+        1 2 1
+        1 3 3 1
+        1 4 6 4 1
+
+92. STAR FRAME AROUND PYRAMID
+        *************
+        *           *
+        *     *     *
+        *    ***    *
+        *   *****   *
+        *  *******  *
+        *************
+
+93. DIAMOND OF STARS WITH CENTER DOT
+            *
+           * *
+          * . *
+         * . . *
+        * . . . *
+         * . . *
+          * . *
+           * *
+            *
+
+94. PYRAMID OF LETTERS AND NUMBERS
+            1
+          A 2 A
+        1 2 3 2 1
+      A B C D C B A
+    1 2 3 4 5 4 3 2 1
+
+95. HOLLOW DIAMOND WITH BORDER HASH
+            #
+           # #
+          #   #
+         #     #
+        #       #
+         #     #
+          #   #
+           # #
+            #
+
+96. DIAGONAL SNAKE OF NUMBERS
+        1 0 0 0 1
+        0 1 0 1 0
+        0 0 1 0 0
+        0 1 0 1 0
+        1 0 0 0 1
+
+97. WINDMILL PATTERN
+        *   *   *
+          *   *
+        *   *   *
+          *   *
+        *   *   *
+
+98. SPIRAL OF STARS (SIMPLE)
+        * * * * *
+        *       *
+        * * *   *
+        *   *   *
+        * * * * *
+
+99. DOUBLE RIGHT TRIANGLE (SIDE BY SIDE)
+        *        *
+        * *      * *
+        * * *    * * *
+        * * * *  * * * *
+        * * * * * * * * *
+
+100. PYRAMID OF BINARY PALINDROME
+            1
+          0   0
+        1   1   1
+      0   0   0   0
+    1   1   1   1   1
