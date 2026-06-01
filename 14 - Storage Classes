@@ -1,0 +1,169 @@
+
+Storage Classes
+
+    What:
+        A storage class defines the scope (visibility), lifetime, default initial value,
+        and storage location (memory/register) of a variable in C.
+
+    Why:
+        To control how long a variable lives and from where it can be accessed.
+        Helps in efficient memory management, data sharing across files, and optimisation.
+
+    Where:
+        Used while declaring variables inside functions, files, or across multiple source files.
+
+    How:
+        Specified before the data type in a declaration:
+            storage_class data_type variable_name;
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Four Storage Classes in C
+
+        1. auto     (automatic)
+        2. register
+        3. static
+        4. extern
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    1. auto
+
+        • Default storage class for all local variables declared inside a function/block.
+        • Stored on the stack.
+        • Lifetime   : exists only while the block is executing.
+        • Scope      : local to the block in which it is defined.
+        • Default Value : garbage (uninitialised).
+        • The keyword `auto` is rarely written explicitly.
+
+        Example:
+            #include <stdio.h>
+            void func() {
+                auto int x = 10;   // same as int x = 10;
+                printf("%d\n", x);
+            }
+            int main() {
+                func();
+                // printf("%d", x);   // error – x not visible here
+                return 0;
+            }
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    2. register
+
+        • Suggests the compiler store the variable in a CPU register for faster access.
+        • It is a request, not a command – compiler may ignore it.
+        • Cannot take the address of a register variable (no & operator allowed).
+        • Scope & Lifetime : same as auto (local to block).
+        • Default Value : garbage.
+        • Typically used for loop counters or frequently accessed variables.
+
+        Example:
+            #include <stdio.h>
+            void loop() {
+                register int i;
+                for (i = 0; i < 10; i++) {
+                    printf("%d ", i);
+                }
+            }
+            int main() {
+                loop();
+                return 0;
+            }
+
+        • The statement `int *p = &i;` would cause a compilation error if i is register.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    3. static
+
+        • Extends the lifetime of a variable to the entire program execution.
+        • The variable is initialised only once and retains its value between function calls.
+        • If used inside a function:
+            - Scope remains local (visible only inside that function).
+            - Lifetime is static (persists across calls).
+        • If used outside all functions (global static):
+            - Scope is limited to the current source file only (internal linkage).
+        • Memory : stored in the data segment (initialised data or BSS).
+        • Default Value : zero if not initialised explicitly.
+
+        Example 1 – Static local variable:
+            #include <stdio.h>
+            void counter() {
+                static int count = 0;
+                count++;
+                printf("%d ", count);
+            }
+            int main() {
+                counter();   // 1
+                counter();   // 2
+                counter();   // 3
+                return 0;
+            }
+
+        Example 2 – Static global variable:
+            // file1.c
+            static int hidden = 100;   // not visible in other files
+            void show() {
+                printf("%d\n", hidden);
+            }
+
+            // file2.c
+            // extern int hidden;  -> linker error, hidden is not accessible
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    4. extern
+
+        • Declares a variable that is defined in another source file (or later in the same file).
+        • Used for sharing variables across multiple files.
+        • The variable must be defined exactly once (without extern) somewhere in the program.
+        • Lifetime : entire program execution.
+        • Scope : global (visible in all files that declare it).
+        • Memory : data segment.
+        • Default Value : zero (when defined without initialiser).
+
+        Example:
+            // file1.c
+            #include <stdio.h>
+            int global = 50;          // definition
+            void display();
+
+            int main() {
+                display();
+                return 0;
+            }
+
+            // file2.c
+            #include <stdio.h>
+            extern int global;        // declaration (definition is in file1.c)
+            void display() {
+                printf("global = %d\n", global);
+            }
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Quick Comparison Table
+
+    | Storage Class | Scope        | Lifetime         | Default Value | Memory     |
+    |---------------|--------------|------------------|---------------|------------|
+    | auto          | local        | block execution  | garbage       | stack      |
+    | register      | local        | block execution  | garbage       | CPU reg    |
+    | static        | local/file   | whole program    | zero          | data/BSS   |
+    | extern        | global       | whole program    | zero          | data/BSS   |
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Additional Notes
+
+        • The `static` keyword in a function definition limits the function's visibility to
+          the file it is defined in (internal linkage).
+            static int helper() { return 1; }   // not callable from other files
+
+        • The `extern` keyword can also be used with functions, but it is optional since
+          all functions are extern by default.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Sample Questions
