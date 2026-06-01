@@ -1,0 +1,465 @@
+
+Strings
+
+    What:
+        A string is a sequence (array) of characters terminated by a null character '\0'.
+        In C, strings are stored as character arrays.
+
+    Why:
+        To represent and manipulate textual data – names, messages, files, etc.
+        Strings are essential for user interaction, data processing, and communication.
+
+    Where:
+        Everywhere – reading input, printing output, storing text, file handling, etc.
+
+    How:
+        Declare a character array large enough to hold characters + '\0'.
+        Use standard library functions or custom loops to process them.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Declaration and Initialization
+
+        Static Array:
+            char str[100];                     // 100 characters (uninitialised)
+            char name[] = "Hello";             // size = 6 (5 chars + '\0')
+            char name[10] = "Hello";           // remaining elements are '\0'
+
+        Dynamic Allocation:
+            char *str = (char*)malloc(100 * sizeof(char));
+
+        Strings are always null‑terminated. The null character marks the end of the string.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Memory Representation
+
+        Example: char str[] = "ABC";
+
+            Index:   0   1   2   3
+            Value:  'A' 'B' 'C' '\0'
+
+        The array name 'str' represents the base address of the first element.
+        Hence, in scanf() we write  scanf("%s", str)  without &.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Input / Output Methods
+
+        • printf("%s", str)      – prints the string until '\0'
+        • scanf("%s", str)       – reads a word (stops at whitespace)
+        • gets(str) / fgets()    – reads a whole line (gets is unsafe, fgets preferred)
+
+        • %c  – reads a single character (including whitespace)
+          Example: scanf(" %c", &ch);   // leading space skips previous whitespace
+
+        • Scansets – read only specified characters or stop at certain characters.
+          Syntax: %[characters]  or %[^characters]
+
+          %[a]       -> reads only 'a'
+          %[!a]      -> same as %[^a]? (implementation defined; avoid)
+          %[^a]      -> reads all characters EXCEPT 'a'; stops when 'a' appears
+
+          %[A-Z]     -> reads uppercase letters only
+          %[a-zA-Z]  -> reads alphabets only
+          %[0-9]     -> reads digits only
+          %[^\n]     -> reads until newline (reads the entire line including spaces)
+
+          The scanset works like a set: [^...] negates the set.
+          When the next character does NOT belong to the set, scanf stops reading.
+
+          How [^r] works internally (bitwise XOR example):
+            Input "Hello World", scanset %[^r]  -> reads until 'r' is encountered.
+            For each character c, if (c ^ 'r') == 0  (i.e., c == 'r'), stop.
+            This is how the delimiter decides to stop.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Why Not Use & with String Name in scanf("%s", str) ?
+
+        str is an array name and evaluates to the address of its first element.
+        Passing str is equivalent to passing &str[0].
+        If we write &str, we get the address of the entire array, which is the same address
+        but with a different pointer type (pointer to array vs pointer to char).
+        Using &str in scanf("%s") is incorrect and may cause warnings/undefined behaviour.
+
+        Example:
+            char str[100];
+            scanf("%s", &str[5]);   // reads a word and stores it starting at index 5
+            printf("%s", &str[5]);  // prints from index 5 onwards
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    String Pointers
+
+        A pointer to a character can be used to handle strings:
+
+            char *ptr = "Hello";        // ptr points to a read‑only literal
+            char str[] = "Hello";       // str is a modifiable array copy
+
+        With a pointer, you can traverse the string:
+            while (*ptr) {
+                putchar(*ptr);
+                ptr++;
+            }
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Useful Format Specifier: %n
+
+        %n stores the number of characters successfully read so far into an integer pointer.
+        Example: scanf("%s%n", str, &count);  // count now holds the length of the string read
+
+        This can be used to find string length without strlen() during input.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Common Standard Library Functions (<string.h>)
+
+        strlen(str)           – returns length of string (excluding '\0')
+        strcpy(dest, src)     – copies src to dest
+        strcat(dest, src)     – concatenates src at end of dest
+        strcmp(s1, s2)        – compares two strings (0 if equal)
+        strchr(str, ch)       – returns pointer to first occurrence of ch
+        strstr(haystack, needle) – finds substring
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Custom Operations (Typical Problems)
+
+        • Reverse the whole string
+        • Reverse each word in a string (word by word)
+        • Reverse ignoring special characters (special reverse)
+        • Length of string (using loop, %n, or pointer)
+        • Sorting characters in a string (e.g., "engineering" → "eeeggiinnnr")
+        • Searching for a character or substring
+        • Replacing characters (e.g., vowels with '#')
+        • Case conversion (upper to lower, lower to upper, toggle)
+        • Deleting specific characters or duplicates
+        • Frequency count of each character
+        • Split a camel‑case string into words ("thisIsAnAutomationEra" → "this is an automation era")
+        • Base conversion (e.g., "23GF" in hex to decimal)
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Sample Questions
+
+        Sample Questions – Strings
+
+    1. Basic Input and Output – Reading and Printing a String
+       Problem : Read a single word (no spaces) from the user and print it.
+       Solution:
+            #include <stdio.h>
+            int main() {
+                char str[100];
+                scanf("%s", str);
+                printf("%s\n", str);
+                return 0;
+            }
+
+    2. Reading a Whole Line Including Spaces (Scanset)
+       Problem : Read an entire line of text (including spaces) until Enter is pressed.
+       Solution:
+            #include <stdio.h>
+            int main() {
+                char str[500];
+                scanf("%[^\n]", str);
+                printf("You entered: %s\n", str);
+                return 0;
+            }
+
+    3. String Length – Using a Loop
+       Problem : Find the length of a string without using the built‑in strlen() function.
+       Solution:
+            #include <stdio.h>
+            int main() {
+                char str[] = "Hello World";
+                int len = 0;
+                while (str[len] != '\0') {
+                    len++;
+                }
+                printf("Length = %d\n", len);
+                return 0;
+            }
+
+    4. String Length – Using %n
+       Problem : Read a string and find its length using the %n format specifier.
+       Solution:
+            #include <stdio.h>
+            int main() {
+                char str[100];
+                int count = 0;
+                scanf("%s%n", str, &count);
+                printf("Length of \"%s\" = %d\n", str, count);
+                return 0;
+            }
+
+    5. Full Reverse of a String
+       Problem : Reverse the entire string "One Two Three Four" to "ruoF eerhT owT enO".
+       Solution:
+            #include <stdio.h>
+            #include <string.h>
+            int main() {
+                char str[] = "One Two Three Four";
+                int len = strlen(str);
+                for (int i = 0, j = len - 1; i < j; i++, j--) {
+                    char temp = str[i];
+                    str[i] = str[j];
+                    str[j] = temp;
+                }
+                printf("%s\n", str);
+                return 0;
+            }
+
+    6. Word‑by‑Word Reverse
+       Problem : Reverse the order of words in the string "One Two Three Four"
+                to get "Four Three Two One".
+       Solution:
+            #include <stdio.h>
+            #include <string.h>
+            void reverse_word(char *start, char *end) {
+                while (start < end) {
+                    char t = *start;
+                    *start++ = *end;
+                    *end-- = t;
+                }
+            }
+            int main() {
+                char str[] = "One Two Three Four";
+                int len = strlen(str);
+                // Reverse the whole string first
+                reverse_word(str, str + len - 1);
+                // Then reverse each word
+                char *start = str, *end = str;
+                while (*end) {
+                    end++;
+                    if (*end == ' ' || *end == '\0') {
+                        reverse_word(start, end - 1);
+                        if (*end) end++;     // skip space
+                        start = end;
+                    }
+                }
+                printf("%s\n", str);
+                return 0;
+            }
+
+    7. Special Reverse (Skip Special Characters)
+       Problem : Given a string "@&^H&^E&^@L@L@@$%#O(#)", reverse only the alphabetic
+                characters. Special characters remain in place.
+                Output: "@&^O&^L&^@L@E@@$%#H(#)"
+       Solution:
+            #include <stdio.h>
+            #include <ctype.h>
+            #include <string.h>
+            int main() {
+                char str[] = "@&^H&^E&^@L@L@@$%#O(#)";
+                int i = 0, j = strlen(str) - 1;
+                while (i < j) {
+                    if (!isalpha(str[i])) i++;
+                    else if (!isalpha(str[j])) j--;
+                    else {
+                        char temp = str[i];
+                        str[i] = str[j];
+                        str[j] = temp;
+                        i++; j--;
+                    }
+                }
+                printf("%s\n", str);
+                return 0;
+            }
+
+    8. Sorting Characters in a String
+       Problem : Sort the characters of "engineering" to get "eeeggiinnnr".
+       Solution:
+            #include <stdio.h>
+            #include <string.h>
+            int main() {
+                char str[] = "engineering";
+                int len = strlen(str);
+                for (int i = 0; i < len - 1; i++) {
+                    for (int j = i + 1; j < len; j++) {
+                        if (str[i] > str[j]) {
+                            char temp = str[i];
+                            str[i] = str[j];
+                            str[j] = temp;
+                        }
+                    }
+                }
+                printf("%s\n", str);
+                return 0;
+            }
+
+    9. Searching for a Character
+       Problem : Search for the character 'e' in "engineering" and print
+                whether it is found or not.
+       Solution:
+            #include <stdio.h>
+            int main() {
+                char str[] = "engineering";
+                char ch = 'e';
+                int found = 0;
+                for (int i = 0; str[i] != '\0'; i++) {
+                    if (str[i] == ch) {
+                        found = 1;
+                        break;
+                    }
+                }
+                if (found)
+                    printf("'%c' found\n", ch);
+                else
+                    printf("'%c' not found\n", ch);
+                return 0;
+            }
+
+    10. Character Replacement
+        Problem : Replace all vowels in "How Are You" with '#'.
+                 Output: "H#w #r# Y##"
+        Solution:
+            #include <stdio.h>
+            #include <string.h>
+            int main() {
+                char str[] = "How Are You";
+                char vowels[] = "aeiouAEIOU";
+                for (int i = 0; str[i] != '\0'; i++) {
+                    if (strchr(vowels, str[i]))
+                        str[i] = '#';
+                }
+                printf("%s\n", str);
+                return 0;
+            }
+
+    11. Case Conversion (Toggle Case)
+        Problem : Convert "How Are You" to "hOW aRE yOU".
+        Solution:
+            #include <stdio.h>
+            #include <ctype.h>
+            int main() {
+                char str[] = "How Are You";
+                for (int i = 0; str[i] != '\0'; i++) {
+                    if (islower(str[i]))
+                        str[i] = toupper(str[i]);
+                    else if (isupper(str[i]))
+                        str[i] = tolower(str[i]);
+                }
+                printf("%s\n", str);
+                return 0;
+            }
+
+    12. Deleting All Occurrences of a Character
+        Problem : Delete all 'e' characters from "engineering".
+                 Result: "nginring"? Actually careful: deleting all 'e' from "engineering"
+                 gives "nginring". Let's compute: e n g i n e e r i n g -> remove e's -> n g i n r i n g -> "nginring".
+                 Implement it in-place.
+        Solution:
+            #include <stdio.h>
+            int main() {
+                char str[] = "engineering";
+                char ch = 'e';
+                int j = 0;
+                for (int i = 0; str[i] != '\0'; i++) {
+                    if (str[i] != ch)
+                        str[j++] = str[i];
+                }
+                str[j] = '\0';
+                printf("%s\n", str);
+                return 0;
+            }
+
+    13. Frequency Count of Each Character
+        Problem : Count the frequency of each character in "hello world" (case‑sensitive).
+        Solution:
+            #include <stdio.h>
+            int main() {
+                char str[] = "hello world";
+                int freq[256] = {0};
+                for (int i = 0; str[i] != '\0'; i++) {
+                    freq[(int)str[i]]++;
+                }
+                for (int i = 0; i < 256; i++) {
+                    if (freq[i] > 0)
+                        printf("'%c' : %d\n", i, freq[i]);
+                }
+                return 0;
+            }
+
+    14. Splitting CamelCase Words
+        Problem : Convert "thisIsAnAutomationEra" into "this is an automation era".
+        Solution:
+            #include <stdio.h>
+            #include <ctype.h>
+            #include <string.h>
+            int main() {
+                char str[] = "thisIsAnAutomationEra";
+                char result[200];
+                int j = 0;
+                for (int i = 0; str[i] != '\0'; i++) {
+                    if (isupper(str[i]) && i != 0) {
+                        result[j++] = ' ';
+                        result[j++] = tolower(str[i]);
+                    } else {
+                        result[j++] = str[i];
+                    }
+                }
+                result[j] = '\0';
+                printf("%s\n", result);
+                return 0;
+            }
+
+    15. Base Conversion – Hex to Decimal ("sweet seventeen")
+        Problem : Convert the hexadecimal string "23GF" to its decimal equivalent.
+                 (Note: 'G' is not a valid hex digit. We'll assume valid hex string, e.g., "23AF".)
+                 Input: "23AF", Output: 9135
+        Solution:
+            #include <stdio.h>
+            #include <string.h>
+            int main() {
+                char hex[] = "23AF";
+                int decimal = 0;
+                int len = strlen(hex);
+                for (int i = 0; i < len; i++) {
+                    int digit;
+                    if (hex[i] >= '0' && hex[i] <= '9')
+                        digit = hex[i] - '0';
+                    else if (hex[i] >= 'A' && hex[i] <= 'F')
+                        digit = hex[i] - 'A' + 10;
+                    else if (hex[i] >= 'a' && hex[i] <= 'f')
+                        digit = hex[i] - 'a' + 10;
+                    else {
+                        printf("Invalid hex digit\n");
+                        return 1;
+                    }
+                    decimal = decimal * 16 + digit;
+                }
+                printf("Decimal = %d\n", decimal);
+                return 0;
+            }
+
+    16. Dynamic String – Copying Without strcpy
+        Problem : Read a string, dynamically allocate memory for a duplicate, copy it manually, and print.
+        Solution:
+            #include <stdio.h>
+            #include <stdlib.h>
+            int main() {
+                char temp[100];
+                scanf("%s", temp);
+                int len = 0;
+                while (temp[len]) len++;
+                char *dup = (char*)malloc(len + 1);
+                if (!dup) return 1;
+                for (int i = 0; i <= len; i++) dup[i] = temp[i];
+                printf("Duplicate: %s\n", dup);
+                free(dup);
+                return 0;
+            }
+
+    17. Scanset – Reading Only Digits
+        Problem : Read input until a non‑digit is encountered and store only the digits.
+        Solution:
+            #include <stdio.h>
+            int main() {
+                char digits[100];
+                scanf("%[0-9]", digits);   // reads only digits, stops at non-digit
+                printf("Digits: %s\n", digits);
+                return 0;
+            }
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
