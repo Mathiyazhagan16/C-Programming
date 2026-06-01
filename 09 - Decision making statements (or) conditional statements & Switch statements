@@ -1,0 +1,718 @@
+Decision making statements (or) conditional statements 
+    
+1) if statement (or) simple if (or) single state if 
+
+    if(condition)
+    {
+        statements;
+    }
+
+2) if else statement (or) two state if 
+
+    if(condition) 
+    {
+        statements;//true
+    }
+    else
+    {
+        statements;//false
+    }
+
+3) else if ladder (or) cascaded if (or) multi state if
+
+    if(condition)
+    {
+        statements;
+    }
+    else if(condition)
+    {
+        statement;
+    }
+    else if(condition)
+    {
+        statement;
+    }
+    else if(condition)
+    {
+        statement;
+    }
+    else 
+    {
+        statements;(optional)
+    }
+
+4) Nested if
+
+    if(condition)
+    {
+        statements;
+        if(condition)
+        {
+            statements;
+        }
+    }
+    else 
+    {
+        statements;
+    }
+
+
+/* Q1: Find the greater value from the given integers */
+#include <stdio.h>
+int main() {
+    int num1, num2;
+    scanf("%d", &num1);
+    scanf("%d", &num2);
+    if (num1 > num2)
+        printf("%d", num1);
+    else
+        printf("%d", num2);
+    return 0;
+}
+
+
+/* Q2: Accept the integer and check if it is even or odd */
+#include <stdio.h>
+int main() {
+    int num1;
+    scanf("%d", &num1);
+    if (num1 % 2 == 1)
+        printf("Odd");
+    else
+        printf("Even");
+    return 0;
+}
+
+
+/* Q3: Hi / Hello / HiHello using if–else ladder */
+#include <stdio.h>
+int main() {
+    int num;
+    scanf("%d", &num);
+    if (num % 3 == 0 && num % 5 == 0)
+        printf("HiHello");
+    else if (num % 3 == 0)
+        printf("Hi");
+    else if (num % 5 == 0)
+        printf("Hello");
+    return 0;
+}
+
+
+/* Q4: Hi / Hello using two separate if statements */
+#include <stdio.h>
+int main() {
+    int num;
+    scanf("%d", &num);
+    if (num % 3 == 0)
+        printf("Hi");
+    if (num % 5 == 0)
+        printf("Hello");
+    return 0;
+}
+
+
+/* Q5: Accept three numbers and print min < mid < max */
+#include <stdio.h>
+int main() {
+    int num1, num2, num3;
+    int max = 0, min = 0, mid = 0;
+    scanf("%d", &num1);
+    scanf("%d", &num2);
+    scanf("%d", &num3);
+
+    if (num1 > num2 && num1 > num3)
+        max = num1;
+    else if (num2 > num3)
+        max = num2;
+    else
+        max = num3;
+
+    if (num1 < num2 && num1 < num3)
+        min = num1;
+    else if (num2 < num3)
+        min = num2;
+    else
+        min = num3;
+
+    mid = (num1 + num2 + num3) - (min + max);
+    printf("%d < %d < %d", min, mid, max);
+    return 0;
+}
+
+
+#include <stdio.h>
+#define Max(a , b) a > b ? a : b
+#define Min(a , b) a < b ? a : b
+int main() {
+    int num1, num2, num3;
+    int max = 0, min = 0, mid = 0;
+    scanf("%d", &num1);
+    scanf("%d", &num2);
+    scanf("%d", &num3);
+    max = Max((Max(num1 , num2)) , num3);
+    min = Min((Min(num1 , num2)) , num3);
+    mid = (num1 + num2 + num3) - (min + max);
+    printf("%d < %d < %d", min, mid, max);
+    return 0;
+}
+
+
+// for 4 values 
+
+30 40 10 20 
+10 < 20 < 30 < 40
+
+#include <stdio.h>
+#define Max(a , b) a > b ? a : b
+#define Min(a , b) a < b ? a : b
+#define swap(a , b) b = (a + b) - (a = b)
+int main() {
+    int num1, num2, num3 , num4;
+    int max = 0, min = 0, mid1 = 0, mid2 = 0;
+    scanf("%d", &num1);
+    scanf("%d", &num2);
+    scanf("%d", &num3);
+    scanf("%d", &num4);
+    max = Max((Max(num1 , num2)) , (Max(num3 , num4)));
+    min = Min((Min(num1 , num2)) , (Min(num3 , num4)));
+    mid1 = Min((Max(num1 , num2)) , (Max(num3 , num4)));
+    mid2 = Max((Min(num1 , num2)) , (Min(num3 , num4)));
+    if(mid1 > mid2)
+        swap(mid1 , mid2);
+    printf("%d < %d < %d < %d", min, mid1, mid2, max);
+    return 0;
+}
+
+
+
+/* Q6: Find the greatest of four numbers */
+#include <stdio.h>
+int main() 
+{
+    int num1, num2, num3, num4;
+    int max;
+    scanf("%d", &num1);
+    scanf("%d", &num2);
+    scanf("%d", &num3);
+    scanf("%d", &num4);
+
+    max = num1;
+    if (max < num2) max = num2;
+    if (max < num3) max = num3;
+    if (max < num4) max = num4;
+
+    printf("%d", max);
+    return 0;
+}
+
+
+/* Q7: Accept a character and display its type */
+#include <stdio.h>
+int main() 
+{
+    char ch;
+    scanf(" %c", &ch);
+    if (ch >= '0' && ch <= '9')
+        printf("Digit");
+    else if (ch >= 'A' && ch <= 'Z')
+        printf("Uppercase");
+    else if (ch >= 'a' && ch <= 'z')
+        printf("Lowercase");
+    else
+        printf("Special Char");
+    return 0;
+}
+
+
+/* Q8: Check whether the given year is leap year or not */
+#include <stdio.h>
+int main() {
+    int year;
+    scanf("%d", &year);
+    if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
+        printf("Leap Year");
+    else
+        printf("Not a Leap Year");
+    return 0;
+}
+
+
+/* Q9: Accept DOB of two persons and find the elder one */
+#include <stdio.h>
+int main() {
+    int d1, m1, y1, d2, m2, y2;
+    scanf("%d %d %d", &d1, &m1, &y1);
+    scanf("%d %d %d", &d2, &m2, &y2);
+
+    if (y1 < y2 ||
+       (y1 == y2 && m1 < m2) ||
+       (y1 == y2 && m1 == m2 && d1 < d2))
+        printf("%d %d %d", d1, m1, y1);
+    else
+        printf("%d %d %d", d2, m2, y2);
+    return 0;
+}
+
+#include <stdio.h>
+int main() {
+    int d1, m1, y1, d2, m2, y2;
+    scanf("%d %d %d", &d1, &m1, &y1);
+    scanf("%d %d %d", &d2, &m2, &y2);
+    int date_of_birth1 = (y1 * 100 + m1) * 100 + d1;
+    int date_of_birth2 = (y2 * 100 + m2) * 100 + d2;
+    if (date_of_birth1 < date_of_birth2)
+        printf("%d %d %d", d1, m1, y1);
+    else
+        printf("%d %d %d", d2, m2, y2);
+    return 0;
+}
+
+
+/* Q10: Accept a character and check Vowel or Consonant */
+#include <stdio.h>
+int main() {
+    char ch;
+    scanf(" %c", &ch);
+
+    if (ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u'||
+        ch=='A'||ch=='E'||ch=='I'||ch=='O'||ch=='U')
+        printf("Vowel");
+    else
+        printf("Consonant");
+    return 0;
+}
+
+
+#include <stdio.h>
+int main() {
+    char ch;
+    scanf(" %c", &ch);
+    if(ch >= 'A' && ch <= 'Z')
+        ch += 32;
+    if (ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u')
+        printf("Vowel");
+    else
+        printf("Consonant");
+    return 0;
+}
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Switch Statements
+
+    What:
+        A switch statement tests a variable (or expression) against a list of
+        constant values. Each constant is called a "case". When a match is found,
+        the code associated with that case runs.
+
+    Why:
+        Cleaner and easier to read than a long chain of if‑else‑if when you are
+        comparing the same variable against many possible values.
+
+    Where:
+        Menu‑driven programs, simple state machines, command interpreters,
+        handling enum values.
+
+    How:
+        The switch expression is evaluated once. The result is compared with each
+        case label. If a matching case is found, execution starts from that point
+        and continues until a `break` statement or the end of the switch block.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Syntax:
+
+        switch (expression) {
+            case constant1:
+                // code
+                break;
+            case constant2:
+                // code
+                break;
+            // ... more cases ...
+            default:
+                // code (if no case matches)
+        }
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Important Rules:
+
+        • The expression must evaluate to an integer (char, short, int, long,
+          long long, or enum). Floating‑point numbers and strings are not allowed.
+        • Each case label must be a compile‑time constant (no variables).
+        • `break` exits the switch block. Without it, execution "falls through" to
+          the next case.
+        • `default` is optional and runs when no other case matches.
+        • You cannot have duplicate case values.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    How Fall‑Through Works:
+
+        If you omit `break`, the program continues executing the next case's code.
+        This is sometimes used intentionally, but can also be a bug.
+
+        Example of intentional fall‑through:
+            char ch;
+            scanf(" %c", &ch);
+            switch (ch) {
+                case 'A':
+                case 'a':
+                    printf("Apple\n");
+                    break;
+                case 'B':
+                case 'b':
+                    printf("Banana\n");
+                    break;
+                default:
+                    printf("Unknown\n");
+            }
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Switch vs if‑else:
+
+        Switch                                   If‑Else‑If
+        ──────                                   ─────────
+        Works only with integral constants.      Can use any condition (>, <, !=).
+        Often more readable for exact equality.  Better for range checks.
+        Compiler may optimise with a jump table.  Evaluated sequentially.
+        Only one variable tested.                Can combine different variables.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Nested Switch:
+
+        You can place a switch inside another switch, but it should be used
+        sparingly as it can become hard to read.
+
+        Example:
+            switch (mainChoice) {
+                case 1:
+                    switch (subChoice) {
+                        case 'a': printf("1a\n"); break;
+                        case 'b': printf("1b\n"); break;
+                    }
+                    break;
+                case 2:
+                    printf("Two\n");
+                    break;
+            }
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Common Pitfalls:
+
+        • Forgetting `break` → unwanted fall‑through.
+        • Using non‑integral expression (float, string) → compilation error.
+        • Using non‑constant case labels (e.g., a variable) → error.
+        • Not including a `default` case when unexpected values might occur.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+Switch Statements – How the Compiler Implements Them
+
+    When you write a switch statement, the C compiler does not simply execute it
+    as a sequence of “if” checks. Depending on the case values, the compiler
+    may use one of three internal strategies to make the switch run faster.
+
+    These strategies are:
+        1. If‑Else Chaining
+        2. Binary Search
+        3. Jump Table (Lookup Table)
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    1. If‑Else Chaining
+        • The compiler converts the switch into a simple chain of if‑else‑if
+          statements.
+        • Each case is checked in order, from top to bottom, until a match is
+          found or the default is reached.
+        • This is used when the number of cases is small, or the case values are
+          very scattered (sparse).
+        • Performance: O(n) – worst case when the matching case is at the end.
+
+        Example:
+            switch (num) {
+                case 10:  ...; break;
+                case 25:  ...; break;
+                case 87:  ...; break;
+                default:  ...;
+            }
+            // Internally becomes:
+            if (num == 10) ...
+            else if (num == 25) ...
+            else if (num == 87) ...
+            else ...
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    2. Binary Search
+        • When the case values are sorted but still sparse, the compiler may
+          build a binary search tree.
+        • It compares the expression with the middle case, then goes left or
+          right, cutting the search space in half each time.
+        • This is better than if‑else chaining for many cases, but still slower
+          than a jump table.
+        • Performance: O(log n).
+
+        Example:
+            switch (num) {
+                case 5:  ...; break;
+                case 12: ...; break;
+                case 19: ...; break;
+                case 33: ...; break;
+                case 45: ...; break;
+                default: ...;
+            }
+            // Might be implemented as:
+            if (num < 19) {
+                if (num < 12) { if (num == 5) ... else default }
+                else { if (num == 12) ... else { if (num == 19) ... else default } }
+            } else { ... }
+            // (simplified illustration of the idea)
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    3. Jump Table (Lookup Table)
+        • The fastest method when the case values form a dense range (e.g., 0,
+          1, 2, 3, 4, 5).
+        • The compiler creates an array (table) of code addresses. The switch
+          expression is used as an index directly into that table to jump to the
+          correct case.
+        • Performance: O(1) – constant time, regardless of the number of cases.
+        • Requires cases to be consecutive or nearly consecutive (small gaps
+          filled with default labels).
+
+        Example:
+            switch (cmd) {
+                case 0: handle_exit(); break;
+                case 1: handle_open(); break;
+                case 2: handle_save(); break;
+                case 3: handle_print(); break;
+                default: handle_unknown();
+            }
+            // Compiler builds a table:
+            jump_table[0] = address of case 0
+            jump_table[1] = address of case 1
+            jump_table[2] = address of case 2
+            jump_table[3] = address of case 3
+            // any other value goes to default
+            // Execution: goto jump_table[cmd];
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    How the Compiler Chooses:
+        • It analyses the case values (their count, range, sparsity).
+        • A jump table is preferred when the density is high (cases / range).
+        • Binary search is used for moderately many cases that are not dense.
+        • If‑else chaining is the fallback for very few or random cases.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Key Takeaways:
+        • You do not need to write these manually; the compiler does it for you.
+        • Understanding these helps you know why a switch with consecutive
+          integers is faster than one with random scattered numbers.
+        • It also explains why cases must be compile‑time constants – they are
+          used to build these tables/search trees at compile time.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+Sample Questions – Switch Statements
+
+    1. Simple Day of Week
+       Problem : Read a number (1–7) and print the corresponding day of the week.
+                (1 = Monday, 2 = Tuesday, …, 7 = Sunday).
+       Solution:
+            #include <stdio.h>
+            int main() {
+                int day;
+                scanf("%d", &day);
+                switch (day) {
+                    case 1: printf("Monday\n");    break;
+                    case 2: printf("Tuesday\n");   break;
+                    case 3: printf("Wednesday\n"); break;
+                    case 4: printf("Thursday\n");  break;
+                    case 5: printf("Friday\n");    break;
+                    case 6: printf("Saturday\n");  break;
+                    case 7: printf("Sunday\n");    break;
+                    default: printf("Invalid\n");
+                }
+                return 0;
+            }
+
+    2. Vowel or Consonant
+       Problem : Read a character and print whether it is a vowel (a,e,i,o,u)
+                or a consonant. Ignore case.
+       Solution:
+            #include <stdio.h>
+            int main() {
+                char ch;
+                scanf(" %c", &ch);
+                switch (ch) {
+                    case 'A': case 'a':
+                    case 'E': case 'e':
+                    case 'I': case 'i':
+                    case 'O': case 'o':
+                    case 'U': case 'u':
+                        printf("Vowel\n"); break;
+                    default:
+                        printf("Consonant\n");
+                }
+                return 0;
+            }
+
+    3. Simple Calculator
+       Problem : Read two integers and an operator (+, -, *, /, %). Perform the
+                corresponding operation and print the result.
+       Solution:
+            #include <stdio.h>
+            int main() {
+                int a, b;
+                char op;
+                scanf("%d %c %d", &a, &op, &b);
+                switch (op) {
+                    case '+': printf("%d\n", a + b); break;
+                    case '-': printf("%d\n", a - b); break;
+                    case '*': printf("%d\n", a * b); break;
+                    case '/':
+                        if (b != 0) printf("%d\n", a / b);
+                        else printf("Division by zero\n");
+                        break;
+                    case '%':
+                        if (b != 0) printf("%d\n", a % b);
+                        else printf("Division by zero\n");
+                        break;
+                    default:  printf("Invalid operator\n");
+                }
+                return 0;
+            }
+
+    4. Month Name from Number
+       Problem : Read a month number (1–12) and print the month name.
+       Solution:
+            #include <stdio.h>
+            int main() {
+                int month;
+                scanf("%d", &month);
+                switch (month) {
+                    case 1:  printf("January\n");   break;
+                    case 2:  printf("February\n");  break;
+                    case 3:  printf("March\n");     break;
+                    case 4:  printf("April\n");     break;
+                    case 5:  printf("May\n");       break;
+                    case 6:  printf("June\n");      break;
+                    case 7:  printf("July\n");      break;
+                    case 8:  printf("August\n");    break;
+                    case 9:  printf("September\n"); break;
+                    case 10: printf("October\n");   break;
+                    case 11: printf("November\n");  break;
+                    case 12: printf("December\n");  break;
+                    default: printf("Invalid month\n");
+                }
+                return 0;
+            }
+
+    5. Number of Days in a Month (Ignoring Leap Year)
+       Problem : Input month number (1–12) and print the number of days in
+                that month (assume February = 28 days).
+       Solution:
+            #include <stdio.h>
+            int main() {
+                int month;
+                scanf("%d", &month);
+                switch (month) {
+                    case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                        printf("31 days\n"); break;
+                    case 4: case 6: case 9: case 11:
+                        printf("30 days\n"); break;
+                    case 2:
+                        printf("28 days\n"); break;
+                    default:
+                        printf("Invalid month\n");
+                }
+                return 0;
+            }
+
+    6. Grade Evaluation
+       Problem : Read a character grade (A, B, C, D, F) and print a remark.
+                A = Excellent, B = Good, C = Average, D = Poor, F = Fail.
+       Solution:
+            #include <stdio.h>
+            int main() {
+                char grade;
+                scanf(" %c", &grade);
+                switch (grade) {
+                    case 'A': printf("Excellent\n"); break;
+                    case 'B': printf("Good\n");      break;
+                    case 'C': printf("Average\n");   break;
+                    case 'D': printf("Poor\n");      break;
+                    case 'F': printf("Fail\n");      break;
+                    default:  printf("Invalid grade\n");
+                }
+                return 0;
+            }
+
+    7. Electricity Bill Calculator
+       Problem : Write a program to calculate the electricity bill based on the
+                following slab rates (units consumed per month):
+                    0 – 100 units   : ₹ 1.50 per unit
+                    101 – 200 units : ₹ 2.50 per unit
+                    201 – 300 units : ₹ 4.00 per unit
+                    above 300 units : ₹ 5.00 per unit
+                The bill is calculated slab‑wise. Use a switch statement to
+                select the appropriate slab for the number of units consumed.
+                (Hint: map the units to a slab index, then compute the bill.)
+
+       Solution (using switch with a computed slab index):
+            #include <stdio.h>
+            int main() {
+                int units;
+                float bill = 0.0;
+                printf("Enter total units consumed: ");
+                scanf("%d", &units);
+
+                // Determine the slab index (0 to 3)
+                // slab 0: 0-100, slab 1: 101-200, slab 2: 201-300, slab 3: >300
+                int slab = (units <= 100) ? 0 :
+                           (units <= 200) ? 1 :
+                           (units <= 300) ? 2 : 3;
+
+                switch (slab) {
+                    case 3:
+                        bill += (units - 300) * 5.00;
+                        units = 300;
+                        // no break — fall through
+                    case 2:
+                        bill += (units - 200) * 4.00;
+                        units = 200;
+                        // fall through
+                    case 1:
+                        bill += (units - 100) * 2.50;
+                        units = 100;
+                        // fall through
+                    case 0:
+                        bill += units * 1.50;
+                        break;
+                    default:
+                        printf("Invalid units\n");
+                        return 1;
+                }
+
+                printf("Total electricity bill = ₹ %.2f\n", bill);
+                return 0;
+            }
+
+       Explanation:
+            The switch uses fall‑through to accumulate the bill from the
+            highest slab down to the lowest. After each slab, the remaining
+            units are reduced to the upper bound of the previous slab.
+            This technique avoids multiple if‑else blocks while correctly
+            applying the progressive slab rates.
