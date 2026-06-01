@@ -1,1 +1,389 @@
 
+Functions
+
+    What:
+        A function is a self‑contained block of code that performs a specific task.
+        It is defined once and can be called (invoked) multiple times.
+
+    Why:
+        Reusability     – Write once, use many times.
+        Modularity      – Break a large program into smaller, manageable parts.
+        Abstraction     – Hide internal implementation details; expose only needed interface.
+        Maintainability – Easier to debug, update, and extend.
+
+    How:
+        Three steps are involved:
+        1. Function Declaration (prototype)
+        2. Function Definition
+        3. Function Call
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    1. Function Declaration (Prototype)
+        • Tells the compiler about the function’s name, return type, and parameters.
+        • It is mandatory if the function definition appears AFTER the function call.
+        • Even when the definition comes before the call, declaring prototypes at the top
+          is considered good programming practice.
+
+        Syntax:
+            return_type function_name(parameter_list);
+
+        Example:
+            void class_count(int count);
+
+        • If no declaration is given before the call, the compiler may raise an
+          "implicit declaration" error or warning.
+
+    2. Function Definition
+        • Contains the actual body of the function – the instructions to be executed.
+        • Must match the prototype exactly (return type, name, parameters).
+
+        Syntax:
+            return_type function_name(parameters)
+            {
+                // statements
+            }
+
+        Example:
+            void class_count(int count)
+            {
+                count = 60;
+                printf("%d\n", count);
+            }
+
+    3. Function Call
+        • Transfers control to the function along with actual arguments (if any).
+        • The function executes its code and, if not void, returns a value.
+
+        Syntax:
+            function_name(arguments);
+
+        Example:
+            class_count(65);   // call with integer argument
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Categories Based on Return Value
+
+        With return value:
+            • The function computes a result and sends it back using the `return` keyword.
+            • Return type must be specified (int, float, double, char*, etc.).
+
+        Without return value (void):
+            • The function performs a task but does not return any value.
+            • Declared with `void` return type.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Parameter Passing Mechanisms
+
+        Pass by Value:
+            • A copy of the argument is passed to the function.
+            • Changes made inside the function do NOT affect the original variable.
+
+            Example:
+                #include <stdio.h>
+                void class_count(int);
+                void class_count(int count)
+                {
+                    count = 60;
+                    printf("%d\n", count);    // 60
+                }
+                int main()
+                {
+                    int count = 65;
+                    class_count(count);       // pass by value
+                    printf("%d", count);      // 65 (unchanged)
+                    return 0;
+                }
+
+        Pass by Reference (using pointers):
+            • The address of the variable is passed.
+            • The function can modify the original variable directly.
+
+            Example:
+                #include <stdio.h>
+                void class_count(int*);
+                void class_count(int *count)
+                {
+                    *count = 60;
+                    printf("%d\n", *count);   // 60
+                }
+                int main()
+                {
+                    int count = 65;
+                    class_count(&count);      // pass by reference
+                    printf("%d", count);      // 60 (changed)
+                    return 0;
+                }
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Presence of Parameters
+
+        With Parameter:
+            • The function receives one or more values from the caller.
+            • Used when the function needs external data to operate.
+
+            Example:
+                #include <stdio.h>
+                void class_count(int);
+                void class_count(int count)
+                {
+                    printf("%d\n", count);
+                }
+                int main()
+                {
+                    int count = 65;
+                    class_count(count);       // argument passed
+                    return 0;
+                }
+
+        Without Parameter:
+            • The function takes no arguments.
+            • It performs a fixed task that does not depend on external input.
+
+            Example:
+                #include <stdio.h>
+                void greetings();
+                void greetings()
+                {
+                    printf("Good Morning\n");
+                }
+                int main()
+                {
+                    greetings();              // no argument
+                    return 0;
+                }
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Order of Definition and Declaration
+
+        • Definition before main() → Declaration is optional.
+            #include <stdio.h>
+            void greetings()
+            {
+                printf("Good Morning\n");
+            }
+            int main()
+            {
+                greetings();
+                return 0;
+            }
+
+        • Definition after main() → Declaration is mandatory.
+            #include <stdio.h>
+            void greetings();   // declaration
+            int main()
+            {
+                greetings();
+                return 0;
+            }
+            void greetings()
+            {
+                printf("Good Morning\n");
+            }
+
+        • Missing declaration when definition is after main() causes:
+            "implicit declaration of function" error.
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Summary of Function Types with Examples
+
+        1. Without return, without parameter
+           void greet() { printf("Hello"); }
+
+        2. Without return, with parameter
+           void display(int n) { printf("%d", n); }
+
+        3. With return, without parameter
+           int giveMeFive() { return 5; }
+
+        4. With return, with parameter
+           int add(int a, int b) { return a + b; }
+
+        5. Pass by reference (modifies original)
+           void swap(int *x, int *y) { int t = *x; *x = *y; *y = t; }
+
+    ────────────────────────────────────────────────────────────────────────────
+
+    Remember:
+        • Function Declaration  – Informs the compiler.
+        • Function Definition   – Implements the logic.
+        • Function Call         – Executes the function.
+        • Parameters are optional.
+        • Return type can be void or any valid C data type.
+        • Use pass‑by‑reference when the function must modify the original argument.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Sample Questions – Functions
+
+1. Function with Parameters and Return Value – Sum of Two Integers
+   Problem : Write a function `add` that takes two integers, returns their sum. Call it from main and print the result.
+   Solution:
+        #include <stdio.h>
+        int add(int a, int b) {
+            return a + b;
+        }
+        int main() {
+            int x = 10, y = 20;
+            int result = add(x, y);
+            printf("Sum = %d\n", result);
+            return 0;
+        }
+
+2. Function without Return (void) – Print Greeting
+   Problem : Write a function `greet` that takes no arguments and prints "Hello, World!". Call it from main.
+   Solution:
+        #include <stdio.h>
+        void greet() {
+            printf("Hello, World!\n");
+        }
+        int main() {
+            greet();
+            return 0;
+        }
+
+3. Pass by Value – Attempt to Modify (No Effect)
+   Problem : Write a function `modify` that takes an integer and tries to change its value to 100. Show that the original variable remains unchanged.
+   Solution:
+        #include <stdio.h>
+        void modify(int num) {
+            num = 100;
+            printf("Inside function: %d\n", num);
+        }
+        int main() {
+            int val = 50;
+            modify(val);
+            printf("In main: %d\n", val);   // still 50
+            return 0;
+        }
+
+4. Pass by Reference – Swap Two Numbers
+   Problem : Write a function `swap` that uses pointers to exchange the values of two integers. Demonstrate in main.
+   Solution:
+        #include <stdio.h>
+        void swap(int *a, int *b) {
+            int temp = *a;
+            *a = *b;
+            *b = temp;
+        }
+        int main() {
+            int x = 5, y = 10;
+            printf("Before: x=%d y=%d\n", x, y);
+            swap(&x, &y);
+            printf("After : x=%d y=%d\n", x, y);
+            return 0;
+        }
+
+5. Function with Array Parameter – Find Maximum Element
+   Problem : Write a function `findMax` that takes an integer array and its size, returns the maximum value.
+   Solution:
+        #include <stdio.h>
+        int findMax(int arr[], int size) {
+            int max = arr[0];
+            for (int i = 1; i < size; i++) {
+                if (arr[i] > max)
+                    max = arr[i];
+            }
+            return max;
+        }
+        int main() {
+            int data[] = {23, 45, 12, 67, 34};
+            int n = sizeof(data)/sizeof(data[0]);
+            printf("Maximum = %d\n", findMax(data, n));
+            return 0;
+        }
+
+6. Recursive Function – Factorial of a Number
+   Problem : Write a recursive function `factorial` that returns n!. Use it to print 5!.
+   Solution:
+        #include <stdio.h>
+        int factorial(int n) {
+            if (n <= 1) return 1;
+            return n * factorial(n - 1);
+        }
+        int main() {
+            int num = 5;
+            printf("%d! = %d\n", num, factorial(num));
+            return 0;
+        }
+
+7. Function Returning Multiple Values via Pointers – Min and Max
+   Problem : Write a function `minMax` that finds both minimum and maximum of an array and returns them through pointer arguments.
+   Solution:
+        #include <stdio.h>
+        void minMax(int arr[], int size, int *min, int *max) {
+            *min = *max = arr[0];
+            for (int i = 1; i < size; i++) {
+                if (arr[i] < *min) *min = arr[i];
+                if (arr[i] > *max) *max = arr[i];
+            }
+        }
+        int main() {
+            int nums[] = {4, 9, 1, 7, 3};
+            int n = 5, min, max;
+            minMax(nums, n, &min, &max);
+            printf("Min = %d, Max = %d\n", min, max);
+            return 0;
+        }
+
+8. Function with String Parameter – Count Vowels
+   Problem : Write a function `countVowels` that accepts a string and returns the number of vowels (a,e,i,o,u) in it.
+   Solution:
+        #include <stdio.h>
+        #include <string.h>
+        int countVowels(char str[]) {
+            int count = 0;
+            for (int i = 0; str[i] != '\0'; i++) {
+                char ch = str[i];
+                if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
+                    ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U')
+                    count++;
+            }
+            return count;
+        }
+        int main() {
+            char text[] = "Hello World";
+            printf("Vowels = %d\n", countVowels(text));
+            return 0;
+        }
+
+9. Function Prototype – Definition After Main
+   Problem : Write a program where the function `isEven` is defined after main. Use a prototype to avoid errors.
+   Solution:
+        #include <stdio.h>
+        int isEven(int);   // prototype
+        int main() {
+            int num = 7;
+            if (isEven(num))
+                printf("%d is even\n", num);
+            else
+                printf("%d is odd\n", num);
+            return 0;
+        }
+        int isEven(int n) {
+            return n % 2 == 0;
+        }
+
+10. Function that Modifies an Array (Passing Entire Array)
+    Problem : Write a function `doubleElements` that doubles every element of an integer array in-place. Print the modified array in main.
+    Solution:
+        #include <stdio.h>
+        void doubleElements(int arr[], int size) {
+            for (int i = 0; i < size; i++)
+                arr[i] *= 2;
+        }
+        int main() {
+            int values[] = {1, 2, 3, 4, 5};
+            int n = 5;
+            doubleElements(values, n);
+            for (int i = 0; i < n; i++)
+                printf("%d ", values[i]);
+            printf("\n");
+            return 0;
+        }
