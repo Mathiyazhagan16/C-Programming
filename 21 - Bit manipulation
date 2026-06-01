@@ -1,0 +1,597 @@
+
+Bit Manipulation in C – Complete Concept & Practice
+
+This document covers the fundamentals of bit manipulation in C, common bitwise
+operations, applications, and a set of solved problems ranging from easy to hard.
+
+───────────────────────────────────────────────────────────────────────────
+1.  INTRODUCTION
+───────────────────────────────────────────────────────────────────────────
+What:
+    Bit manipulation is the act of algorithmically manipulating individual bits
+    of a number. In C, it uses bitwise operators to perform operations directly
+    on binary representations.
+
+Why:
+    • Faster than arithmetic operations (CPUs handle bits natively)
+    • Saves memory (pack multiple flags into a single integer)
+    • Essential in low‑level programming, embedded systems, cryptography, and
+      competitive programming
+
+Where:
+    • Setting/clearing flags in registers
+    • Compression and encryption
+    • Efficient mathematical checks (odd/even, power of two, etc.)
+    • Graph algorithms (bitmask DP)
+    • Network protocols (bit fields)
+
+How:
+    Using the six bitwise operators: &, |, ^, ~, <<, >>
+
+───────────────────────────────────────────────────────────────────────────
+2.  BITWISE OPERATORS
+───────────────────────────────────────────────────────────────────────────
+Operator  Symbol  Meaning
+AND       &       Result bit = 1 if both bits are 1, else 0
+OR        |       Result bit = 1 if at least one bit is 1
+XOR       ^       Result bit = 1 if bits are different
+NOT       ~       Flips all bits (unary)
+Left Shift   <<   Shifts bits left, fills LSBs with 0 (multiply by 2^n)
+Right Shift  >>   Shifts bits right; for unsigned, fills with 0;
+                  for signed, behaviour is implementation‑defined
+                  (usually arithmetic shift on most compilers – fills with sign bit)
+
+Examples (8‑bit for clarity):
+    a = 5 (0000 0101), b = 9 (0000 1001)
+    a & b  → 0000 0001 = 1
+    a | b  → 0000 1101 = 13
+    a ^ b  → 0000 1100 = 12
+    ~a     → 1111 1010 (signed interpretation = -6 in two’s complement)
+    a << 1 → 0000 1010 = 10
+    b >> 2 → 0000 0010 = 2
+
+───────────────────────────────────────────────────────────────────────────
+3.  COMMON BIT OPERATIONS
+───────────────────────────────────────────────────────────────────────────
+Let n be an integer, k the bit position (0‑based from LSB).
+
+Check if k‑th bit is set:      n & (1 << k)  ≠ 0
+Set k‑th bit:                  n = n | (1 << k)
+Clear k‑th bit:                n = n & ~(1 << k)
+Toggle k‑th bit:               n = n ^ (1 << k)
+
+Least significant set bit (LSB):  n & -n   (gives value of lowest set bit)
+Remove LSB:                       n & (n-1)  (clears the lowest set bit)
+Count set bits:                   repeatedly clear LSB until 0
+Get bit at position:              (n >> k) & 1
+
+───────────────────────────────────────────────────────────────────────────
+4.  BIT MASKS
+───────────────────────────────────────────────────────────────────────────
+A mask is a sequence of bits used to select or modify specific bits.
+
+Examples:
+    Mask for lower 4 bits: 0x0F  (binary 0000 1111)
+    Extract lower 4 bits:  num & 0x0F
+    Set lower 4 bits:      num | 0x0F
+    Clear lower 4 bits:    num & ~0x0F
+    Toggle lower 4 bits:   num ^ 0x0F
+
+Creating masks:
+    Mask with n least significant bits set:  (1 << n) - 1
+    Mask with k‑th bit set:                 1 << k
+
+───────────────────────────────────────────────────────────────────────────
+5.  SHIFT OPERATORS IN DETAIL
+───────────────────────────────────────────────────────────────────────────
+Left Shift (<<): Always fills right side with 0.
+    Equivalent to multiplying by 2^n (if no overflow).
+
+Right Shift (>>):
+    • For unsigned types: logical shift (fill with 0).
+    • For signed types: may be arithmetic (fill with sign bit) or logical.
+      GCC uses arithmetic shift for signed integers.
+    Safe practice: use unsigned when bit manipulation is intended.
+
+───────────────────────────────────────────────────────────────────────────
+6.  BIT FIELDS
+───────────────────────────────────────────────────────────────────────────
+Bit fields allow you to pack multiple small members into a single integer.
+    struct {
+        unsigned int flag1 : 1;
+        unsigned int flag2 : 1;
+        unsigned int mode  : 3;
+    } status;
+Size of status is typically 4 bytes, but the compiler packs the bits.
+Limitations: non‑portable, no address‑of, subject to endianness.
+
+───────────────────────────────────────────────────────────────────────────
+7.  ENDIANNESS AND BIT MANIPULATION
+───────────────────────────────────────────────────────────────────────────
+Endianness affects byte order, but bitwise operations work on values, not on
+memory layout. However, when accessing individual bytes of an integer via char*
+pointers, endianness matters. Usually, bit manipulations are endian‑agnostic.
+
+───────────────────────────────────────────────────────────────────────────
+8.  APPLICATIONS AND TRICKS
+───────────────────────────────────────────────────────────────────────────
+• Check if n is power of two:          n && !(n & (n-1))
+• Check if n is even:                  (n & 1) == 0
+• Swap two numbers without temp:       a ^= b; b ^= a; a ^= b;
+• Multiply/divide by 2:                n << 1, n >> 1
+• Compute 2^n:                         1 << n
+• Set all bits to 1 in a given width:  (1 << n) - 1
+• Turn off rightmost 1:                n & (n-1)
+• Isolate rightmost 1:                 n & -n
+• Generate all subsets (bitmask iteration): for(int mask=0; mask < (1<<n); mask++)
+
+───────────────────────────────────────────────────────────────────────────
+9.  SAMPLE QUESTIONS (EASY → HARD)
+───────────────────────────────────────────────────────────────────────────
+Each question is followed by a complete C solution.
+
+───────────────────────────────────────────────────────────────────────────
+[EASY]
+
+Q1. Check if a given integer is even or odd using bitwise operators.
+    #include <stdio.h>
+    int main() {
+        int n;
+        scanf("%d", &n);
+        if (n & 1)
+            printf("Odd\n");
+        else
+            printf("Even\n");
+        return 0;
+    }
+
+Q2. Toggle the k‑th bit of a number.
+    Input: n = 5 (0101), k = 1 → toggle bit1 → 0111 = 7
+    #include <stdio.h>
+    int main() {
+        int n, k;
+        scanf("%d %d", &n, &k);
+        n = n ^ (1 << k);
+        printf("%d\n", n);
+        return 0;
+    }
+
+Q3. Count the number of set bits (Brian Kernighan’s algorithm).
+    #include <stdio.h>
+    int main() {
+        int n, count = 0;
+        scanf("%d", &n);
+        while (n) {
+            n &= (n - 1);
+            count++;
+        }
+        printf("%d\n", count);
+        return 0;
+    }
+
+Q4. Check if a number is a power of two.
+    #include <stdio.h>
+    int main() {
+        int n;
+        scanf("%d", &n);
+        if (n > 0 && !(n & (n - 1)))
+            printf("Yes\n");
+        else
+            printf("No\n");
+        return 0;
+    }
+
+Q5. Swap two numbers without using a temporary variable.
+    #include <stdio.h>
+    int main() {
+        int a, b;
+        scanf("%d %d", &a, &b);
+        a ^= b;
+        b ^= a;
+        a ^= b;
+        printf("%d %d\n", a, b);
+        return 0;
+    }
+
+───────────────────────────────────────────────────────────────────────────
+[EASY‑MEDIUM]
+
+Q6. Clear the lowest set bit of a number.
+    #include <stdio.h>
+    int main() {
+        int n;
+        scanf("%d", &n);
+        n = n & (n - 1);
+        printf("%d\n", n);
+        return 0;
+    }
+
+Q7. Get the value of the lowest set bit.
+    #include <stdio.h>
+    int main() {
+        int n;
+        scanf("%d", &n);
+        int lsb = n & -n;
+        printf("Lowest set bit value: %d\n", lsb);
+        return 0;
+    }
+
+Q8. Count number of bits to be flipped to convert A to B.
+    #include <stdio.h>
+    int main() {
+        int a, b, count = 0;
+        scanf("%d %d", &a, &b);
+        int x = a ^ b;
+        while (x) {
+            x &= x - 1;
+            count++;
+        }
+        printf("%d\n", count);
+        return 0;
+    }
+
+Q9. Set the k‑th bit and print the new number.
+    #include <stdio.h>
+    int main() {
+        int n, k;
+        scanf("%d %d", &n, &k);
+        n |= (1 << k);
+        printf("%d\n", n);
+        return 0;
+    }
+
+Q10. Check if a number is a power of four.
+    (Power of four numbers have only one set bit and it is at an even position)
+    #include <stdio.h>
+    int main() {
+        int n;
+        scanf("%d", &n);
+        // Power of two check + the single bit must be in an even position
+        if (n > 0 && !(n & (n - 1)) && (n & 0xAAAAAAAA) == 0)
+            printf("Yes\n");
+        else
+            printf("No\n");
+        return 0;
+    }
+
+───────────────────────────────────────────────────────────────────────────
+[MEDIUM]
+
+Q11. Reverse the bits of a 32‑bit unsigned integer.
+    #include <stdio.h>
+    #include <stdint.h>
+    int main() {
+        uint32_t n, rev = 0;
+        scanf("%u", &n);
+        for (int i = 0; i < 32; i++) {
+            rev <<= 1;
+            rev |= (n & 1);
+            n >>= 1;
+        }
+        printf("%u\n", rev);
+        return 0;
+    }
+
+Q12. Find the single non‑repeating element in an array where every other element
+    appears twice. (Use XOR: all duplicates cancel out)
+    #include <stdio.h>
+    int main() {
+        int n, res = 0;
+        scanf("%d", &n);
+        int arr[n];
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &arr[i]);
+            res ^= arr[i];
+        }
+        printf("%d\n", res);
+        return 0;
+    }
+
+Q13. Given an array where every element occurs three times except one, find that
+    single element. (Use bitwise counting modulo 3)
+    #include <stdio.h>
+    int main() {
+        int n;
+        scanf("%d", &n);
+        int arr[n];
+        for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
+        int ones = 0, twos = 0;
+        for (int i = 0; i < n; i++) {
+            ones = (ones ^ arr[i]) & ~twos;
+            twos = (twos ^ arr[i]) & ~ones;
+        }
+        printf("%d\n", ones);
+        return 0;
+    }
+
+Q14. Generate all subsets of a set of N elements using bitmask iteration.
+    #include <stdio.h>
+    int main() {
+        char set[] = {'A', 'B', 'C'};
+        int n = sizeof(set)/sizeof(set[0]);
+        int total = 1 << n;
+        for (int mask = 0; mask < total; mask++) {
+            printf("{ ");
+            for (int j = 0; j < n; j++) {
+                if (mask & (1 << j))
+                    printf("%c ", set[j]);
+            }
+            printf("}\n");
+        }
+        return 0;
+    }
+
+Q15. Count total number of set bits from 1 to N.
+    (Use DP or pattern; here’s a simple O(log N) method)
+    #include <stdio.h>
+    int countSetBits(int n) {
+        int count = 0;
+        for (int i = 1; i <= n; i <<= 1) {
+            int complete_pairs = (n + 1) / (i << 1);
+            count += complete_pairs * i;
+            int remainder = (n + 1) % (i << 1);
+            count += (remainder > i) ? (remainder - i) : 0;
+        }
+        return count;
+    }
+    int main() {
+        int n;
+        scanf("%d", &n);
+        printf("%d\n", countSetBits(n));
+        return 0;
+    }
+
+───────────────────────────────────────────────────────────────────────────
+[MEDIUM‑HARD]
+
+Q16. Determine the parity (even/odd number of set bits) of a 32‑bit integer
+    without counting all bits (XOR folding).
+    #include <stdio.h>
+    int main() {
+        unsigned int n;
+        scanf("%u", &n);
+        n ^= n >> 16;
+        n ^= n >> 8;
+        n ^= n >> 4;
+        n ^= n >> 2;
+        n ^= n >> 1;
+        if (n & 1)
+            printf("Odd parity\n");
+        else
+            printf("Even parity\n");
+        return 0;
+    }
+
+Q17. Compute the next higher number with the same number of set bits.
+    #include <stdio.h>
+    unsigned int nextHigher(unsigned int n) {
+        unsigned int c = n & -n;
+        unsigned int r = n + c;
+        return r | (((n ^ r) >> 2) / c);
+    }
+    int main() {
+        unsigned int n;
+        scanf("%u", &n);
+        printf("%u\n", nextHigher(n));
+        return 0;
+    }
+
+Q18. Rotate bits of a 32‑bit number left by d positions.
+    #include <stdio.h>
+    #include <stdint.h>
+    int main() {
+        uint32_t n, d;
+        scanf("%u %u", &n, &d);
+        d %= 32;
+        uint32_t rotated = (n << d) | (n >> (32 - d));
+        printf("%u\n", rotated);
+        return 0;
+    }
+
+Q19. Calculate the Hamming distance between two integers (number of differing bits).
+    Already done in Q8 (count of set bits in XOR). So:
+    #include <stdio.h>
+    int main() {
+        int a, b;
+        scanf("%d %d", &a, &b);
+        int diff = a ^ b, dist = 0;
+        while (diff) {
+            dist++;
+            diff &= diff - 1;
+        }
+        printf("%d\n", dist);
+        return 0;
+    }
+
+Q20. Find the missing number in an array of size N containing numbers 0..N
+    (one missing). XOR all indices and values.
+    #include <stdio.h>
+    int main() {
+        int n;
+        scanf("%d", &n); // n = highest number, size = n
+        int missing = 0;
+        for (int i = 0; i < n; i++) {
+            int x;
+            scanf("%d", &x);
+            missing ^= i ^ x;
+        }
+        missing ^= n; // because array size is n, indexes 0..n-1, n is missing
+        printf("%d\n", missing);
+        return 0;
+    }
+
+───────────────────────────────────────────────────────────────────────────
+[HARD]
+
+Q21. Find two non‑repeating elements in an array where all others appear twice.
+    (Use XOR, then separate by a set bit)
+    #include <stdio.h>
+    void findTwoUnique(int arr[], int n) {
+        int xor_all = 0;
+        for (int i = 0; i < n; i++) xor_all ^= arr[i];
+        int set_bit = xor_all & -xor_all; // rightmost set bit
+        int a = 0, b = 0;
+        for (int i = 0; i < n; i++) {
+            if (arr[i] & set_bit)
+                a ^= arr[i];
+            else
+                b ^= arr[i];
+        }
+        printf("%d %d\n", a, b);
+    }
+    int main() {
+        int n;
+        scanf("%d", &n);
+        int arr[n];
+        for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
+        findTwoUnique(arr, n);
+        return 0;
+    }
+
+Q22. Count total set bits in all numbers from 1 to N using memoized recursion.
+    (Alternative to Q15, another approach)
+    #include <stdio.h>
+    int countSetBits(int n) {
+        if (n <= 0) return 0;
+        int m = 0;
+        while ((1 << (m + 1)) <= n) m++; // highest power of 2 ≤ n
+        int pow2 = 1 << m;
+        return (pow2 * m / 2) + (n - pow2 + 1) + countSetBits(n - pow2);
+    }
+    int main() {
+        int n;
+        scanf("%d", &n);
+        printf("%d\n", countSetBits(n));
+        return 0;
+    }
+
+Q23. Compute the bitwise AND of all numbers in range [L, R].
+    (Find common prefix of L and R)
+    #include <stdio.h>
+    int main() {
+        int L, R;
+        scanf("%d %d", &L, &R);
+        while (R > L) {
+            R &= (R - 1);
+        }
+        printf("%d\n", R);
+        return 0;
+    }
+
+Q24. Swap two nibbles (4‑bit groups) in a byte.
+    #include <stdio.h>
+    int main() {
+        unsigned char byte;
+        scanf("%hhu", &byte);
+        byte = (byte << 4) | (byte >> 4);
+        printf("%d\n", byte);
+        return 0;
+    }
+
+Q25. Generate Gray code for n bits.
+    (1 << n codes, each successive code differs by one bit)
+    #include <stdio.h>
+    int main() {
+        int n;
+        scanf("%d", &n);
+        int total = 1 << n;
+        for (int i = 0; i < total; i++) {
+            int gray = i ^ (i >> 1);
+            // print binary representation
+            for (int j = n - 1; j >= 0; j--)
+                printf("%d", (gray >> j) & 1);
+            printf("\n");
+        }
+        return 0;
+    }
+
+Q26. Check if a number is a power of 8.
+    (Same as power of two + set bit position is multiple of 3)
+    #include <stdio.h>
+    int main() {
+        int n;
+        scanf("%d", &n);
+        if (n > 0 && !(n & (n - 1))) {
+            int pos = 0;
+            while (n > 1) {
+                n >>= 1;
+                pos++;
+            }
+            if (pos % 3 == 0)
+                printf("Yes\n");
+            else
+                printf("No\n");
+        } else
+            printf("No\n");
+        return 0;
+    }
+
+Q27. Find the majority element (appearing > n/2) using bit counting.
+    #include <stdio.h>
+    int main() {
+        int n;
+        scanf("%d", &n);
+        int arr[n];
+        for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
+        int majority = 0;
+        for (int i = 0; i < 32; i++) {
+            int count = 0;
+            for (int j = 0; j < n; j++) {
+                if (arr[j] & (1 << i)) count++;
+            }
+            if (count > n / 2)
+                majority |= (1 << i);
+        }
+        printf("%d\n", majority);
+        return 0;
+    }
+
+Q28. Convert a binary string to integer using bit operations.
+    #include <stdio.h>
+    int main() {
+        char bin[65];
+        scanf("%s", bin);
+        int num = 0;
+        for (int i = 0; bin[i]; i++) {
+            num <<= 1;
+            if (bin[i] == '1') num |= 1;
+        }
+        printf("%d\n", num);
+        return 0;
+    }
+
+Q29. Check if binary representation of a number is palindrome.
+    #include <stdio.h>
+    int main() {
+        unsigned int n;
+        scanf("%u", &n);
+        unsigned int rev = 0, temp = n;
+        while (temp) {
+            rev <<= 1;
+            rev |= (temp & 1);
+            temp >>= 1;
+        }
+        if (n == rev)
+            printf("Yes\n");
+        else
+            printf("No\n");
+        return 0;
+    }
+
+Q30. Count trailing zeros in an integer (using __builtin_ctz if allowed, or own)
+    #include <stdio.h>
+    int main() {
+        int n;
+        scanf("%d", &n);
+        if (n == 0) {
+            printf("32\n"); // assume 32‑bit
+            return 0;
+        }
+        int count = 0;
+        while ((n & 1) == 0) {
+            n >>= 1;
+            count++;
+        }
+        printf("%d\n", count);
+        return 0;
+    }
