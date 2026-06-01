@@ -1,1 +1,703 @@
 
+Pointer
+
+Definition
+    * A pointer is a variable that stores the memory address of another variable.
+    * It “points” to a location in memory where data resides.
+    * On a 64‑bit system, a pointer always occupies 8 bytes (4 bytes on 32‑bit).
+
+Declaration
+    * Syntax          :  data_type *pointer_name;
+    * Example         :  int *p;          // p can hold the address of an int
+    * & (address‑of)  :  gives the address of a variable.
+    * * (dereference) :  accesses the value stored at the address held by the pointer.
+
+Memory & Address
+    * A normal variable has two properties: its address and its value.
+    * A pointer variable has two properties: its own address and the address it stores.
+      int num = 10;
+      int *p = &num;
+
+         p      →  address of num           (e.g., 0x7ffe14c2ee54)
+        *p      →  value at that address    (10)
+        &p      →  address of p itself      (e.g., 0x7ffe14c2e200)
+
+Pointer Arithmetic
+    * p + n  moves the pointer forward by  n * sizeof(*p)  bytes.
+    * p++    points to the next element of the base type.
+    * Valid operations  :  pointer + int, pointer – int, pointer – pointer (same array).
+    * Array indexing is pointer arithmetic  :  arr[i]   ≡  *(arr + i).
+
+Pointers and Arrays
+    * The name of an array acts as a constant pointer to its first element.
+         int arr[5];
+         arr    == &arr[0]
+         arr+i  == &arr[i]
+         *(arr+i) == arr[i]
+    * Can traverse an array using a pointer:
+         int *p = arr;
+         for(i = 0; i < n; i++)
+             printf("%d ", *(p + i));
+    * sizeof(array)  gives total bytes of the array;
+      sizeof(pointer) gives only the size of the pointer variable (e.g., 8 bytes).
+
+Types of Pointers
+    * Null pointer       : points nowhere (int *p = NULL;). Safe to check before use.
+    * Void pointer       : (void *) can store the address of any data type;
+                           must be explicitly cast before dereferencing.
+    * Wild pointer       : uninitialised pointer; dereferencing causes undefined behaviour.
+    * Dangling pointer   : points to memory that has been freed or has gone out of scope.
+    * Pointer to pointer : stores the address of another pointer.
+         int **q = &p;   // q → p → data
+
+Pointers and Functions
+    * Pass‑by‑reference : send the address of a variable to allow the function to modify it.
+         void swap(int *a, int *b) 
+         {
+             int temp = *a;
+             *a = *b;
+             *b = temp;
+         }
+    * When an array is passed, only the base address is sent (the function receives a pointer).
+    * Returning a pointer from a function is possible, but never return the address of a local variable.
+
+Pointers and Strings
+    * Strings in C are null‑terminated character arrays.
+         char *ptr = "Hello";      // ptr points to a read‑only string literal
+         char str[] = "Hello";     // str is a modifiable copy of the literal
+    * Traversal:  while(*ptr) { /* use *ptr */ ptr++; }
+
+Dynamic Memory Allocation
+    * Functions in <stdlib.h>:  malloc, calloc, realloc, free.
+         int *p = (int*)malloc(n * sizeof(int));
+         // use p …
+         free(p);
+    * Always check the returned pointer against NULL.
+    * Forgetting to free leads to memory leaks.
+
+Advantages
+    * Efficient handling of arrays and strings.
+    * Enables dynamic memory management.
+    * Allows functions to modify actual arguments.
+    * Foundation for complex data structures (linked lists, trees, etc.).
+
+Limitations
+    * Uninitialised or dangling pointers cause crashes / undefined behaviour.
+    * Manual memory management risks memory leaks.
+    * No automatic bounds checking on pointer arithmetic.
+    * Syntax can be confusing and error‑prone.
+
+
+
+Sample Questions – Pointers
+
+1. Basic Pointer Assignment
+   Problem : Declare an integer variable, assign it a value, then declare a pointer that holds its address.
+            Print the address stored in the pointer, the value using the pointer, and the address of the pointer itself.
+   Solution:
+        int num = 42;
+        int *ptr = &num;
+
+        printf("Value of num         : %d\n", num);
+        printf("Address of num       : %p\n", (void*)&num);
+        printf("Pointer ptr stores   : %p\n", (void*)ptr);
+        printf("Value via *ptr       : %d\n", *ptr);
+        printf("Address of ptr itself: %p\n", (void*)&ptr);
+
+2. Double Pointer
+   Problem : Create an integer, a pointer to it, and a pointer to that pointer. Access the original value using the double pointer.
+   Solution:
+        int x = 99;
+        int *p  = &x;
+        int **q = &p;
+
+        printf("%d\n", **q);   // prints 99
+
+3. Pointer Arithmetic – Traversing an Array
+   Problem : Create an array of 5 integers. Use a pointer to traverse and print all elements without using array subscript [ ].
+   Solution:
+        int arr[] = {10, 20, 30, 40, 50};
+        int *p = arr;
+        for(int i = 0; i < 5; i++) {
+            printf("%d ", *(p + i));
+        }
+
+4. Input into an Array Using a Pointer
+   Problem : Accept 5 integers into an array using a pointer (instead of &arr[i]).
+   Solution:
+        int arr[5];
+        int *p = arr;
+        for(int i = 0; i < 5; i++) {
+            scanf("%d", p + i);   // equivalent to &arr[i]
+        }
+        for(int i = 0; i < 5; i++) {
+            printf("%d ", *(p + i));
+        }
+
+5. Sum of Array Elements with a Pointer
+   Problem : Calculate the sum of an array’s elements by iterating with a pointer.
+   Solution:
+        int data[] = {5, 10, 15, 20};
+        int sum = 0;
+        int *p = data;
+        for(int i = 0; i < 4; i++) {
+            sum += *(p + i);
+        }
+        printf("Sum = %d\n", sum);
+
+6. Swap Two Numbers Using Pointers (Function)
+   Problem : Write a function that swaps two integers. Call it from main and verify.
+   Solution:
+        void swap(int *a, int *b) {
+            int temp = *a;
+            *a = *b;
+            *b = temp;
+        }
+        int main() {
+            int x = 10, y = 20;
+            swap(&x, &y);
+            printf("x = %d, y = %d\n", x, y);
+            return 0;
+        }
+
+7. Array Modification via Pointer in a Function
+   Problem : Write a function that doubles every element of an array. Pass the array and its size.
+   Solution:
+        void doubleElements(int *arr, int n) {
+            for(int i = 0; i < n; i++) {
+                *(arr + i) = *(arr + i) * 2;
+            }
+        }
+        int main() {
+            int vals[] = {1, 2, 3, 4, 5};
+            doubleElements(vals, 5);
+            for(int i = 0; i < 5; i++) printf("%d ", vals[i]);
+            return 0;
+        }
+
+8. Dynamic Memory – Create an Array of User‑Defined Size
+   Problem : Read the size N from the user, dynamically allocate memory for N integers, fill with first N squares, and print.
+   Solution:
+        int n;
+        scanf("%d", &n);
+        int *arr = (int*)malloc(n * sizeof(int));
+        if(arr == NULL) {
+            printf("Memory allocation failed\n");
+            return 1;
+        }
+        for(int i = 0; i < n; i++) {
+            *(arr + i) = (i+1) * (i+1);   // square
+        }
+        for(int i = 0; i < n; i++) {
+            printf("%d ", *(arr + i));
+        }
+        free(arr);
+
+9. String Length Using a Pointer
+   Problem : Write a function that returns the length of a string by using a pointer to traverse it.
+   Solution:
+        int myStrlen(char *str) {
+            int count = 0;
+            while(*str != '\0') {
+                count++;
+                str++;
+            }
+            return count;
+        }
+        // Usage: printf("%d\n", myStrlen("Hello"));
+
+10. Reverse a String in‑place Using Pointers
+    Problem : Reverse a given character array without using another array. Use two pointers (start and end).
+    Solution:
+        void reverse(char *str) {
+            int len = strlen(str);
+            char *start = str;
+            char *end = str + len - 1;
+            while(start < end) {
+                char temp = *start;
+                *start = *end;
+                *end = temp;
+                start++;
+                end--;
+            }
+        }
+        // char s[] = "abcd"; reverse(s); -> "dcba"
+
+11. Pointer to an Array of Pointers (Array of Strings)
+    Problem : Create an array of pointers to strings (char *names[]) and print each name using pointer notation.
+    Solution:
+        char *fruits[] = {"Apple", "Banana", "Cherry", "Date"};
+        int n = sizeof(fruits)/sizeof(fruits[0]);
+        for(int i = 0; i < n; i++) {
+            printf("%s\n", *(fruits + i));   // fruits[i]
+            // or traverse each character
+        }
+
+12. Function Pointer – Callback Example
+    Problem : Write a function `operate(int a, int b, int (*func)(int, int))` that applies a given operation.
+              Provide `add` and `multiply` as callbacks.
+    Solution:
+        int add(int a, int b)      { return a + b; }
+        int multiply(int a, int b) { return a * b; }
+
+        int operate(int a, int b, int (*op)(int, int)) {
+            return op(a, b);
+        }
+        int main() {
+            printf("Add : %d\n", operate(10, 20, add));
+            printf("Mul : %d\n", operate(10, 20, multiply));
+            return 0;
+        }
+
+13. 2D Array Traversal with a Pointer
+    Problem : Print all elements of a 3×3 matrix using a single pointer. (Matrix stored in row‑major order)
+    Solution:
+        int mat[3][3] = {{1,2,3}, {4,5,6}, {7,8,9}};
+        int *p = &mat[0][0];   // pointer to the first element
+        for(int i = 0; i < 9; i++) {
+            printf("%d ", *(p + i));
+        }
+
+14. Dangling Pointer Prevention
+    Problem : Allocate memory, assign it to a pointer, free the memory, and immediately set the pointer to NULL to avoid a dangling pointer.
+    Solution:
+        int *p = (int*)malloc(sizeof(int));
+        *p = 100;
+        free(p);
+        p = NULL;   // now p is not dangling
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Dynamic Memory Allocation
+
+Definition
+    * Dynamic Memory Allocation (DMA) allows a program to request memory during runtime.
+    * Memory is allocated from the heap segment.
+    * The programmer is responsible for releasing the memory when it is no longer needed.
+    * Contrasts with static/automatic memory (stack), which is handled automatically at compile time.
+
+Need
+    * When the exact amount of memory required is not known until runtime.
+    * To create data structures that can grow or shrink (linked lists, trees, dynamic arrays).
+    * Memory persists beyond the scope of the function where it was allocated (until freed).
+
+Memory Layout of a C Program
+    * Text / Code segment    : compiled machine instructions (read-only).
+    * Initialized data segment: global/static variables with explicit initial values (e.g., int a = 10;).
+    * Uninitialized data (BSS): global/static variables without initializers (e.g., int a;); zeroed on startup.
+    * Stack                   : local variables, function call frames. Managed automatically (LIFO).
+    * Heap                    : memory allocated at runtime via malloc, calloc, realloc. Managed manually.
+
+Stack vs Heap
+    * Stack                          Heap
+      – Automatic allocation          – Manual allocation (malloc, etc.)
+      – Fast access                   – Slower access
+      – Limited size                  – Larger memory pool
+      – No fragmentation              – Can become fragmented
+      – Lifetime tied to scope        – Lifetime controlled by programmer
+      – Direct access (variable name) – Access only through pointers
+
+Dynamic Memory Functions (stdlib.h)
+    * malloc(size_t size)
+        – Allocates 'size' bytes of uninitialised memory.
+        – Returns void*; cast to desired type.
+        – On failure returns NULL.
+        – Syntax: ptr = (type*)malloc(count * sizeof(type));
+
+    * calloc(size_t count, size_t size)
+        – Allocates memory for 'count' elements, each of 'size' bytes.
+        – Initialises all bytes to zero.
+        – Returns void*; cast to desired type.
+        – Syntax: ptr = (type*)calloc(count, sizeof(type));
+
+    * realloc(void *ptr, size_t new_size)
+        – Resizes previously allocated memory.
+        – May move the block to a new location.
+        – Contents up to min(old_size, new_size) are preserved.
+        – If ptr is NULL, behaves like malloc(new_size).
+        – If new_size is 0, behaviour is implementation-defined (may free or not; better to use free).
+        – Syntax: ptr = (type*)realloc(ptr, new_count * sizeof(type));
+
+    * free(void *ptr)
+        – Releases memory previously allocated by malloc/calloc/realloc.
+        – After freeing, set the pointer to NULL to avoid dangling pointer.
+        – Never free memory that has not been dynamically allocated.
+        – Never free the same block twice.
+
+Rules for Safe DMA Usage
+    * Always check the returned pointer against NULL before using.
+    * Initialise allocated memory (calloc does this automatically; malloc does not).
+    * After free(ptr), set ptr = NULL; to prevent accidental use.
+    * Do not dereference a pointer after it has been freed (dangling pointer).
+    * Do not free the same memory twice; double free causes undefined behaviour.
+    * Always free memory when it is no longer needed to avoid memory leaks.
+    * Do not use memory beyond the allocated size (buffer overflow).
+
+Advantages
+    * Flexible memory usage: allocate exactly what is needed at runtime.
+    * Enables complex and dynamic data structures.
+    * Data can outlive the creating function.
+    * Reduces wastage when maximum needed size is unpredictable.
+
+Limitations
+    * Manual management is error-prone (leaks, double frees, dangling pointers).
+    * Slower than stack allocation.
+    * Fragmentation may lead to inefficient memory use.
+    * Forgetting to free leads to memory exhaustion in long-running programs.
+
+
+
+Sample Questions – Dynamic Memory Allocation
+
+1. Basic malloc and free
+   Problem : Allocate memory for a single integer, store a value, print it, and free the memory.
+   Solution:
+        int *ptr = (int*)malloc(sizeof(int));
+        if (ptr == NULL) {
+            printf("Allocation failed\n");
+            return 1;
+        }
+        *ptr = 100;
+        printf("Value : %d\n", *ptr);
+        free(ptr);
+        ptr = NULL;
+
+2. Dynamic 1D Array (User‑Defined Size)
+   Problem : Read size N from user, allocate memory for N integers, fill with squares of 1..N, print them, then free.
+   Solution:
+        int n;
+        scanf("%d", &n);
+        int *arr = (int*)malloc(n * sizeof(int));
+        if (arr == NULL) {
+            printf("Memory error\n");
+            return 1;
+        }
+        for (int i = 0; i < n; i++) {
+            arr[i] = (i+1) * (i+1);   // or *(arr+i)
+        }
+        for (int i = 0; i < n; i++) {
+            printf("%d ", arr[i]);
+        }
+        free(arr);
+        arr = NULL;
+
+3. calloc – Zero Initialisation
+   Problem : Allocate an array of 5 integers using calloc. Verify that all elements are zero without explicit initialisation.
+   Solution:
+        int *arr = (int*)calloc(5, sizeof(int));
+        if (arr == NULL) return 1;
+        for (int i = 0; i < 5; i++)
+            printf("%d ", arr[i]);   // prints 0 0 0 0 0
+        free(arr);
+
+4. realloc – Growing an Array
+   Problem : Allocate memory for 3 integers, fill them. Then resize to hold 6 integers, keeping the original values. Add 3 more values and print.
+   Solution:
+        int *arr = (int*)malloc(3 * sizeof(int));
+        arr[0] = 1; arr[1] = 2; arr[2] = 3;
+        arr = (int*)realloc(arr, 6 * sizeof(int));
+        if (arr == NULL) return 1;
+        arr[3] = 4; arr[4] = 5; arr[5] = 6;
+        for (int i = 0; i < 6; i++) printf("%d ", arr[i]);
+        free(arr);
+
+5. String Duplication (Custom strdup)
+   Problem : Read a string, dynamically allocate enough memory for a copy, copy it, and print the duplicate.
+   Solution:
+        char original[100];
+        scanf("%s", original);
+        int len = strlen(original);
+        char *copy = (char*)malloc(len + 1);
+        if (copy == NULL) return 1;
+        strcpy(copy, original);
+        printf("Copy : %s\n", copy);
+        free(copy);
+
+6. Sum of Dynamic Array Elements
+   Problem : Allocate memory for an array of floats of size N, read values, compute sum, print and free.
+   Solution:
+        int n;
+        scanf("%d", &n);
+        float *arr = (float*)malloc(n * sizeof(float));
+        if (arr == NULL) return 1;
+        float sum = 0;
+        for (int i = 0; i < n; i++) {
+            scanf("%f", &arr[i]);
+            sum += arr[i];
+        }
+        printf("Sum = %.2f\n", sum);
+        free(arr);
+
+7. Memory Leak Prevention
+   Problem : Write a program that allocates memory inside a loop. Show the correct way to free memory each iteration to prevent leaks.
+   Solution:
+        for (int i = 0; i < 3; i++) {
+            int *temp = (int*)malloc(10 * sizeof(int));
+            if (temp == NULL) return 1;
+            // use temp ...
+            temp[0] = i;
+            free(temp);   // free inside loop
+        }
+        // No leak because each allocation is freed before the next iteration.
+
+8. Dangling Pointer Prevention
+   Problem : Demonstrate how a dangling pointer is created and how to avoid it by setting pointer to NULL after free.
+   Solution:
+        int *p = (int*)malloc(sizeof(int));
+        *p = 42;
+        free(p);
+        p = NULL;          // safe, no dangling
+        // if (p != NULL) printf("%d", *p);  // won't execute, no crash.
+
+9. Dynamic 2D Array (Array of Pointers)
+   Problem : Allocate a 2D integer matrix of R rows and C columns, fill with row*col product, print, and free.
+   Solution:
+        int R = 3, C = 4;
+        int **mat = (int**)malloc(R * sizeof(int*));
+        if (mat == NULL) return 1;
+        for (int i = 0; i < R; i++) {
+            mat[i] = (int*)malloc(C * sizeof(int));
+            if (mat[i] == NULL) return 1;
+            for (int j = 0; j < C; j++) {
+                mat[i][j] = i * j;
+            }
+        }
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) printf("%2d ", mat[i][j]);
+            printf("\n");
+        }
+        for (int i = 0; i < R; i++) free(mat[i]);
+        free(mat);
+
+10. realloc to Shrink
+    Problem : Allocate 10 integers with values 0..9, then shrink to 5 using realloc. Print the first 5 elements (still valid).
+    Solution:
+        int *arr = (int*)malloc(10 * sizeof(int));
+        for (int i = 0; i < 10; i++) arr[i] = i;
+        arr = (int*)realloc(arr, 5 * sizeof(int));
+        if (arr == NULL) return 1;
+        for (int i = 0; i < 5; i++) printf("%d ", arr[i]);  // 0 1 2 3 4
+        free(arr);
+
+11. NULL Check and Double Free Avoidance
+    Problem : Write a safe free wrapper that checks for NULL and sets the pointer to NULL after freeing.
+    Solution:
+        void safe_free(void **ptr) {
+            if (ptr != NULL && *ptr != NULL) {
+                free(*ptr);
+                *ptr = NULL;
+            }
+        }
+        // Usage: safe_free((void**)&p);
+
+12. Dynamic Array of Structures
+    Problem : Define a Student structure with name and roll. Allocate memory for N students, read details, print, and free.
+    Solution:
+        typedef struct {
+            char name[50];
+            int roll;
+        } Student;
+        int n;
+        scanf("%d", &n);
+        Student *s = (Student*)malloc(n * sizeof(Student));
+        if (s == NULL) return 1;
+        for (int i = 0; i < n; i++) {
+            scanf("%s %d", s[i].name, &s[i].roll);
+        }
+        for (int i = 0; i < n; i++) {
+            printf("%s %d\n", s[i].name, s[i].roll);
+        }
+        free(s);
+
+13. Detect and Avoid Memory Leak (Valgrind Hint)
+    Problem : Write a small program that purposely forgets to free memory, then correct it.
+    Solution (incorrect):
+        int *p = (int*)malloc(10*sizeof(int));
+        p[0] = 5;
+        // missing free(p);  -> memory leak
+    Solution (correct):
+        int *p = (int*)malloc(10*sizeof(int));
+        p[0] = 5;
+        free(p);
+        p = NULL;
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Factorial of N (Big Integer) Using Character Array and DMA
+
+    Problem:
+        Given an integer N (0 ≤ N ≤ 10000), compute N! (factorial) exactly.
+        The result is too large for standard integer types, so store it as a
+        string of digits in a dynamically allocated character array. Print the
+        final string.
+
+        Example: N = 500 produces a very long output (over 1000 digits).
+
+        Why DMA?
+            * The number of digits grows with N (about 35660 digits for 10000!).
+            * Using realloc() the array expands only when a new digit is needed.
+
+    Approach:
+        * Use a char array `result` to store digits in reverse order
+          (least significant digit first). Each cell holds a char '0'…'9'.
+        * Start with result[0] = '1' (size = 1).
+        * For multiplier from 2 to N:
+            - Multiply every existing digit by multiplier, add carry.
+            - Update digit to (product % 10) and carry = product / 10.
+            - When carry remains after the last digit, realloc to add more
+              digits and store the carry digits one by one.
+        * Print the array from the last index down to 0 to get the correct order.
+        * Free memory after use.
+
+    Solution Code:
+        #include <stdio.h>
+        #include <stdlib.h>
+
+        int main() {
+            int range, size = 1, carry = 0;
+            scanf("%d", &range);
+            if (range < 0) return 1;
+
+            char *result = (char *)malloc(size);
+            if (!result) return 1;
+            result[0] = '1';
+
+            for (int multiplier = 2; multiplier <= range; multiplier++) {
+                carry = 0;
+                for (int i = 0; i < size; i++) {
+                    int product = multiplier * (result[i] - '0') + carry;
+                    result[i] = (product % 10) + '0';
+                    carry = product / 10;
+                }
+                while (carry > 0) {
+                    size++;
+                    char *temp = realloc(result, size);
+                    if (!temp) { free(result); return 1; }
+                    result = temp;
+                    result[size - 1] = (carry % 10) + '0';
+                    carry /= 10;
+                }
+            }
+
+            for (int i = size - 1; i >= 0; i--)
+                putchar(result[i]);
+            printf("\n");
+
+            free(result);
+            return 0;
+        }
+
+    Sample Input:
+        500
+
+    Sample Output (first and last few digits):
+        12201368259911100687012387854230469262535743428031928421924135883858453
+        73153881997605496447502203281863013616477148203584163378722078177200480
+        78520515932928547790757193933060377296085908627042917454788242491272634
+        43056701732707694610628023104526442188787894657547771498634943677810376
+        44274033827365397471386477878495438489559537537990423241061271326984327
+        74571554630997720278101456108118837370953101635632443298702956389662891
+        16589747695720879269288712817800702651745077684107196243903943225364226
+        05234945850129918571501248706961568141625359056693423813008856249246891
+        56412677565448188650659384795177536089400574523894033579847636394490531
+        30623237490664450488246507594673586207463792518420045936969298102226397
+        19525971909452178233317569345815085523328207628200234026269078983424517
+        12006207714640979456116127629145951237229913340169552363850942885592018
+        72743379517301458635757082835578015873543276888868012039988238470215146
+        76054454076635359841744304801289383138968816394874696588175045069263653
+        38175055478128640000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000000000
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Column Series Generation in Reverse Using Dynamic Array
+
+    Problem:
+        For a given positive integer range, generate the sequence:
+            1 2 2 3 3 4 4 4 5 5 5 ... up to range,
+        where each number k (k ≥ 1) appears exactly 'count' times:
+            count = 1 for k=1,
+            count = 2 for k=2,
+            count = 2 for k=3,
+            count = 3 for k=4,
+            count = 3 for k=5,
+            count = 4 for k=6,
+            count = 4 for k=7,
+            count = 4 for k=8,
+            count = 5 for k=9,
+            count = 5 for k=10,
+            … (the count equals the value of the previous term in the sequence).
+
+        Store the sequence in a dynamically allocated integer array and print it
+        in reverse order (last element first).
+
+        Why DMA?
+            The total size is not known in advance; it depends on the pattern of
+            repetitions. The array starts small and grows via realloc() as numbers
+            are appended.
+
+    Approach:
+        * Allocate an empty array and maintain `size`.
+        * For val = 1 to range:
+            - First value (val=1) → size becomes 1, store 1.
+            - For val=2 → size becomes 3, store 2,2 (if not already handled).
+            - For val ≥ 3 → get count = series[val-1] (the value of the previous term).
+              Realloc to accommodate `size + count` elements, then fill the new slots
+              with `val`.
+        * After generation, print the array from last index down to 0.
+        * Free memory.
+
+    Solution Code:
+        #include <stdio.h>
+        #include <stdlib.h>
+
+        int main() {
+            int range, size = 0;
+            scanf("%d", &range);
+            if (range < 1) return 1;
+
+            int *series = (int *)malloc(0);
+            if (!series && range > 0) return 1;
+
+            for (int val = 1; val <= range; val++) {
+                if (size == 0) {
+                    size = 1;
+                    int *temp = realloc(series, size * sizeof(int));
+                    if (!temp) { free(series); return 1; }
+                    series = temp;
+                    series[0] = 1;
+                }
+                else if (size == 1 && val == 2) {
+                    size = 3;
+                    int *temp = realloc(series, size * sizeof(int));
+                    if (!temp) { free(series); return 1; }
+                    series = temp;
+                    series[1] = 2;
+                    series[2] = 2;
+                }
+                else if (val >= 3) {
+                    int count = series[val - 1];
+                    int *temp = realloc(series, (size + count) * sizeof(int));
+                    if (!temp) { free(series); return 1; }
+                    series = temp;
+                    for (int itr = 0; itr < count; itr++)
+                        series[size++] = val;
+                }
+            }
+
+            for (int i = size - 1; i >= 0; i--)
+                printf("%d ", series[i]);
+            printf("\n");
+
+            free(series);
+            return 0;
+        }
+
+    Sample Input:
+        10
+
+    Sample Output:
+        10 10 10 10 10 9 9 9 9 9 8 8 8 8 7 7 7 7 6 6 6 6 5 5 5 4 4 4 3 3 2 2 1
