@@ -1,0 +1,356 @@
+Advanced Concepts and Technical Terms
+───────────────────────────────────────────────────────────────────────────
+1. PRIMING VALUE
+───────────────────────────────────────────────────────────────────────────
+What is it?
+    A starting number you set before a loop or recursion begins.
+    Example: to add numbers, you start with sum = 0 (the priming value).
+    To multiply, you start with product = 1.
+
+Analogy:
+    Before counting apples, you set the basket count to zero. That zero is the priming value.
+
+───────────────────────────────────────────────────────────────────────────
+2. UNDEFINED BEHAVIOUR (UB)
+───────────────────────────────────────────────────────────────────────────
+What is it?
+    When your code does something the C language rules do not allow.
+    The computer may do anything – crash, give wrong results, or even work by
+    accident. You should never rely on it.
+
+Examples:
+    • Using a variable before giving it a value.
+    • Reading beyond the end of an array.
+    • Dividing by zero.
+
+Analogy:
+    A recipe says "bake for 20 minutes". If you bake for 2 hours, you get charcoal –
+    but the recipe didn't say what happens. That's undefined.
+
+───────────────────────────────────────────────────────────────────────────
+3. IMPLEMENTATION‑DEFINED BEHAVIOUR
+───────────────────────────────────────────────────────────────────────────
+What is it?
+    The C standard says “the compiler must choose one way and tell you in its
+    manual”. It is not random – it is just different on different computers.
+
+Examples:
+    • How many bytes an int has (usually 4, but it can be 2 on some machines).
+    • Whether a plain char is signed or unsigned.
+
+Analogy:
+    Different car brands have different fuel tank sizes. The size is decided by the
+    manufacturer, but they always tell you in the owner’s manual.
+
+───────────────────────────────────────────────────────────────────────────
+4. SEQUENCE POINTS
+───────────────────────────────────────────────────────────────────────────
+What is it?
+    A point in your code where everything before it is completely finished.
+    At a sequence point, all side effects (like updating a variable) are done.
+
+Why it matters:
+    If you change the same variable twice without a sequence point between them,
+    you get undefined behaviour (trouble).
+
+Example of a sequence point: the semicolon at the end of a full statement.
+    int a = 5;  // sequence point here
+
+Analogy:
+    A traffic light. Only after the light turns green, the next car can move.
+    A sequence point is like that green light for operations.
+
+───────────────────────────────────────────────────────────────────────────
+5. STRICT ALIASING RULE
+───────────────────────────────────────────────────────────────────────────
+What is it?
+    In simple terms: “Do not look at a piece of memory as if it were a different
+    type than it really is, except when using char or void pointers.”
+
+You break the rule if you:
+    Write an int and then read it as if it were a float using a pointer.
+
+Why it exists:
+    It lets the compiler optimise your code better.
+
+Safe rule:
+    Always use the correct pointer type for the variable you are accessing.
+
+───────────────────────────────────────────────────────────────────────────
+6. MEMORY MODEL
+───────────────────────────────────────────────────────────────────────────
+Imagine your computer’s memory as a big warehouse divided into areas:
+
+    • Stack   → sticky notes for short‑term tasks (local variables, function calls).
+               Automatically thrown away when the task finishes.
+
+    • Heap    → a storage room where you put boxes (dynamic memory).
+               You must manually remove them when no longer needed.
+
+    • Data/BSS → whiteboards with permanent information (global variables).
+
+    • Code    → the shelf with the instruction manual (your compiled program).
+
+───────────────────────────────────────────────────────────────────────────
+7. DATA TYPES – TYPE QUALIFIERS
+───────────────────────────────────────────────────────────────────────────
+    const    → “read‑only”. Once set, you cannot change it.
+    volatile → “may change by itself” (e.g., a sensor value).
+               Tells the compiler to always read fresh, not from cache.
+
+Analogy:
+    const = a laminated card, you can read it but can’t write on it.
+    volatile = a live sports score; it can change any moment.
+
+───────────────────────────────────────────────────────────────────────────
+8. STORAGE CLASSES
+───────────────────────────────────────────────────────────────────────────
+    auto     → normal local variable. Automatically created and destroyed.
+    register → a hint to keep the variable in super‑fast CPU memory. (No guarantee.)
+    static   → lives for the whole program run. Inside a function it remembers its
+               value between calls. Outside functions, it is private to that file.
+    extern   → “this variable exists somewhere else”. Used to share variables
+               between different .c files.
+
+───────────────────────────────────────────────────────────────────────────
+9. TYPEDEF
+───────────────────────────────────────────────────────────────────────────
+    Creates a nickname for a data type.
+    Example: typedef unsigned long ulong;   // now 'ulong' means unsigned long.
+
+Analogy:
+    Instead of saying “Mister Bartholomew the Third” every time, you call him “Bart”.
+
+───────────────────────────────────────────────────────────────────────────
+10. STRUCTURES (struct)
+───────────────────────────────────────────────────────────────────────────
+    A way to group different pieces of information together.
+    Example: a Student has a name and an age.
+        struct Student {
+            char name[50];
+            int age;
+        };
+    Now you can create a Student variable that holds both.
+
+───────────────────────────────────────────────────────────────────────────
+11. UNION (union)
+───────────────────────────────────────────────────────────────────────────
+    Like a struct, but all members share the same memory spot.
+    Only one member holds a valid value at a time.
+
+Analogy:
+    A whiteboard that can hold either a shopping list or a to‑do list, but not both
+    at the same time. You erase one before using the other.
+
+───────────────────────────────────────────────────────────────────────────
+12. BIT‑FIELDS
+───────────────────────────────────────────────────────────────────────────
+    You can tell a struct member to use only a few bits, not a whole byte.
+    Example: storing a flag (yes/no) uses just 1 bit instead of 8.
+
+    struct {
+        unsigned int isOn : 1;
+        unsigned int mode : 3;
+    } status;
+
+This saves memory when you have many small true/false settings.
+
+───────────────────────────────────────────────────────────────────────────
+13. FLEXIBLE ARRAY MEMBER
+───────────────────────────────────────────────────────────────────────────
+    The last member of a struct can be an array with no fixed size.
+    You decide its size when you allocate memory.
+    Example: a network packet with a header and then some data bytes.
+
+───────────────────────────────────────────────────────────────────────────
+14. POINTERS
+───────────────────────────────────────────────────────────────────────────
+    A pointer stores an address (like a house number).
+    & gives the address of a variable.
+    * follows the pointer to the value at that address.
+
+Analogy:
+    A library card (pointer) doesn’t hold the book; it tells you where the book is
+    on the shelf.
+
+───────────────────────────────────────────────────────────────────────────
+15. NULL POINTER
+───────────────────────────────────────────────────────────────────────────
+    A special pointer value that means “points to nothing”.
+    Always check if a pointer is NULL before using it.
+
+Analogy:
+    A blank library card – there is no shelf location written yet.
+
+───────────────────────────────────────────────────────────────────────────
+16. FUNCTION POINTERS
+───────────────────────────────────────────────────────────────────────────
+    A variable that can hold the address of a function.
+    You can then call that function using the pointer.
+    Useful when you want to choose between different actions at runtime.
+
+Example:
+    int (*operation)(int,int);   // operation can point to add or multiply.
+
+───────────────────────────────────────────────────────────────────────────
+17. DYNAMIC MEMORY (malloc / calloc / realloc / free)
+───────────────────────────────────────────────────────────────────────────
+    malloc  → ask the heap for a block of memory (uninitialised).
+    calloc  → ask for memory and zero everything.
+    realloc → resize a block you already have.
+    free    → give the memory back.
+
+Important: Always free what you malloc, or you get a memory leak.
+
+Analogy:
+    Renting a storage locker. If you don’t return the keys (free), the locker
+    stays locked and nobody else can use it.
+
+───────────────────────────────────────────────────────────────────────────
+18. MEMORY ALIGNMENT AND PADDING
+───────────────────────────────────────────────────────────────────────────
+    The computer likes to store data at addresses that are multiples of its size
+    (like 4‑byte int at addresses 0,4,8,12…). This is alignment.
+    Sometimes the compiler adds empty bytes (padding) inside a struct to
+    respect this rule. This makes access faster but uses a bit more memory.
+
+───────────────────────────────────────────────────────────────────────────
+19. ENDIANNESS (BYTE ORDER)
+───────────────────────────────────────────────────────────────────────────
+    Big‑Endian: like writing a number normally  (most significant digit first).
+    Little‑Endian: like writing a number backwards (least significant digit first).
+
+Most PCs use little‑endian. Network data uses big‑endian.
+C functions like htons() help you convert.
+
+───────────────────────────────────────────────────────────────────────────
+20. ARRAYS AND STRINGS
+───────────────────────────────────────────────────────────────────────────
+    Array: many items of the same type placed next to each other in memory.
+    String: a character array that ends with '\0' (the null character).
+
+    String scan sets (%[ ]):
+        %[^\n]   – read the whole line including spaces.
+        %[0-9]   – read only digits.
+        %[^a]    – read until the letter 'a' appears.
+
+───────────────────────────────────────────────────────────────────────────
+21. PREPROCESSOR
+───────────────────────────────────────────────────────────────────────────
+    Runs before the compiler. It handles #include, #define, #ifdef, etc.
+    #define PI 3.14   → a simple text replacement.
+    Macros can be tricky; prefer const variables and functions when you can.
+
+───────────────────────────────────────────────────────────────────────────
+22. TYPE CONVERSIONS
+───────────────────────────────────────────────────────────────────────────
+    Implicit conversion: the compiler automatically changes a small type to a
+                        larger one so they can be used together.
+    Explicit cast: you force a type change with (type).
+    Example: float f = (float) 5;   // 5.0
+
+───────────────────────────────────────────────────────────────────────────
+23. RECURSION
+───────────────────────────────────────────────────────────────────────────
+    A function that calls itself.
+    Needs a base case (when to stop) or it will call forever and crash.
+
+Analogy:
+    Matryoshka dolls. Opening the first doll reveals a smaller one inside, then
+    another smaller one, until you reach the tiniest doll (base case).
+
+───────────────────────────────────────────────────────────────────────────
+24. TAIL RECURSION
+───────────────────────────────────────────────────────────────────────────
+    A special recursion where the recursive call is the very last thing the
+    function does. Some compilers can then run it without growing the stack
+    (like converting recursion into a loop).
+
+───────────────────────────────────────────────────────────────────────────
+25. STANDARD LIBRARY HEADERS (COMMON ONES)
+───────────────────────────────────────────────────────────────────────────
+    <stdio.h>   – printf, scanf, file operations.
+    <stdlib.h>  – malloc, free, random numbers.
+    <string.h>  – string functions (strlen, strcpy, strcmp).
+    <ctype.h>   – check character types (isalpha, isdigit).
+    <math.h>    – sin, cos, sqrt.
+    <time.h>    – date and time.
+    <assert.h>  – for debugging (assert condition).
+
+───────────────────────────────────────────────────────────────────────────
+26. FILE I/O
+───────────────────────────────────────────────────────────────────────────
+    fopen  – open a file.
+    fprintf/fscanf – write/read formatted text.
+    fread/fwrite   – read/write raw bytes.
+    fclose – close the file.
+    Files can be text ("r","w") or binary ("rb","wb").
+
+───────────────────────────────────────────────────────────────────────────
+27. ERROR HANDLING
+───────────────────────────────────────────────────────────────────────────
+    errno  – a variable set by functions when something goes wrong.
+    perror – prints a message describing the error.
+
+    assert  – if the condition is false, the program stops and shows an error.
+              Good for debugging.
+
+───────────────────────────────────────────────────────────────────────────
+28. BITWISE OPERATORS
+───────────────────────────────────────────────────────────────────────────
+    & (AND)  → keep bits that are 1 in both numbers.
+    | (OR)   → set bits to 1 if either number has 1.
+    ^ (XOR)  → flip bits that are different.
+    ~ (NOT)  → flip all bits.
+    << (shift left)  → multiply by 2.
+    >> (shift right) → divide by 2.
+
+Very useful for flags, low‑level hardware, and optimisations.
+
+───────────────────────────────────────────────────────────────────────────
+29. VOLATILE IN DEPTH
+───────────────────────────────────────────────────────────────────────────
+    Tell the compiler: “This variable may change outside our code, so always
+    read it fresh, never cache it in a register.” Used for hardware registers
+    or variables changed by interrupts.
+
+───────────────────────────────────────────────────────────────────────────
+30. INLINE ASSEMBLY & COMPILER INTRINSICS
+───────────────────────────────────────────────────────────────────────────
+    Rarely needed for beginners. These let you write assembly language inside C
+    or use special functions built into the compiler for extra speed. They are
+    not standard and vary between compilers.
+
+───────────────────────────────────────────────────────────────────────────
+31. C STANDARDS
+───────────────────────────────────────────────────────────────────────────
+    • C89 / C90 – the classic C.
+    • C99      – added // comments, inline, VLAs, etc.
+    • C11      – added threads, atomics, _Generic.
+    • C17      – small fixes.
+    • C23      – future standard.
+
+───────────────────────────────────────────────────────────────────────────
+32. COMMAND LINE ARGUMENTS
+───────────────────────────────────────────────────────────────────────────
+    int main(int argc, char *argv[])
+    argc = how many words were typed.
+    argv = the words, split into an array.
+    argv[0] is always the program name.
+
+Example:
+    ./myprogram hello world
+    argc = 3
+    argv[0] = "./myprogram", argv[1] = "hello", argv[2] = "world".
+
+───────────────────────────────────────────────────────────────────────────
+33. UNDEFINED BEHAVIOUR (COMMON PITFALLS TO AVOID)
+───────────────────────────────────────────────────────────────────────────
+    • Forgetting to initialise a variable before using it.
+    • Writing to array index that is too big.
+    • Using a pointer after freeing it.
+    • Returning the address of a local variable.
+    • Assuming int size is always 4 bytes.
+    • Expecting char to be signed (or unsigned) everywhere.
+
+───────────────────────────────────────────────────────────────────────────
