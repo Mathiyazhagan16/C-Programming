@@ -1,0 +1,402 @@
+User‑Defined Data Types (UDD) and Structure Padding in C
+
+1.  Introduction
+    C provides four ways to create new data types:
+      • struct  – group variables of different types under one name.
+      • union   – share the same memory location for multiple members.
+      • enum    – define a set of named integer constants.
+      • typedef – give a new name (alias) to an existing type.
+
+    This document explains each of them and then focuses on the memory layout
+    of structures, including padding and alignment.  Finally, it analyses the
+    provided code and shows its output.
+
+───────────────────────────────────────────────────────────────────────────
+2.  Structures (struct)
+───────────────────────────────────────────────────────────────────────────
+
+    A structure is a collection of members (variables) of possibly different
+    types.  Each member has its own storage.
+
+    Syntax:
+        struct TagName {
+            type1 member1;
+            type2 member2;
+            …
+        };
+
+    Example – The given STUDENT structure:
+        typedef struct Student {
+            short int    SNo;          // 2 bytes
+            char         name[25];     // 25 bytes (each char 1 byte)
+            char         dept[4];      // 4 bytes
+            char         section;      // 1 byte
+            long long    regno;        // 8 bytes
+            int          marks[6];     // 24 bytes (6 * 4)
+            float        percentage;   // 4 bytes
+            char         result;       // 1 byte
+        } STUDENT;
+
+    When we declare an array of such structures, the compiler may insert
+    padding bytes between members or at the end to satisfy alignment
+    requirements.  This is called **structure padding**.
+
+───────────────────────────────────────────────────────────────────────────
+3.  Unions (union)
+───────────────────────────────────────────────────────────────────────────
+
+    A union stores all its members in the same memory location.  The size of
+    a union is the size of its largest member.  Only one member can hold a
+    meaningful value at a time.
+
+    Example:
+        union Data {
+            int   i;
+            float f;
+            char  str[20];
+        };
+    Here, sizeof(union Data) = 20 (on most systems).  Modifying i makes f
+    and str become garbage (and vice versa).  Unions are useful for memory
+    saving and for interpreting the same bytes in different ways.
+
+───────────────────────────────────────────────────────────────────────────
+4.  Enumerations (enum)
+───────────────────────────────────────────────────────────────────────────
+
+    An enumeration defines a set of named integer constants.  By default, the
+    first name has value 0, the next 1, and so on.  You can assign explicit
+    values.
+
+    Example:
+        enum Level { LOW = 10, MEDIUM = 56, HIGH };
+    Here, LOW = 10, MEDIUM = 56, HIGH = 57 (automatic increment).
+
+    Enums make code more readable than raw numbers.
+
+───────────────────────────────────────────────────────────────────────────
+5.  Typedef
+───────────────────────────────────────────────────────────────────────────
+
+    typedef creates an alias for an existing data type.  It improves
+    readability and portability.
+
+    Example:
+        typedef unsigned long ulong;
+        ulong distance;   // same as “unsigned long distance;”
+
+    In the given code, the Student struct is typedef’ed to STUDENT, so we can
+    write STUDENT data[5]; instead of struct Student data[5];.
+
+───────────────────────────────────────────────────────────────────────────
+6.  Structure Padding and Alignment
+───────────────────────────────────────────────────────────────────────────
+
+    Why padding exists:
+      Processors access memory more efficiently when multi‑byte data is
+      aligned at an address that is a multiple of its size.  For example,
+      a 4‑byte int should be placed at an address divisible by 4.
+      If a member’s offset is not a multiple of its alignment, the compiler
+      inserts padding bytes to fix it.  Also, the whole structure may need
+      padding at the end so that the overall size is a multiple of the
+      largest member’s alignment (so that an array of the structure keeps
+      every element aligned).
+
+    Alignment rules (typical for 64‑bit Linux/Windows):
+        Type          Size (bytes)   Required alignment
+        char          1              1
+        short         2              2
+        int           4              4
+        float         4              4
+        long long     8              8
+        double        8              8
+        pointer       8              8
+        array         element size   same as element
+
+    Structure alignment = maximum alignment among its members.
+    Structure size is rounded up to a multiple of this alignment.
+
+    Let’s compute the layout of STUDENT on a typical x86‑64 system.
+    Assume no special packing (#pragma pack(1) is not used).
+
+    Member          Size   Alignment   Offset (without padding)   Padding added?
+    –––––––––––––   ––––   –––––––––   ––––––––––––––––––––––––   –––––––––––––
+    SNo (short)     2      2           0                           no
+    name[25]        25     1           2                           no
+    dept[4]         4      1           27                          no
+    section (char)  1      1           31                          no
+    Now total offset = 32.  Next member regno (long long) needs
+    alignment 8.  Current offset 32 is already a multiple of 8,
+    so no padding needed before regno.
+    regno (long long)  8   8           32                          no
+    marks[6] (int)     24  4           40 (multiple of 4)          no
+    percentage (float) 4   4           64                          no
+    result (char)      1   1           68                          no
+    Total size so far = 69.  The largest alignment in the struct is 8
+    (from regno).  The structure size must be a multiple of 8.
+    69 → next multiple of 8 is 72.  So 3 bytes of end padding.
+    Final sizeof(STUDENT) = 72 bytes.
+
+    (On some compilers/ABIs, arrays might have different alignment; 
+     but char arrays have alignment 1, int arrays have alignment 4.
+     So the above is correct.)
+
+    The confusing comments in the code (“// 8”, “// 8 8 8”, etc.) were
+    perhaps intended to show the alignment boundaries or were just markers.
+    Do not rely on them – the compiler does the exact calculation.
+
+───────────────────────────────────────────────────────────────────────────
+7.  Analysis of the Provided Code
+───────────────────────────────────────────────────────────────────────────
+
+    The code:
+
+        #include<stdio.h>
+        typedef struct Student
+        {
+            short int SNo;       // 2 bytes
+            char name[25];       // 25 bytes
+            char dept[4];        // 4 bytes
+            char section;        // 1 byte
+            long long int regno; // 8 bytes
+            int marks[6];        // 24 bytes
+            float percentage;    // 4 bytes
+            char result;         // 1 byte
+        }STUDENT;
+
+        int main()
+        {
+            STUDENT data[5] = {
+                { 1 , "JAYASRI"    , "ECE" , 'A' , 1234567890 , {87,36,45,98,62,34} , 90.00 , 'P'},
+                { 2 , "MANEESHA"   , "ECE" , 'A' , 6543212345 , {98,27,35,94,87,39} , 88.00 , 'P'},
+                { 3 , "CHANDU"     , "ECE" , 'B' , 9872634234 , {38,47,63,49,58,70} , 91.00 , 'P'},
+                { 4 , "KARTHIKEYA" , "ECE" , 'B' , 9862345982 , {34,95,72,93,87,49} , 87.00 , 'P'},
+                { 5 , "AJAY KUMAR" , "ECE" , 'B' , 4276543765 , {87,62,38,76,32,87} , 92.00 , 'P'}
+            };
+
+            printf("%.5s\n", &data[4].name[5]);
+            printf("%.5s\n", (((*(data+4)).name)+5));
+            return 0;
+        }
+
+    Output:
+        KUMAR
+        KUMAR
+
+    Why?
+        • data[4] is the fifth student (index 4) : “AJAY KUMAR”.
+        • name[5] is the character at index 5 of that name.
+          Index:  0='A',1='J',2='A',3='Y',4=' ',5='K',6='U',7='M',8='A',9='R'.
+          So name[5] points to 'K'.
+        • The format specifier “%.5s” tells printf to print at most 5
+          characters starting from that address.  The five characters are
+          'K', 'U', 'M', 'A', 'R' – forming “KUMAR”.  No null terminator is
+          required because the precision limits the output.
+        • The second printf uses pointer arithmetic:
+          (data+4) gives the address of data[4].
+          (*(data+4)).name is data[4].name, i.e., base address of the name array.
+          +5 moves the pointer to name[5].
+          The result is exactly the same as &data[4].name[5].
+          Hence the same output is printed.
+
+    Both statements demonstrate that array indexing and pointer addition are
+    interchangeable in C.
+
+───────────────────────────────────────────────────────────────────────────
+8.  Summary
+    • struct   – groups data, may contain padding.
+    • union    – overlaps members, saves memory.
+    • enum     – named constants.
+    • typedef  – creates type aliases.
+    • Padding is added automatically by the compiler to satisfy alignment
+      requirements and can be influenced by #pragma pack or __attribute__
+      if needed.
+    • The provided code shows how pointer arithmetic works with structures
+      and arrays, and it prints “KUMAR” as a substring of the stored name.
+
+User‑Defined Data Types – Sample Codes
+
+This document provides simple, working examples for struct, union, enum, and typedef.
+Each code is self‑contained and can be compiled directly.
+
+───────────────────────────────────────────────────────────────────────────
+1.  struct – grouping related data
+───────────────────────────────────────────────────────────────────────────
+
+    #include <stdio.h>
+    #include <string.h>
+
+    // Define a structure for a Student
+    struct Student {
+        int roll;
+        char name[30];
+        float marks;
+    };
+
+    int main() {
+        // Declare and initialize a structure variable
+        struct Student s1 = {101, "Ravi", 85.5};
+
+        // Access members using dot (.) operator
+        printf("Roll: %d\n", s1.roll);
+        printf("Name: %s\n", s1.name);
+        printf("Marks: %.2f\n", s1.marks);
+
+        // Modify a member
+        s1.marks = 92.0;
+        printf("Updated marks: %.2f\n", s1.marks);
+
+        // Array of structures
+        struct Student class[2] = {
+            {102, "Priya", 78.0},
+            {103, "Amit", 88.5}
+        };
+        for (int i = 0; i < 2; i++)
+            printf("%s scored %.2f\n", class[i].name, class[i].marks);
+
+        return 0;
+    }
+
+───────────────────────────────────────────────────────────────────────────
+2.  union – sharing memory
+───────────────────────────────────────────────────────────────────────────
+
+    #include <stdio.h>
+
+    union Data {
+        int i;
+        float f;
+        char str[20];
+    };
+
+    int main() {
+        union Data d;
+
+        d.i = 100;
+        printf("d.i = %d\n", d.i);
+
+        d.f = 3.14;          // overwrites i
+        printf("d.f = %.2f\n", d.f);
+        printf("d.i now = %d (garbage)\n", d.i);   // unpredictable
+
+        // Size of union = size of largest member
+        printf("Size of union = %lu bytes\n", sizeof(d));
+
+        return 0;
+    }
+
+───────────────────────────────────────────────────────────────────────────
+3.  enum – named integer constants
+───────────────────────────────────────────────────────────────────────────
+
+    #include <stdio.h>
+
+    enum Day { SUN, MON, TUE, WED, THU, FRI, SAT };
+
+    int main() {
+        enum Day today = WED;
+        printf("Day number = %d\n", today);   // prints 3
+
+        // Enum with custom values
+        enum Status { LOW = 10, MEDIUM = 25, HIGH = 50 };
+        enum Status s = MEDIUM;
+        printf("Status = %d\n", s);           // prints 25
+
+        // Using enum in switch
+        switch (today) {
+            case MON: printf("Monday\n"); break;
+            case WED: printf("Wednesday\n"); break;
+            default:  printf("Other day\n");
+        }
+
+        return 0;
+    }
+
+───────────────────────────────────────────────────────────────────────────
+4.  typedef – creating a type alias
+───────────────────────────────────────────────────────────────────────────
+
+    #include <stdio.h>
+
+    typedef unsigned long ulong;
+    typedef struct {
+        int x;
+        int y;
+    } Point;
+
+    int main() {
+        ulong bigNumber = 1234567890;
+        printf("Big number: %lu\n", bigNumber);
+
+        Point p1 = {10, 20};
+        printf("Point: (%d, %d)\n", p1.x, p1.y);
+
+        return 0;
+    }
+
+───────────────────────────────────────────────────────────────────────────
+5.  Structure Padding – observing memory size
+───────────────────────────────────────────────────────────────────────────
+
+    #include <stdio.h>
+
+    struct Example {
+        char a;      // 1 byte
+        int b;       // 4 bytes
+        char c;      // 1 byte
+    };
+
+    int main() {
+        struct Example e;
+        // Expected sum = 1+4+1 = 6, but sizeof shows larger due to padding
+        printf("Size of struct = %lu bytes\n", sizeof(e));
+        // Typically 12 bytes (1 + 3 padding + 4 + 1 + 3 padding)
+        return 0;
+    }
+
+───────────────────────────────────────────────────────────────────────────
+6.  Nested structures – struct inside struct
+───────────────────────────────────────────────────────────────────────────
+
+    #include <stdio.h>
+
+    struct Date {
+        int day, month, year;
+    };
+
+    struct Employee {
+        char name[25];
+        struct Date joinDate;   // nested structure
+        float salary;
+    };
+
+    int main() {
+        struct Employee emp = {"Meena", {5, 8, 2020}, 45000.0};
+        printf("Name: %s\n", emp.name);
+        printf("Joined: %d/%d/%d\n", emp.joinDate.day,
+               emp.joinDate.month, emp.joinDate.year);
+        printf("Salary: %.2f\n", emp.salary);
+        return 0;
+    }
+
+───────────────────────────────────────────────────────────────────────────
+Sample Questions (Try yourself)
+
+1. Define a structure `Book` with title, author, price, and year.  
+   Write a program to read 3 books from the user and display them.
+
+2. Create a union `Number` that can hold an int, a float, and a double.  
+   Show that writing to one member corrupts the others. Print sizeof(Number).
+
+3. Define an enum `Color` with values RED, GREEN, BLUE.  
+   Write a program that prints the name of the color based on an integer input.
+
+4. Use typedef to create an alias `matrix` for a 2D integer array `int[3][3]`.  
+   Declare a variable of type `matrix` and print its elements.
+
+5. Given the structure:
+       struct Test {
+           char c;
+           double d;
+           int i;
+       };
+   Predict the size of the structure on a 64‑bit system and verify with your compiler.
