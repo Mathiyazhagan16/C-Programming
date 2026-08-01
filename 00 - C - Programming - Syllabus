@@ -21,7 +21,7 @@ printf("How to print",what to print);
     	->%d - decimal
     	->%hd - short decimal
     	->%ld - long decimal
-    	->%lld - ling long decimal
+    	->%lld - long long decimal
     	->%u - unsigned
     	->%lu - long unsigned
     	->%llu - long long unsigned
